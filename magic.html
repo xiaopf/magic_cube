@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>magic</title>
+</head>
+<style type="text/css">
+    *{
+    	margin: 0;padding: 0;
+    	outline: none;
+    }
+    .rotate_btns{
+    	width: 350px;
+    	height: 50px;
+    	position: absolute;
+    	left: 60%;
+    	top: 20px;
+    	font-size: 0;
+    }
+    .rotate_btns>button{
+    	display: inline-block;
+    	vertical-align: top;
+    	width: 50px;
+    	height: 50px;
+    	font-size: 16px;
+    }
+    .big_box_range{
+    	width: 310px;
+    	height: 69px;
+    	position: absolute;
+    	left: 20%;
+    	top: 20px;
+    }
+    .big_box_range>div{
+    	width: 310px;
+    	height: 23px;
+    	font-size: 0px;
+    }
+    .big_box_range>div>input{
+    	display: inline-block;
+    	vertical-align: top;
+    	width: 180px;
+    	height: 23px;
+    	margin-right: 10px;
+    }
+    .big_box_range>div>span{
+    	display: inline-block;
+    	vertical-align: top;
+    	font-size: 14px;
+    	width: 40px;
+    	height: 23px;
+    }
+	.wrap{
+		font-size: 0;
+        width: 600px;
+        height: 600px;
+        margin: 50px 0 0 50px;
+        border: 1px solid black;
+        perspective:800px;
+        position: relative;
+        transform: scale(0.8);
+	}
+
+	.rotate{
+		transform:rotateZ(-180deg);
+	}
+
+
+	.litteWrap{
+		display: inline-block;
+		vertical-align: top;
+        width: 600px;
+        height: 600px;
+        position: absolute;
+        -webkit-transform-style: preserve-3d;
+        transform-origin: 300px 300px -300px;
+        transition: all 1s;
+	}
+
+
+	.big_box{
+		display: inline-block;
+		vertical-align: top;
+        width: 600px;
+        height: 600px;
+        position: absolute;
+        -webkit-transform-style: preserve-3d;
+        transform-origin: center center -300px;
+        transition: all 1s;
+	}
+
+	.box{
+		display: inline-block;
+		vertical-align: top;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        -webkit-transform-style: preserve-3d;
+        transform-origin: center center -100px;
+        transition: all 1s;
+	}
+	.box>div{
+        width: 198px;
+        height: 198px;
+        border: 1px solid black;
+        position: absolute;
+	}
+	.face_01{
+		font-size: 50px;
+		text-align: center;
+		line-height: 198px;
+		background-color: orange;
+		left: 0px;
+		top: -200px;
+		transform-origin: bottom;
+		transform: rotateX(90deg);
+	}
+	.face_02{
+		font-size: 50px;
+		text-align: center;
+		line-height: 198px;
+		background-color: red;
+		left: -200px;
+		top: 0px;
+		transform-origin: right;
+		transform: rotateY(-90deg);
+	}
+	.face_03{
+		font-size: 50px;
+		text-align: center;
+		line-height: 198px;
+		background-color: yellow;
+		left: 0px;
+		top: 0px;
+	}
+	.face_04{
+		font-size: 50px;
+		text-align: center;
+		line-height: 198px;
+		background-color: green;
+		left: 200px;
+		top: 0px;
+		transform-origin: left;
+		transform: rotateY(90deg);
+	}
+	.face_05{
+		font-size: 50px;
+		text-align: center;
+		line-height: 198px;
+		background-color: blue;
+		left: 0px;
+		top: 200px;
+		transform-origin: top;
+		transform: rotateX(-90deg);
+	}
+	.face_06{
+		font-size: 50px;
+		text-align: center;
+		line-height: 198px;
+		background-color: pink;
+		left: 0px;
+		top: 0px;
+		transform:translateZ(-200px) rotateX(180deg);
+	}
+
+
+/* 前面9个 */
+	.box_1{top: 0;    left: 0;    transform: translateZ(0px);}
+	.box_2{top: 0;    left: 200px;transform: translateZ(0px);}
+	.box_3{top: 0;    left: 400px;transform: translateZ(0px);}
+	.box_4{top: 200px;left: 0;    transform: translateZ(0px);}
+	.box_5{top: 200px;left: 200px;transform: translateZ(0px);}
+	.box_6{top: 200px;left: 400px;transform: translateZ(0px);}
+	.box_7{top: 400px;left: 0;    transform: translateZ(0px);}
+	.box_8{top: 400px;left: 200px;transform: translateZ(0px);}
+	.box_9{top: 400px;left: 400px;transform: translateZ(0px);}
+/* 中间8个 */
+	.box_10{top: 0;    left: 0;    transform: translateZ(-200px);}
+	.box_11{top: 0;    left: 200px;transform: translateZ(-200px);}
+	.box_12{top: 0;    left: 400px;transform: translateZ(-200px);}
+	.box_13{top: 200px;left: 0;    transform: translateZ(-200px);}
+	.box_14{top: 200px;left: 400px;transform: translateZ(-200px);}
+	.box_15{top: 400px;left: 0;    transform: translateZ(-200px);}
+	.box_16{top: 400px;left: 200px;transform: translateZ(-200px);}
+	.box_17{top: 400px;left: 400px;transform: translateZ(-200px);}
+/* 背后9个 */
+	.box_18{top: 0;    left: 0;    transform: translateZ(-400px);}
+	.box_19{top: 0;    left: 200px;transform: translateZ(-400px);}
+	.box_20{top: 0;    left: 400px;transform: translateZ(-400px);}
+	.box_21{top: 200px;left: 0;    transform: translateZ(-400px);}
+	.box_22{top: 200px;left: 200px;transform: translateZ(-400px);}
+	.box_23{top: 200px;left: 400px;transform: translateZ(-400px);}
+	.box_24{top: 400px;left: 0;    transform: translateZ(-400px);}
+	.box_25{top: 400px;left: 200px;transform: translateZ(-400px);}
+	.box_26{top: 400px;left: 400px;transform: translateZ(-400px);}
+</style>
+<script type="text/javascript" src="javascript.js"></script>
+<body>
+	<div class="rotate_btns">
+		<button class="btn1">按钮U</button>
+		<button class="btn2">按钮L</button>
+		<button class="btn3">按钮F</button>
+		<button class="btn4">按钮R</button>
+		<button class="btn5">按钮D</button>
+		<button class="btn6">按钮B</button>
+		<button class="btnF">视角复位</button>
+	</div>
+	<div class="big_box_range">
+			<div>
+                <span>X轴</span>
+				<input class="x_rotate" type="range" name="points" min="-180" max="180" step="15" value="-30" />
+				<span class="x_deg"></span>
+			</div>
+			<div>
+                <span>Y轴</span>
+				<input class="y_rotate" type="range" name="points" min="-180" max="180" step="15" value="-30" />
+				<span class="y_deg"></span>
+			</div>
+			<div>
+                <span>Z轴</span>
+				<input class="z_rotate" type="range" name="points" min="-180" max="180" step="15" value="0" />
+				<span class="z_deg"></span>
+			</div>
+	</div>
+	<div class="wrap" id="wrap">
+		<div class="big_box" id="big_box" style="transform: rotateX(-30deg) rotateY(-30deg) rotateZ(0deg);">
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
