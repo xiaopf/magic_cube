@@ -49,203 +49,283 @@ window.onload = function(){
 		$("#big_box").style.transform += 'rotateY(-30deg)';
 		$("#big_box").style.transform += 'rotateZ(0deg)';
 	}
-    // 每个cube的六个小面
-    function sixFace(i) {
-    	return '<div class="face_01">!'+i+'</div>'+
-			   '<div class="face_02">!'+i+'</div>'+
-			   '<div class="face_03">!'+i+'</div>'+
-			   '<div class="face_04">!'+i+'</div>'+
-			   '<div class="face_05">!'+i+'</div>'+
-			   '<div class="face_06">!'+i+'</div>';
-    };
 
     // cube 的空间位置，x，y，z,旋转轴，旋转角度
+    // 代表每一个块的空间位置，顺序是色块的序列号
     var cubePosition = [
-        [0,   0,   0,    'Z', 0],
-        [0,   200, 0,    'Z', 0],
-        [0,   400, 0,    'Z', 0],
-        [200, 0,   0,    'Z', 0],
-        [200, 200, 0,    'Z', 0],
-        [200, 400, 0,    'Z', 0],
-        [400, 0,   0,    'Z', 0],
-        [400, 200, 0,    'Z', 0],
-        [400, 400, 0,    'Z', 0],
-        [0,   0,   -200, 'Z', 0],
-        [0,   200, -200, 'Z', 0],
-        [0,   400, -200, 'Z', 0],
-        [200, 0,   -200, 'Z', 0],
-        [200, 200, -200, 'Z', 0],
-        [200, 400, -200, 'Z', 0],
-        [400, 0,   -200, 'Z', 0],
-        [400, 200, -200, 'Z', 0],
-        [400, 400, -200, 'Z', 0],
-        [0,   0,   -400, 'Z', 0],
-        [0,   200, -400, 'Z', 0],
-        [0,   400, -400, 'Z', 0],
-        [200, 0,   -400, 'Z', 0],
-        [200, 200, -400, 'Z', 0],
-        [200, 400, -400, 'Z', 0],
-        [400, 0,   -400, 'Z', 0],
-        [400, 200, -400, 'Z', 0],
-        [400, 400, -400, 'Z', 0],
+        [0,   0,   0,    {'X':0, 'Y':0, 'Z':0}],//1
+        [0,   200, 0,    {'X':0, 'Y':0, 'Z':0}],//2
+        [0,   400, 0,    {'X':0, 'Y':0, 'Z':0}],//3
+        [200, 0,   0,    {'X':0, 'Y':0, 'Z':0}],//4
+        [200, 200, 0,    {'X':0, 'Y':0, 'Z':0}],//5!!!!
+        [200, 400, 0,    {'X':0, 'Y':0, 'Z':0}],//6
+        [400, 0,   0,    {'X':0, 'Y':0, 'Z':0}],//7
+        [400, 200, 0,    {'X':0, 'Y':0, 'Z':0}],//8
+        [400, 400, 0,    {'X':0, 'Y':0, 'Z':0}],//9
+
+
+
+        [0,   0,   -200, {'X':0, 'Y':0, 'Z':0}],//10
+        [0,   200, -200, {'X':0, 'Y':0, 'Z':0}],//11!!!
+        [0,   400, -200, {'X':0, 'Y':0, 'Z':0}],//12
+        [200, 0,   -200, {'X':0, 'Y':0, 'Z':0}],//13!!!
+        [200, 200, -200, {'X':0, 'Y':0, 'Z':0}],//14???ccccccccccccccccccc
+        [200, 400, -200, {'X':0, 'Y':0, 'Z':0}],//15!!!
+        [400, 0,   -200, {'X':0, 'Y':0, 'Z':0}],//16
+        [400, 200, -200, {'X':0, 'Y':0, 'Z':0}],//17!!!
+        [400, 400, -200, {'X':0, 'Y':0, 'Z':0}],//18
+        [0,   0,   -400, {'X':0, 'Y':0, 'Z':0}],//19
+        [0,   200, -400, {'X':0, 'Y':0, 'Z':0}],//20
+        [0,   400, -400, {'X':0, 'Y':0, 'Z':0}],//21
+        [200, 0,   -400, {'X':0, 'Y':0, 'Z':0}],//22
+        [200, 200, -400, {'X':0, 'Y':0, 'Z':0}],//23!!!
+        [200, 400, -400, {'X':0, 'Y':0, 'Z':0}],//24
+        [400, 0,   -400, {'X':0, 'Y':0, 'Z':0}],//25
+        [400, 200, -400, {'X':0, 'Y':0, 'Z':0}],//26
+        [400, 400, -400, {'X':0, 'Y':0, 'Z':0}],//27
     ];
     // 设置旋转面包含的cube块序列号
     var bigSixFace = {
-	    'up'   :[
+	    'u'   :[
 				  19,  20, 21,
 			      10,  11, 12,
 			       1,   2,  3
 			    ],
-	    'front':[
+	    'f':[
 				   1,   2,  3,
 				   4,   5,  6,
 				   7,   8,  9
 			    ],
-	    'down' :[
+	    'd' :[
 				   7,   8,  9,
 				  16,  17, 18,
 				  25,  26, 27
 			    ],
-	    'back' :[
+	    'b' :[
 				  21,  20, 19,
 				  24,  23, 22,
 				  27,  26, 25
 			    ],
-	    'left' :[
+	    'l' :[
 				  19,  10,  1,
 				  22,  13,  4,
 				  25,  16,  7
 			    ],
-	    'right':[
+	    'r':[
 				   3,  12, 21,
 				   6,  15, 24,
 				   9,  18, 27
 			    ],
     };
+    
+    // magic cube 每个小cube都有一个槽点，槽点是我自定义的，1-27编号，有固定顺序，
+    // 槽点的顺序是死的，固定的，
+    var cubeSlot = [];
+    upDateCubeSlot ();
+
+    function upDateCubeSlot () {
+        cubeSlot = [
+                     bigSixFace['f'][0],bigSixFace['f'][1],bigSixFace['f'][2],
+                     bigSixFace['f'][3],bigSixFace['f'][4],bigSixFace['f'][5],
+                     bigSixFace['f'][6],bigSixFace['f'][7],bigSixFace['f'][8],
+                     bigSixFace['u'][3],bigSixFace['u'][4],bigSixFace['u'][5],
+                     bigSixFace['l'][4],
+                     14,
+                     bigSixFace['r'][4],
+                     bigSixFace['d'][3],bigSixFace['d'][4],bigSixFace['d'][5],
+                     bigSixFace['b'][2],bigSixFace['b'][1],bigSixFace['b'][0],
+                     bigSixFace['b'][5],bigSixFace['b'][4],bigSixFace['b'][3],
+                     bigSixFace['b'][8],bigSixFace['b'][7],bigSixFace['b'][6],
+                   ];
+    };
+
+
     // 当旋转时，更新旋转面包含的cube块序列号
-    function changeBigSixFace(whichFace) {
-    	if(whichFace == "front"){
-    		let tep_01 = bigSixFace['up'].slice(0,6).concat(bigSixFace['down'].slice(0,3).reverse());
-    		let tep_02 = [bigSixFace['front'][8],bigSixFace['front'][5],bigSixFace['front'][2]];
-    		let tep_03 = [bigSixFace['front'][6],bigSixFace['front'][3],bigSixFace['front'][0]];
-    		let tep_04 = bigSixFace['up'].slice(6).reverse().concat(bigSixFace['down'].slice(3));
-    		bigSixFace['up'] = tep_01;
-    		bigSixFace['left'][2] = tep_02[0];
-    		bigSixFace['left'][5] = tep_02[1];
-    		bigSixFace['left'][8] = tep_02[2];
-    		bigSixFace['right'][0] = tep_03[0];
-    		bigSixFace['right'][3] = tep_03[1];
-    		bigSixFace['right'][6] = tep_03[2];
-    		bigSixFace['down'] = tep_04;
-    	};
-    	if(whichFace == "up"){
-    		let tep_01 = bigSixFace['back'].slice(0,3).concat(bigSixFace['front'].slice(3));
-    		let tep_02 = bigSixFace['right'].slice(0,3).concat(bigSixFace['left'].slice(3));
-    		let tep_03 = bigSixFace['left'].slice(0,3).concat(bigSixFace['right'].slice(3));
-    		let tep_04 = bigSixFace['front'].slice(0,3).concat(bigSixFace['back'].slice(3));
-    		bigSixFace['front'] = tep_01;
-    		bigSixFace['left'] = tep_02;
-    		bigSixFace['right'] = tep_03;
-    		bigSixFace['back'] = tep_04;
-    	};
-    	if(whichFace == "right"){
-    		let tep_01 = [bigSixFace['back'][6],bigSixFace['back'][3],bigSixFace['back'][0]];
-    		let tep_02 = [bigSixFace['down'][2],bigSixFace['down'][5],bigSixFace['down'][8]];
-    		let tep_03 = [bigSixFace['front'][8],bigSixFace['front'][5],bigSixFace['front'][2]];
-    		let tep_04 = [bigSixFace['up'][2],bigSixFace['up'][5],bigSixFace['up'][8]];
-    		bigSixFace['front'][2] = tep_01[0];
-    		bigSixFace['front'][5] = tep_01[1];
-    		bigSixFace['front'][8] = tep_01[2];
-    		bigSixFace['up'][2] = tep_02[0];
-    		bigSixFace['up'][5] = tep_02[1];
-    		bigSixFace['up'][8] = tep_02[2];
-    		bigSixFace['back'][0] = tep_03[0];
-    		bigSixFace['back'][3] = tep_03[1];
-    		bigSixFace['back'][6] = tep_03[2];
-    		bigSixFace['down'][2] = tep_04[0];
-    		bigSixFace['down'][5] = tep_04[1];
-    		bigSixFace['down'][8] = tep_04[2];
-    	};
-    	if(whichFace == "left"){
-    		let tep_01 = [bigSixFace['back'][8],bigSixFace['back'][5],bigSixFace['back'][2]];
-    		let tep_02 = [bigSixFace['down'][0],bigSixFace['down'][3],bigSixFace['down'][6]];
-    		let tep_03 = [bigSixFace['front'][6],bigSixFace['front'][3],bigSixFace['front'][0]];
-    		let tep_04 = [bigSixFace['up'][0],bigSixFace['up'][3],bigSixFace['up'][6]];
+    // rerender之前把各个小cube位置重新定义
+    function changeBigSixFaceAndCubePosition(whichFace, axis, deg) {
+        //去除上一次的槽点上的cube序号
+        var tempSlot = [];
 
-    		bigSixFace['front'][0] = tep_01[0];
-    		bigSixFace['front'][3] = tep_01[1];
-    		bigSixFace['front'][6] = tep_01[2];
-    		bigSixFace['up'][0] = tep_02[0];
-    		bigSixFace['up'][3] = tep_02[1];
-    		bigSixFace['up'][6] = tep_02[2];
-    		bigSixFace['back'][2] = tep_03[0];
-    		bigSixFace['back'][5] = tep_03[1];
-    		bigSixFace['back'][8] = tep_03[2];
-    		bigSixFace['down'][0] = tep_04[0];
-    		bigSixFace['down'][3] = tep_04[1];
-    		bigSixFace['down'][6] = tep_04[2];
-    	};
-    	if(whichFace == "back"){
-    		let tep_01 = bigSixFace['down'].slice(6).reverse().concat(bigSixFace['up'].slice(3));
-    		let tep_02 = [bigSixFace['right'][8],bigSixFace['right'][5],bigSixFace['right'][2]];
-    		let tep_03 = [bigSixFace['left'][6],bigSixFace['left'][3],bigSixFace['left'][0]];
-    		let tep_04 = bigSixFace['down'].slice(0,6).concat(bigSixFace['up'].slice(0,3).reverse());
+        for (let i = 0; i < cubeSlot.length; i ++) {
+            tempSlot[i] = cubeSlot[i];
+            
+        };
 
-    		bigSixFace['up'] = tep_01;
-    		bigSixFace['left'][0] = tep_02[0];
-    		bigSixFace['left'][3] = tep_02[1];
-    		bigSixFace['left'][6] = tep_02[2];
-    		bigSixFace['right'][2] = tep_03[0];
-    		bigSixFace['right'][5] = tep_03[1];
-    		bigSixFace['right'][8] = tep_03[2];
-    		bigSixFace['down'] = tep_04;
+    	if(whichFace == "f"){
+    		let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
+    		let tep_02 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
+    		let tep_03 = [bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]];
+    		let tep_04 = bigSixFace['u'].slice(6).reverse().concat(bigSixFace['d'].slice(3));
+    		bigSixFace['u'] = tep_01;
+    		bigSixFace['l'][2] = tep_02[0];
+    		bigSixFace['l'][5] = tep_02[1];
+    		bigSixFace['l'][8] = tep_02[2];
+    		bigSixFace['r'][0] = tep_03[0];
+    		bigSixFace['r'][3] = tep_03[1];
+    		bigSixFace['r'][6] = tep_03[2];
+    		bigSixFace['d'] = tep_04;
     	};
-    	if(whichFace == "down"){
-		   let tep_01 = bigSixFace['front'].slice(0,6).concat(bigSixFace['back'].slice(6));
-		   let tep_02 = bigSixFace['left'].slice(0,6).concat(bigSixFace['right'].slice(6));
-		   let tep_03 = bigSixFace['right'].slice(0,6).concat(bigSixFace['left'].slice(6));
-		   let tep_04 = bigSixFace['back'].slice(0,6).concat(bigSixFace['front'].slice(6));
-		   bigSixFace['front'] = tep_01;
-		   bigSixFace['left'] = tep_02;
-		   bigSixFace['right'] = tep_03;
-		   bigSixFace['back'] = tep_04;
+    	if(whichFace == "u"){
+    		let tep_01 = bigSixFace['b'].slice(0,3).concat(bigSixFace['f'].slice(3));
+    		let tep_02 = bigSixFace['r'].slice(0,3).concat(bigSixFace['l'].slice(3));
+    		let tep_03 = bigSixFace['l'].slice(0,3).concat(bigSixFace['r'].slice(3));
+    		let tep_04 = bigSixFace['f'].slice(0,3).concat(bigSixFace['b'].slice(3));
+    		bigSixFace['f'] = tep_01;
+    		bigSixFace['l'] = tep_02;
+    		bigSixFace['r'] = tep_03;
+    		bigSixFace['b'] = tep_04;
+    	};
+    	if(whichFace == "r"){
+    		let tep_01 = [bigSixFace['b'][6],bigSixFace['b'][3],bigSixFace['b'][0]];
+    		let tep_02 = [bigSixFace['d'][2],bigSixFace['d'][5],bigSixFace['d'][8]];
+    		let tep_03 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
+    		let tep_04 = [bigSixFace['u'][2],bigSixFace['u'][5],bigSixFace['u'][8]];
+    		bigSixFace['f'][2] = tep_01[0];
+    		bigSixFace['f'][5] = tep_01[1];
+    		bigSixFace['f'][8] = tep_01[2];
+    		bigSixFace['u'][2] = tep_02[0];
+    		bigSixFace['u'][5] = tep_02[1];
+    		bigSixFace['u'][8] = tep_02[2];
+    		bigSixFace['b'][0] = tep_03[0];
+    		bigSixFace['b'][3] = tep_03[1];
+    		bigSixFace['b'][6] = tep_03[2];
+    		bigSixFace['d'][2] = tep_04[0];
+    		bigSixFace['d'][5] = tep_04[1];
+    		bigSixFace['d'][8] = tep_04[2];
+    	};
+    	if(whichFace == "l"){
+    		let tep_01 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
+    		let tep_02 = [bigSixFace['d'][0],bigSixFace['d'][3],bigSixFace['d'][6]];
+    		let tep_03 = [bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]];
+    		let tep_04 = [bigSixFace['u'][0],bigSixFace['u'][3],bigSixFace['u'][6]];
+
+    		bigSixFace['f'][0] = tep_01[0];
+    		bigSixFace['f'][3] = tep_01[1];
+    		bigSixFace['f'][6] = tep_01[2];
+    		bigSixFace['u'][0] = tep_02[0];
+    		bigSixFace['u'][3] = tep_02[1];
+    		bigSixFace['u'][6] = tep_02[2];
+    		bigSixFace['b'][2] = tep_03[0];
+    		bigSixFace['b'][5] = tep_03[1];
+    		bigSixFace['b'][8] = tep_03[2];
+    		bigSixFace['d'][0] = tep_04[0];
+    		bigSixFace['d'][3] = tep_04[1];
+    		bigSixFace['d'][6] = tep_04[2];
+    	};
+    	if(whichFace == "b"){
+    		let tep_01 = bigSixFace['d'].slice(6).reverse().concat(bigSixFace['u'].slice(3));
+    		let tep_02 = [bigSixFace['r'][8],bigSixFace['r'][5],bigSixFace['r'][2]];
+    		let tep_03 = [bigSixFace['l'][6],bigSixFace['l'][3],bigSixFace['l'][0]];
+    		let tep_04 = bigSixFace['d'].slice(0,6).concat(bigSixFace['u'].slice(0,3).reverse());
+
+    		bigSixFace['u'] = tep_01;
+    		bigSixFace['l'][0] = tep_02[0];
+    		bigSixFace['l'][3] = tep_02[1];
+    		bigSixFace['l'][6] = tep_02[2];
+    		bigSixFace['r'][2] = tep_03[0];
+    		bigSixFace['r'][5] = tep_03[1];
+    		bigSixFace['r'][8] = tep_03[2];
+    		bigSixFace['d'] = tep_04;
+    	};
+    	if(whichFace == "d"){
+		   let tep_01 = bigSixFace['f'].slice(0,6).concat(bigSixFace['b'].slice(6));
+		   let tep_02 = bigSixFace['l'].slice(0,6).concat(bigSixFace['r'].slice(6));
+		   let tep_03 = bigSixFace['r'].slice(0,6).concat(bigSixFace['l'].slice(6));
+		   let tep_04 = bigSixFace['b'].slice(0,6).concat(bigSixFace['f'].slice(6));
+		   bigSixFace['f'] = tep_01;
+		   bigSixFace['l'] = tep_02;
+		   bigSixFace['r'] = tep_03;
+		   bigSixFace['b'] = tep_04;
     	};
 
     	bigSixFace[whichFace] = bigSixFace[whichFace].reverse();
+
+
+        upDateCubeSlot ();//更新 cubeSlot
+
+        var count = 0;
+
+        for (let i = 0; i<cubeSlot.length; i ++) {
+
+            
+            if (cubeSlot[i] != tempSlot[i]){
+                count ++;
+
+                if (count == 5) {return false;};
+                var tempNewPos_01 = cubePosition[cubeSlot[i]-1];
+                var tempNewPos_02 = cubePosition[i];
+
+
+
+                tempNewPos_01[3][axis] = deg;
+                tempNewPos_02[3][axis] = deg;
+                tempNewPos_01[3][axis] = deg;
+                tempNewPos_02[3][axis] = deg;
+
+                cubePosition[i] = tempNewPos_01;
+                cubePosition[cubeSlot[i]-1] = tempNewPos_02;
+            };
+        };
+
+        if(whichFace == "f"){
+            cubePosition[bigSixFace["f"][4]][axis] = deg;
+        }
+        if(whichFace == "u"){
+            cubePosition[bigSixFace["u"][4]][axis] = deg;
+        }
+        if(whichFace == "r"){
+            cubePosition[bigSixFace["r"][4]][axis] = deg;
+        }
+        if(whichFace == "l"){
+            cubePosition[bigSixFace["l"][4]][axis] = deg;
+        }
+        if(whichFace == "b"){
+            cubePosition[bigSixFace["b"][4]][axis] = deg;
+        }
+        if(whichFace == "d"){
+            cubePosition[bigSixFace["d"][4]][axis] = deg;
+        }
+
+
+
     };
-    // 旋转，同时更新cube的空间位置,同时更新html布局
-    function rotateCubeFace(whichFace, axis, deg){
 
-    	renderCube (false, bigSixFace[whichFace]);
+    
 
-    	setTimeout(function(){
-    		$(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
-    	},10);
 
-		changeBigSixFace(whichFace, axis, deg);
-		changeCubePosition(whichFace, axis, deg);
-    };
-    function changeCubePosition(whichFace, axis, deg) {
-    	if(whichFace == "front"){
-    		let tempPosition_01 = cubePosition.slice(0,9).reverse();
-    		for (let i=0; i<9; i++){
-    			tempPosition_01[i][3] = axis;
-    			tempPosition_01[i][4] = deg;
 
-    		}
-    		let tempPosition_02 = cubePosition.slice(9);
-    		cubePosition = tempPosition_01.concat(tempPosition_02);
-    	}
-    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // 根据给定的空间位置，设置内联样式
     function cubePositionStyle (i) {
     	return  "top:"+cubePosition[i-1][0]+"px; "+
 		    	"left:"+cubePosition[i-1][1]+"px ;"+
 		    	"transform:translateZ("+cubePosition[i-1][2]+"px) "+
-		    	           "rotate"+cubePosition[i-1][3]+
-		    	           "("+cubePosition[i-1][4]+"deg)";
+		    	           "rotateX("+cubePosition[i-1][3]['X']+"deg)"+" rotateY("+cubePosition[i-1][3]['Y']+"deg)"+" rotateZ("+cubePosition[i-1][3]['Z']+"deg)";
     };
-
+    // 每个cube的六个小面
+    function sixFace(i) {
+        return '<div class="face_01">!'+i+'</div>'+
+               '<div class="face_02">!'+i+'</div>'+
+               '<div class="face_03">!'+i+'</div>'+
+               '<div class="face_04">!'+i+'</div>'+
+               '<div class="face_05">!'+i+'</div>'+
+               '<div class="face_06">!'+i+'</div>';
+    };
 
     // 初始化渲染cubes
     renderCube (true, []);
@@ -274,29 +354,43 @@ window.onload = function(){
     };
 
 
+
+    // 旋转，同时更新cube的空间位置,同时更新html布局
+    function rotateCubeFace(whichFace, axis, deg){
+
+        renderCube (false, bigSixFace[whichFace]);
+
+        setTimeout(function(){
+            $(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
+        },10);
+
+        changeBigSixFaceAndCubePosition(whichFace, axis, deg);
+    };
+
+
     // 六个面的旋转按钮
     $('.btn1').onclick = function(){
-    	rotateCubeFace('up', "Y", -180);
+    	rotateCubeFace('u', "Y", -180);
     	console.log(bigSixFace);
     };
     $('.btn2').onclick = function(){
-    	rotateCubeFace('left', "X", -180);
+    	rotateCubeFace('l', "X", -180);
     	console.log(bigSixFace);
     };
     $('.btn3').onclick = function(){
-    	rotateCubeFace('front', "Z", 180);
+    	rotateCubeFace('f', "Z", 180);
     	console.log(bigSixFace);
     };
     $('.btn4').onclick = function(){
-    	rotateCubeFace('right', "X", 180);
+    	rotateCubeFace('r', "X", 180);
     	console.log(bigSixFace);
     };
     $('.btn5').onclick = function(){
-    	rotateCubeFace('down', "Y", 180);
+    	rotateCubeFace('d', "Y", 180);
     	console.log(bigSixFace);
     };
     $('.btn6').onclick = function(){
-    	rotateCubeFace('back', "Z", -180);
+    	rotateCubeFace('b', "Z", -180);
     	console.log(bigSixFace);
     };
 
