@@ -117,7 +117,7 @@ window.onload = function(){
 				   9,  18, 27
 			    ],
     };
-    
+
     // magic cube 每个小cube都有一个槽点，槽点是我自定义的，1-27编号，有固定顺序，
     // 槽点的顺序是死的，固定的，
     var cubeSlot = [];
@@ -148,7 +148,6 @@ window.onload = function(){
 
         for (let i = 0; i < cubeSlot.length; i ++) {
             tempSlot[i] = cubeSlot[i];
-            
         };
 
     	if(whichFace == "f"){
@@ -247,63 +246,47 @@ window.onload = function(){
 
         for (let i = 0; i<cubeSlot.length; i ++) {
 
-            
             if (cubeSlot[i] != tempSlot[i]){
                 count ++;
-
-                if (count == 5) {return false;};
+                if (count == 5) {break};
+                if (count == 1){
+                    console.log('cubeSlot',cubeSlot)
+                    console.log('tempSlot',tempSlot)
+                    console.log(cubePosition[0],cubeSlot[i])
+                    console.log(cubePosition[8],tempSlot[i])
+                }
                 var tempNewPos_01 = cubePosition[cubeSlot[i]-1];
-                var tempNewPos_02 = cubePosition[i];
+                var tempNewPos_02 = cubePosition[tempSlot[i]-1];//00000000
+
+                if (count == 1){
+                    console.log("temp1",tempNewPos_01);
+                    console.log("temp2",tempNewPos_02);
+                }
 
 
+                // if (axis = 'X'){
+                //     tempNewPos_01[3]['Z'] =0;
+                //     tempNewPos_02[3]['Y'] =0;
+                // }
+                // if (axis = 'Y'){
+                //     tempNewPos_01[3]['Z'] =0;
+                //     tempNewPos_02[3]['X'] =0;
+                // }
+                // if (axis = 'Z'){
+                //     tempNewPos_01[3]['Y'] =0;
+                //     tempNewPos_02[3]['X'] =0;
+                // }
+                tempNewPos_01[3][axis] += deg%360;
+                tempNewPos_02[3][axis] += deg%360;
 
-                tempNewPos_01[3][axis] = deg;
-                tempNewPos_02[3][axis] = deg;
-                tempNewPos_01[3][axis] = deg;
-                tempNewPos_02[3][axis] = deg;
 
-                cubePosition[i] = tempNewPos_01;
+                cubePosition[tempSlot[i]-1] = tempNewPos_01;
                 cubePosition[cubeSlot[i]-1] = tempNewPos_02;
             };
         };
-
-        if(whichFace == "f"){
-            cubePosition[bigSixFace["f"][4]][axis] = deg;
-        }
-        if(whichFace == "u"){
-            cubePosition[bigSixFace["u"][4]][axis] = deg;
-        }
-        if(whichFace == "r"){
-            cubePosition[bigSixFace["r"][4]][axis] = deg;
-        }
-        if(whichFace == "l"){
-            cubePosition[bigSixFace["l"][4]][axis] = deg;
-        }
-        if(whichFace == "b"){
-            cubePosition[bigSixFace["b"][4]][axis] = deg;
-        }
-        if(whichFace == "d"){
-            cubePosition[bigSixFace["d"][4]][axis] = deg;
-        }
-
-
-
+        cubePosition[bigSixFace[whichFace][4]-1][3][axis] += deg%360;
+        console.log(cubePosition)
     };
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -353,7 +336,7 @@ window.onload = function(){
     	};
     };
 
-
+var ooo = true;
 
     // 旋转，同时更新cube的空间位置,同时更新html布局
     function rotateCubeFace(whichFace, axis, deg){
@@ -362,9 +345,11 @@ window.onload = function(){
 
         setTimeout(function(){
             $(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
+            changeBigSixFaceAndCubePosition(whichFace, axis, deg);
         },10);
 
-        changeBigSixFaceAndCubePosition(whichFace, axis, deg);
+
+
     };
 
 
