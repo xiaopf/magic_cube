@@ -181,6 +181,7 @@ window.onload = function(){
     // 槽点的顺序是死的，固定的，
     var cubeSlot = [];
     upDateCubeSlot ();
+    console.log("!!!!!!!",cubeSlot)
 
     function upDateCubeSlot () {
         cubeSlot = [
@@ -206,9 +207,16 @@ window.onload = function(){
 
         var tempCubePosition = [];
 
-        var tempBigSixFace = {};
-        
-        
+        var tempBigSixFace = {
+            'u' :[[],[],[],[],[],[],[],[],[]],
+            'f' :[[],[],[],[],[],[],[],[],[]],
+            'd' :[[],[],[],[],[],[],[],[],[]],
+            'b' :[[],[],[],[],[],[],[],[],[]],
+            'l' :[[],[],[],[],[],[],[],[],[]],
+            'r' :[[],[],[],[],[],[],[],[],[]]
+        };
+
+
         for (let i = 0; i < cubePosition.length; i ++) {
             tempCubePosition[i] = cubePosition[i];
         };
@@ -217,15 +225,25 @@ window.onload = function(){
             tempSlot[i] = cubeSlot[i];
         };
 
-        for(var key in bigSixFace){
-            for (var m = 0; m < 9; m ++) {
-                
-                    tempBigSixFace[key][m][0] = bigSixFace[key][m][0];
-                    tempBigSixFace[key][m][1] = bigSixFace[key][m][1];
-               
-            };
-        }
 
+            for (var m = 0; m < 9; m ++) {
+
+                    tempBigSixFace['u'][m][0] = bigSixFace['u'][m][0];
+                    tempBigSixFace['f'][m][0] = bigSixFace['f'][m][0];
+                    tempBigSixFace['d'][m][0] = bigSixFace['d'][m][0];
+                    tempBigSixFace['b'][m][0] = bigSixFace['b'][m][0];
+                    tempBigSixFace['l'][m][0] = bigSixFace['l'][m][0];
+                    tempBigSixFace['r'][m][0] = bigSixFace['r'][m][0];
+                    tempBigSixFace['u'][m][1] = bigSixFace['u'][m][1];
+                    tempBigSixFace['f'][m][1] = bigSixFace['f'][m][1];
+                    tempBigSixFace['d'][m][1] = bigSixFace['d'][m][1];
+                    tempBigSixFace['b'][m][1] = bigSixFace['b'][m][1];
+                    tempBigSixFace['l'][m][1] = bigSixFace['l'][m][1];
+                    tempBigSixFace['r'][m][1] = bigSixFace['r'][m][1];
+
+            };
+
+console.log(tempBigSixFace)
 
 
 
@@ -236,8 +254,8 @@ window.onload = function(){
             // console.log(180);
         	if(whichFace == "f"){
         		let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
-        		let tep_02 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
-        		let tep_03 = [bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]];
+        		let tep_02 = [bigSixFace['r'][6],bigSixFace['r'][3],bigSixFace['r'][0]];
+        		let tep_03 = [bigSixFace['l'][8],bigSixFace['l'][5],bigSixFace['l'][2]];
         		let tep_04 = bigSixFace['u'].slice(6).reverse().concat(bigSixFace['d'].slice(3));
         		bigSixFace['u'] = tep_01;
         		bigSixFace['l'][2] = tep_02[0];
@@ -263,6 +281,7 @@ window.onload = function(){
         		let tep_02 = [bigSixFace['d'][2],bigSixFace['d'][5],bigSixFace['d'][8]];
         		let tep_03 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
         		let tep_04 = [bigSixFace['u'][2],bigSixFace['u'][5],bigSixFace['u'][8]];
+
         		bigSixFace['f'][2] = tep_01[0];
         		bigSixFace['f'][5] = tep_01[1];
         		bigSixFace['f'][8] = tep_01[2];
@@ -320,15 +339,17 @@ window.onload = function(){
     		   bigSixFace['r'] = tep_03;
     		   bigSixFace['b'] = tep_04;
         	};
+            let tep_05 = bigSixFace[whichFace].reverse();
+        	bigSixFace[whichFace] = tep_05;
 
-        	bigSixFace[whichFace] = bigSixFace[whichFace].reverse();
         } else if(Math.abs(deg) == 90 && dir) {
             console.log("顺90");
             if(whichFace == "f"){
-                let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]);
-                let tep_02 = bigSixFace['f'].slice(6);
-                let tep_03 = bigSixFace['f'].slice(0, 3);
-                let tep_04 = [bigSixFace['f'][8]].concat(bigSixFace['f'][5],bigSixFace['f'][2],bigSixFace['d'].slice(3));
+                let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['l'][8]],[bigSixFace['l'][5]],[bigSixFace['l'][2]]);
+                let tep_02 = bigSixFace['d'].slice(0,3);
+                let tep_03 = bigSixFace['u'].slice(6);
+
+                let tep_04 = [bigSixFace['r'][6],bigSixFace['r'][3],bigSixFace['r'][0]].concat(bigSixFace['d'].slice(3));
 
                 bigSixFace['u'] = tep_01;
                 bigSixFace['l'][2] = tep_02[0];
@@ -388,10 +409,10 @@ window.onload = function(){
                 bigSixFace['d'][6] = tep_04[2];
             };
             if(whichFace == "b"){
-                let tep_01 = [bigSixFace['r'][2]].concat(bigSixFace['r'][5],bigSixFace['r'][8],bigSixFace['u'].slice(3));
+                let tep_01 = [bigSixFace['r'][2],bigSixFace['r'][5],bigSixFace['r'][8]].concat(bigSixFace['u'].slice(3));
                 let tep_02 = bigSixFace['u'].slice(0,3).reverse();
                 let tep_03 = bigSixFace['d'].slice(6).reverse();
-                let tep_04 = bigSixFace['d'].slice(0,6).concat(bigSixFace['r'][0],bigSixFace['r'][3],bigSixFace['u'][6]);
+                let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['l'][0]],[bigSixFace['l'][3]],[bigSixFace['l'][6]]);
 
                 bigSixFace['u'] = tep_01;
                 bigSixFace['l'][0] = tep_02[0];
@@ -412,12 +433,9 @@ window.onload = function(){
                bigSixFace['r'] = tep_03;
                bigSixFace['b'] = tep_04;
             };
-            
-            
-            
-            
-            
-            let tep_05 = [  
+
+
+            let tep_05 = [
                             bigSixFace[whichFace][6],bigSixFace[whichFace][3],bigSixFace[whichFace][0],
                             bigSixFace[whichFace][7],bigSixFace[whichFace][4],bigSixFace[whichFace][1],
                             bigSixFace[whichFace][8],bigSixFace[whichFace][5],bigSixFace[whichFace][2]
@@ -526,6 +544,7 @@ window.onload = function(){
 
         var count = 0;
 
+
       console.log(tempSlot);
           console.log(cubeSlot);
 
@@ -550,7 +569,7 @@ window.onload = function(){
                 var whichAxis = "";
 
                 for (let j = 0; j < 9; j++){
-                    if (tempBigSixFace[whichFace][j][0] == cubeSlot[k]) {
+                    if (tempBigSixFace[whichFace][j][0] == tempSlot[k]) {
 
                         console.log(tempBigSixFace[whichFace][j][0],tempSlot[k],tempBigSixFace[whichFace][j][1]);
                         switch ( tempBigSixFace[whichFace][j][1] ) {
@@ -573,18 +592,17 @@ window.onload = function(){
                                         whichAxis = "Z"
                                         break;
                         }
-
                         console.log(whichAxis);
                     }
-                    
                 }
-                
 
-               
 
-             
-
+             // alert(cubeRotateDeg[cubeSlot[i]-1][whichAxis])
+            // if(deg == "Z"){!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //     cubeRotateDeg[cubeSlot[i]-1][whichAxis] = -(cubeRotateDeg[cubeSlot[i]-1][whichAxis]+deg)%360;
+            // }else{
                 cubeRotateDeg[cubeSlot[i]-1][whichAxis] = (cubeRotateDeg[cubeSlot[i]-1][whichAxis]+deg)%360;
+            // }
                 // cubeRotateDeg[tempSlot[i]-1][axis] = (cubeRotateDeg[tempSlot[i]-1][axis]+deg)%360;
 
 
@@ -606,7 +624,8 @@ window.onload = function(){
        };
 
        // console.log(cubePosition);
-       console.log(cubeRotateDeg);
+       console.log(bigSixFace);
+       // console.log(cubeRotateDeg);
   
     };
 
