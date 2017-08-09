@@ -110,6 +110,7 @@ window.onload = function(){
        {'X':0, 'Y':0, 'Z':0},
        {'X':0, 'Y':0, 'Z':0}
     ];
+
     // 设置旋转面包含的cube块序列号
     // var bigSixFace = {
 	   //  'u'   :[
@@ -579,13 +580,15 @@ window.onload = function(){
                 var whichAxis = "";
                 var whichAxisDir = true;
                 var whichDir = true;
-            
+
+                var whichAxisNum = "";
+
 
                 for (let j = 0; j < 9; j++){
                     if (tempBigSixFace[whichFace][j][0] == tempSlot[k]) {
 
                         console.log(tempBigSixFace[whichFace][j][0],tempSlot[k],tempBigSixFace[whichFace][j][1]);
-
+whichAxisNum = tempBigSixFace[whichFace][j][1];
                         switch ( tempBigSixFace[whichFace][j][1] ) {
                             case 1  :
                                         whichAxis = "Y";
@@ -615,6 +618,7 @@ window.onload = function(){
                     }
                 }
 
+
                  if (whichFace == "f"||whichFace == "d"||whichFace == "r") {
                         whichDir = true;
                  }else if(whichFace == "b"||whichFace == "u"||whichFace == "l"){
@@ -622,13 +626,41 @@ window.onload = function(){
                  }
                  console.log(tempSlot[k]-1,whichAxis,whichAxisDir);
              // alert(cubeRotateDeg[cubeSlot[i]-1][whichAxis])
+        // ["X","Y","X","Y"],
+        // ["Y","Z","Y","Z"],
+        // ["X","Y","X","Y"],
+        // ["Y","Z","Y","Z"],
+        // ["X","Y","X","Y"],
+        // ["X","Y","X","Y"],
+    var dynamicAxis = [
+             [6,4,3,2],
+             [3,5,6,2],
+             [4,5,2,1],
+             [5,3,1,6],
+             [5,6,2,3],
+             [4,1,2,5]
+    ];
+    var ltCubeA = ["Y","X","Z","X","Y","Z"];
 
 
 
 
+if(deg == 90){
+
+    let tempN = dynamicAxis[whichAxisNum-1].shift();
+    dynamicAxis[whichAxisNum-1].push(tenpN);
 
 
-             
+    dynamicAxis[whichAxisNum-1][0]
+    dynamicAxis[whichAxisNum-1][1]
+    dynamicAxis[whichAxisNum-1][2]
+    dynamicAxis[whichAxisNum-1][3]
+
+}
+
+
+
+
 if(whichAxisDir === whichDir){
 
 console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
