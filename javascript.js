@@ -216,6 +216,7 @@ window.onload = function(){
             'r' :[[],[],[],[],[],[],[],[],[]]
         };
 
+        var tempCubeRotateDeg =[];
 
         for (let i = 0; i < cubePosition.length; i ++) {
             tempCubePosition[i] = cubePosition[i];
@@ -243,7 +244,16 @@ window.onload = function(){
 
             };
 
-console.log(tempBigSixFace)
+        for (let i = 0; i < cubeRotateDeg.length; i ++) {
+            tempCubeRotateDeg[i] = cubeRotateDeg[i];
+        };
+        
+
+
+
+
+
+// console.log(tempBigSixFace)
 
 
 
@@ -567,42 +577,70 @@ console.log(tempBigSixFace)
                 // }
                 var k = i;
                 var whichAxis = "";
+                var whichAxisDir = true;
+                var whichDir = true;
+            
 
                 for (let j = 0; j < 9; j++){
                     if (tempBigSixFace[whichFace][j][0] == tempSlot[k]) {
 
                         console.log(tempBigSixFace[whichFace][j][0],tempSlot[k],tempBigSixFace[whichFace][j][1]);
+
                         switch ( tempBigSixFace[whichFace][j][1] ) {
                             case 1  :
-                                        whichAxis = "Y"
+                                        whichAxis = "Y";
+                                        whichAxisDir = false
                                         break;
                             case 2  :
-                                        whichAxis = "X"
+                                        whichAxis = "X";
+                                        whichAxisDir = false
                                         break;
                             case 3  :
-                                        whichAxis = "Z"
+                                        whichAxis = "Z";
+                                        whichAxisDir = true
                                         break;
                             case 4  :
-                                        whichAxis = "X"
+                                        whichAxis = "X";
+                                        whichAxisDir = true
                                         break;
                             case 5  :
-                                        whichAxis = "Y"
+                                        whichAxis = "Y";
+                                        whichAxisDir = true
                                         break;
                             case 6  :
-                                        whichAxis = "Z"
+                                        whichAxis = "Z";
+                                        whichAxisDir = false
                                         break;
-                        }
-                        console.log(whichAxis);
+                        };
                     }
                 }
 
-
+                 if (whichFace == "f"||whichFace == "d"||whichFace == "r") {
+                        whichDir = true;
+                 }else if(whichFace == "b"||whichFace == "u"||whichFace == "l"){
+                        whichDir = false;
+                 }
+                 console.log(tempSlot[k]-1,whichAxis,whichAxisDir);
              // alert(cubeRotateDeg[cubeSlot[i]-1][whichAxis])
-            // if(deg == "Z"){!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //     cubeRotateDeg[cubeSlot[i]-1][whichAxis] = -(cubeRotateDeg[cubeSlot[i]-1][whichAxis]+deg)%360;
-            // }else{
-                cubeRotateDeg[cubeSlot[i]-1][whichAxis] = (cubeRotateDeg[cubeSlot[i]-1][whichAxis]+deg)%360;
-            // }
+
+
+
+
+
+
+             
+if(whichAxisDir === whichDir){
+
+console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
+                        tempCubeRotateDeg[tempSlot[k]-1][whichAxis] = (cubeRotateDeg[tempSlot[k]-1][whichAxis]+deg)%360;
+}else{
+console.log("--------------------------------------------------")
+                    tempCubeRotateDeg[tempSlot[k]-1][whichAxis] = (cubeRotateDeg[tempSlot[k]-1][whichAxis]+(-deg))%360;
+                }
+
+
+
+
                 // cubeRotateDeg[tempSlot[i]-1][axis] = (cubeRotateDeg[tempSlot[i]-1][axis]+deg)%360;
 
 
@@ -612,20 +650,25 @@ console.log(tempBigSixFace)
         };
 
 
-
+        // 对中心色块旋转
 
         cubeRotateDeg[bigSixFace[whichFace][4][0]-1][axis] = (cubeRotateDeg[bigSixFace[whichFace][4][0]-1][axis]+deg)%360;
 
 
 
 
-       for (let i = 0; i < cubePosition.length; i ++) {
-           cubePosition[i] = tempCubePosition[i];
+       for (let u = 0; u < cubePosition.length; u ++) {
+           cubePosition[u] = tempCubePosition[u];
+       };
+
+       for (let h = 0; h < cubeRotateDeg.length; h ++) {
+           cubeRotateDeg[h] = tempCubeRotateDeg[h];
        };
 
        // console.log(cubePosition);
        console.log(bigSixFace);
-       // console.log(cubeRotateDeg);
+       console.log(cubeRotateDeg[1]);
+       console.log(cubeRotateDeg[2]);
   
     };
 
@@ -678,7 +721,7 @@ console.log(tempBigSixFace)
 			if (init) {
 				$("#big_box").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 			} else {
-				if (i == whichFace[0][0] || i == whichFace[1][0] || i == whichFace[2][0] || i == whichFace[3][0] || i == whichFace[4][0] || i == whichFace[5][0] || i == whichFace[6][0] || i == whichFace[7][0] || i == whichFace[8][0] ) {
+				if (i == bigSixFace[whichFace][0][0] || i == bigSixFace[whichFace][1][0] || i == bigSixFace[whichFace][2][0] || i == bigSixFace[whichFace][3][0] || i == bigSixFace[whichFace][4][0] || i == bigSixFace[whichFace][5][0] || i == bigSixFace[whichFace][6][0] || i == bigSixFace[whichFace][7][0] || i == bigSixFace[whichFace][8][0] ) {
 					if (onOff) {
 						$("#big_box").innerHTML += '<div class="litteWrap"></div>';
 						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
@@ -698,7 +741,7 @@ var ooo = 0;
     // 旋转，同时更新cube的空间位置,同时更新html布局
     function rotateCubeFace(whichFace, axis, deg, dir){
 
-        renderCube (false, bigSixFace[whichFace]);
+        renderCube (false, whichFace);
 
         setTimeout(function(){
             // changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
