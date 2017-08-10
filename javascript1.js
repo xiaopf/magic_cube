@@ -206,35 +206,7 @@ window.onload = function(){
             { "3":"Z","4":"X","5":"Y"},
             { "3":"Z","4":"X","5":"Y"}
         ];
-        var tempLtCubeA = [
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"},
-            { "3":"Z","4":"X","5":"Y"}
-        ];
+
     // magic cube 每个小cube都有一个槽点，槽点是我自定义的，1-27编号，有固定顺序，
     // 槽点的顺序是死的，固定的，
     var cubeSlot = [];
@@ -613,8 +585,8 @@ window.onload = function(){
         var count = 0;
 
 
-        console.log(tempSlot);
-        console.log(cubeSlot);
+console.log(tempSlot);
+console.log(cubeSlot);
 
         for (let i = 0; i<cubeSlot.length; i ++) {
 
@@ -649,75 +621,38 @@ window.onload = function(){
                         switch ( tempBigSixFace[whichFace][j][1] ) {
                             case 1  :
                                         whichAxisDir = false;
-                                       
-                                       
+                                        whichAxisNum = 5;
+                                        whichAxis = ltCubeA[k][whichAxisNum] ;
                                         break;
                             case 2  :
 
                                         whichAxisDir = false;
-                                       
-                                       
+                                        whichAxisNum = 4;
+                                        whichAxis = ltCubeA[k][whichAxisNum] ;
                                         break;
                             case 3  :
                                         whichAxisDir = true;
-                                        
-                                        
-                                        break;
-                            case 4  :
-                                        whichAxisDir = true;
-                                        
-                                        
-                                        break;
-                            case 5  :
-                                        whichAxisDir = true;
-                                       
-                                        
-                                        break;
-                            case 6  :
-                                        whichAxisDir = false;
-                                        
-                                        
-                                        break;
-                        };
-
-
-                        switch ( whichFace ) {
-                            case "u" :
-                                        whichAxisNum = 5;
-                                        whichAxis = ltCubeA[k][whichAxisNum] ;
-                                        break;
-                            case "d" :
-                                        whichAxisNum = 5;
-                                        whichAxis = ltCubeA[k][whichAxisNum] ;
-                                        break;
-                            case "l" :
-                                        whichAxisNum = 4;
-                                        whichAxis = ltCubeA[k][whichAxisNum] ;
-                                        break;
-                            case "r" :
-                                        whichAxisNum = 4;
-                                        whichAxis = ltCubeA[k][whichAxisNum] ;
-                                        break;
-                            case "f" :
                                         whichAxisNum = 3;
                                         whichAxis = ltCubeA[k][whichAxisNum] ;
                                         break;
-                            case "b" :
+                            case 4  :
+                                        whichAxisDir = true;
+                                        whichAxisNum = 4;
+                                        whichAxis = ltCubeA[k][whichAxisNum] ;
+                                        break;
+                            case 5  :
+                                        whichAxisDir = true;
+                                        whichAxisNum = 5;
+                                        whichAxis = ltCubeA[k][whichAxisNum] ;
+                                        break;
+                            case 6  :
+                                        whichAxisDir = false;
                                         whichAxisNum = 3;
                                         whichAxis = ltCubeA[k][whichAxisNum] ;
                                         break;
                         };
                     }
-                }//for 9 cubes
-
-
-
-
-
-
-
-
-
+                }
 
 
                  if (whichFace == "f"||whichFace == "d"||whichFace == "r") {
@@ -726,35 +661,23 @@ window.onload = function(){
                         whichDir = false;
                  }
                  console.log(tempSlot[k],whichAxis,whichAxisDir);
-                // alert(cubeRotateDeg[cubeSlot[i]-1][whichAxis])
-                // ["X","Y","X","Y"],
-                // ["Y","Z","Y","Z"],
-                // ["X","Y","X","Y"],
-                // ["Y","Z","Y","Z"],
-                // ["X","Y","X","Y"],
-                // ["X","Y","X","Y"],
-                // var dynamicAxis = [
-                //          [6,4,3,2],
-                //          [3,5,6,2],
-                //          [4,5,2,1],
-                //          [5,3,1,6],
-                //          [5,6,2,3],
-                //          [4,1,2,5]
-                // ];
-                console.log("周周周周走",ltCubeA[tempSlot[k]-1])
-                console.log("obj",ltCubeA[0])
-
-                console.log(whichAxisNum);
-                console.log("周周周周走",ltCubeA[tempSlot[k]-1][whichAxisNum.toString()])
+             // alert(cubeRotateDeg[cubeSlot[i]-1][whichAxis])
+        // ["X","Y","X","Y"],
+        // ["Y","Z","Y","Z"],
+        // ["X","Y","X","Y"],
+        // ["Y","Z","Y","Z"],
+        // ["X","Y","X","Y"],
+        // ["X","Y","X","Y"],
+    // var dynamicAxis = [
+    //          [6,4,3,2],
+    //          [3,5,6,2],
+    //          [4,5,2,1],
+    //          [5,3,1,6],
+    //          [5,6,2,3],
+    //          [4,1,2,5]
+    // ];
 
 
-                if(whichAxisDir === whichDir){
-                    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
-                    tempCubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]] = (cubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]]+deg)%360;
-                }else{
-                    console.log("--------------------------------------------------")
-                    tempCubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]] = (cubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]]+(-deg))%360;
-                };
 
 
                 if(Math.abs(deg) == 90){
@@ -771,36 +694,44 @@ window.onload = function(){
                         let tempN_01 = ltCubeA[i]["4"];
                         let tempN_02 = ltCubeA[i]["5"];
 
-                        tempLtCubeA[i]["4"] = tempN_02;
-                        tempLtCubeA[i]["5"] = tempN_01;
+                        ltCubeA[i]["4"] = tempN_02;
+                        ltCubeA[i]["5"] = tempN_01;
 
                     }
                     if(whichAxisNum == 4){
                         let tempN_01 = ltCubeA[i]["3"];
                         let tempN_02 = ltCubeA[i]["5"];
 
-                        tempLtCubeA[i]["3"] = tempN_02;
-                        tempLtCubeA[i]["5"] = tempN_01;
+                        ltCubeA[i]["3"] = tempN_02;
+                        ltCubeA[i]["5"] = tempN_01;
 
                     }
                     if(whichAxisNum == 5){
-                
+  
                         let tempN_01 = ltCubeA[i]["4"];
                         let tempN_02 = ltCubeA[i]["3"];
 
-                        tempLtCubeA[i]["4"] = tempN_02;
-                        tempLtCubeA[i]["3"] = tempN_01;
+                        ltCubeA[i]["4"] = tempN_02;
+                        ltCubeA[i]["3"] = tempN_01;
 
                     }
-                    console.log("周周周周走",ltCubeA[tempSlot[k]-1])
+
                 }
 
-                
 
-                
+console.log("周周周周走",ltCubeA[tempSlot[k]-1])
+console.log(whichAxisNum);
+console.log("周周周周走",ltCubeA[tempSlot[k]-1][whichAxisNum.toString()])
 
-                
 
+                if(whichAxisDir === whichDir){
+
+console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
+                        tempCubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]] = (cubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]]+deg)%360;
+                }else{
+console.log("--------------------------------------------------")
+                    tempCubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]] = (cubeRotateDeg[tempSlot[k]-1][ltCubeA[i][whichAxisNum.toString()]]+(-deg))%360;
+                }
 
 
 
@@ -812,9 +743,6 @@ window.onload = function(){
                 tempCubePosition[cubeSlot[i]-1] = tempNewPos_01;
             };
         };
-
-
-
 
 
         // 对中心色块旋转
@@ -833,7 +761,6 @@ window.onload = function(){
        };
 
        // console.log(cubePosition);
-       console.log("obj",ltCubeA)
        console.log(bigSixFace);
        console.log(cubeRotateDeg[1]);
        console.log(cubeRotateDeg[2]);
@@ -845,37 +772,12 @@ window.onload = function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 根据给定的空间位置，设置内联样式
     function cubePositionStyle (i) {
     	return  "top:"+cubePosition[i-1][0]+"px; "+
 		    	"left:"+cubePosition[i-1][1]+"px ;"+
-		    	"transform:translateZ("+cubePosition[i-1][2]+"px) "+
-		    	           "rotateX("+cubeRotateDeg[i-1]['X']+"deg)"+" rotateY("+cubeRotateDeg[i-1]['Y']+"deg)"+" rotateZ("+cubeRotateDeg[i-1]['Z']+"deg)";
+		    	"transform:translateZ("+cubePosition[i-1][2]+"px) ";//+
+		    	           //"rotateX("+cubeRotateDeg[i-1]['X']+"deg)"+" rotateY("+cubeRotateDeg[i-1]['Y']+"deg)"+" rotateZ("+cubeRotateDeg[i-1]['Z']+"deg)";
     };
     // 每个cube的六个小面
     function sixFace(i) {
@@ -917,13 +819,13 @@ window.onload = function(){
 				if (i == bigSixFace[whichFace][0][0] || i == bigSixFace[whichFace][1][0] || i == bigSixFace[whichFace][2][0] || i == bigSixFace[whichFace][3][0] || i == bigSixFace[whichFace][4][0] || i == bigSixFace[whichFace][5][0] || i == bigSixFace[whichFace][6][0] || i == bigSixFace[whichFace][7][0] || i == bigSixFace[whichFace][8][0] ) {
 					if (onOff) {
 						$("#big_box").innerHTML += '<div class="litteWrap"></div>';
-						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box box_'+i+'" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 						onOff = false;
 					} else {
-						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box box_'+i+'" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 					}
 				} else {
-					$("#big_box").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+					$("#big_box").innerHTML += '<div index="'+i+'" class="box box_'+i+'" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 				}
 			};
     	};
@@ -933,13 +835,6 @@ var ooo = 0;
 
     // 旋转，同时更新cube的空间位置,同时更新html布局
     function rotateCubeFace(whichFace, axis, deg, dir){
-
-
-        for (let i = 0;i < tempLtCubeA.length; i++) {
-            for (let keyc in ltCubeA[i]){
-                tempLtCubeA[i][keyc] = ltCubeA[i][keyc];
-            }
-        }
 
         renderCube (false, whichFace);
 
@@ -951,11 +846,6 @@ var ooo = 0;
                 $(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
                 // ooo ++;
                 changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
-                for (let i = 0;i < tempLtCubeA.length; i++) {
-                    for (let keyc in ltCubeA[i]){
-                        ltCubeA[i][keyc] = tempLtCubeA[i][keyc];
-                    }
-                }
             // }
         },10);
 
