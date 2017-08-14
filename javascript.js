@@ -2,52 +2,52 @@ window.onload = function(){
 	let RANK = 3; // 定义魔方的阶数
     let cubeNum = RANK * RANK * RANK//计算立方体的个数
 
-    const $ = function (key) {
+    const get = function (key) {
     	return document.querySelector(key);
     };
     // 初始化big_box的视角
-    // $("#big_box").style.transform = '';
-    // $("#big_box").style.transform += 'rotateX('+$('.x_rotate').value+'deg)';
-    // $("#big_box").style.transform += 'rotateY('+$('.y_rotate').value+'deg)';
-    // $("#big_box").style.transform += 'rotateZ('+$('.z_rotate').value+'deg)';
-	$('.x_deg').innerHTML = $('.x_rotate').value + 'deg';
-	$('.y_deg').innerHTML = $('.y_rotate').value + 'deg';
-	$('.z_deg').innerHTML = $('.z_rotate').value + 'deg';
+    // get("#big_box").style.transform = '';
+    // get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+    // get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+    // get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
+	get('.x_deg').innerHTML = get('.x_rotate').value + 'deg';
+	get('.y_deg').innerHTML = get('.y_rotate').value + 'deg';
+	get('.z_deg').innerHTML = get('.z_rotate').value + 'deg';
 
     // 调整big_box的视角
-	$('.x_rotate').oninput = function(){
-		$('.x_deg').innerHTML = this.value + 'deg';
-		$("#big_box").style.transform = '';
-		$("#big_box").style.transform += 'rotateX('+$('.x_rotate').value+'deg)';
-		$("#big_box").style.transform += 'rotateY('+$('.y_rotate').value+'deg)';
-		$("#big_box").style.transform += 'rotateZ('+$('.z_rotate').value+'deg)';
+	get('.x_rotate').oninput = function(){
+		get('.x_deg').innerHTML = this.value + 'deg';
+		get("#big_box").style.transform = '';
+		get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+		get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+		get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
 	};
-	$('.y_rotate').oninput = function(){
-		$('.y_deg').innerHTML = this.value + 'deg';
-		$("#big_box").style.transform = '';
-		$("#big_box").style.transform += 'rotateX('+$('.x_rotate').value+'deg)';
-		$("#big_box").style.transform += 'rotateY('+$('.y_rotate').value+'deg)';
-		$("#big_box").style.transform += 'rotateZ('+$('.z_rotate').value+'deg)';
+	get('.y_rotate').oninput = function(){
+		get('.y_deg').innerHTML = this.value + 'deg';
+		get("#big_box").style.transform = '';
+		get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+		get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+		get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
 	};
-	$('.z_rotate').oninput = function(){
-		$('.z_deg').innerHTML = this.value + 'deg';
-		$("#big_box").style.transform = '';
-		$("#big_box").style.transform += 'rotateX('+$('.x_rotate').value+'deg)';
-		$("#big_box").style.transform += 'rotateY('+$('.y_rotate').value+'deg)';
-		$("#big_box").style.transform += 'rotateZ('+$('.z_rotate').value+'deg)';
+	get('.z_rotate').oninput = function(){
+		get('.z_deg').innerHTML = this.value + 'deg';
+		get("#big_box").style.transform = '';
+		get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+		get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+		get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
 	};
     // 视角复位
-	$('.btnF').onclick = function(){
-		$('.x_rotate').value = '-30';
-		$('.y_rotate').value = '-30';
-		$('.z_rotate').value = '0';
-		$('.x_deg').innerHTML = '-30deg';
-		$('.y_deg').innerHTML = '-30deg';
-		$('.z_deg').innerHTML = '0deg';
-		$("#big_box").style.transform = '';
-		$("#big_box").style.transform += 'rotateX(-30deg)';
-		$("#big_box").style.transform += 'rotateY(-30deg)';
-		$("#big_box").style.transform += 'rotateZ(0deg)';
+	get('.btnF').onclick = function(){
+		get('.x_rotate').value = '-30';
+		get('.y_rotate').value = '-30';
+		get('.z_rotate').value = '0';
+		get('.x_deg').innerHTML = '-30deg';
+		get('.y_deg').innerHTML = '-30deg';
+		get('.z_deg').innerHTML = '0deg';
+		get("#big_box").style.transform = '';
+		get("#big_box").style.transform += 'rotateX(-30deg)';
+		get("#big_box").style.transform += 'rotateY(-30deg)';
+		get("#big_box").style.transform += 'rotateZ(0deg)';
 	}
 
     // cube 的空间位置，x，y，z,旋转轴，旋转角度
@@ -81,95 +81,71 @@ window.onload = function(){
         [400, 200, -400],//26
         [400, 400, -400]//27
     ];
-  var defaultBigSixFace = {
-      'u' :[
+
+    var defaultBigSixFace = {
+        'u' :[
                 [19, 1],  [20, 1], [21, 1],
                 [10, 1],  [11, 1], [12, 1],
                  [1, 1],   [2, 1],  [3, 1]
-          ],
-      'f':[
+               ],
+        'f':[
                  [1, 3],   [2, 3],  [3, 3],
                  [4, 3],   [5, 3],  [6, 3],
                  [7, 3],   [8, 3],  [9, 3]
-              ],
-      'd' :[
+                ],
+        'd' :[
                  [7, 5],   [8, 5],  [9, 5],
                 [16, 5],  [17, 5], [18, 5],
                 [25, 5],  [26, 5], [27, 5]
-              ],
-      'b' :[
+                ],
+        'b' :[
                 [21, 6],  [20, 6], [19, 6],
                 [24, 6],  [23, 6], [22, 6],
                 [27, 6],  [26, 6], [25, 6]
-              ],
-      'l' :[
+                ],
+        'l' :[
                 [19, 2],  [10, 2],  [1, 2],
                 [22, 2],  [13, 2],  [4, 2],
                 [25, 2],  [16, 2],  [7, 2]
-              ],
-      'r':[
+                ],
+        'r':[
                  [3, 4],  [12, 4], [21, 4],
                  [6, 4],  [15, 4], [24, 4],
                  [9, 4],  [18, 4], [27, 4]
-              ],
-  };
-    var bigSixFace = {
-        'u' :[
-                  [19, 1],  [20, 1], [21, 1],
-                  [10, 1],  [11, 1], [12, 1],
-                   [1, 1],   [2, 1],  [3, 1]
-            ],
-        'f':[
-                   [1, 3],   [2, 3],  [3, 3],
-                   [4, 3],   [5, 3],  [6, 3],
-                   [7, 3],   [8, 3],  [9, 3]
-                ],
-        'd' :[
-                   [7, 5],   [8, 5],  [9, 5],
-                  [16, 5],  [17, 5], [18, 5],
-                  [25, 5],  [26, 5], [27, 5]
-                ],
-        'b' :[
-                  [21, 6],  [20, 6], [19, 6],
-                  [24, 6],  [23, 6], [22, 6],
-                  [27, 6],  [26, 6], [25, 6]
-                ],
-        'l' :[
-                  [19, 2],  [10, 2],  [1, 2],
-                  [22, 2],  [13, 2],  [4, 2],
-                  [25, 2],  [16, 2],  [7, 2]
-                ],
-        'r':[
-                   [3, 4],  [12, 4], [21, 4],
-                   [6, 4],  [15, 4], [24, 4],
-                   [9, 4],  [18, 4], [27, 4]
                 ],
     };
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    var bigSixFace = {
+        'u' :[
+                  [19, 1, 'orange'],  [20, 1, 'orange'], [21, 1, 'orange'],
+                  [10, 1, 'orange'],  [11, 1, 'orange'], [12, 1, 'orange'],
+                   [1, 1, 'orange'],   [2, 1, 'orange'],  [3, 1, 'orange']
+            ],
+        'f':[
+                   [1, 3, 'yellow'],   [2, 3, 'yellow'],  [3, 3, 'yellow'],
+                   [4, 3, 'yellow'],   [5, 3, 'yellow'],  [6, 3, 'yellow'],
+                   [7, 3, 'yellow'],   [8, 3, 'yellow'],  [9, 3, 'yellow']
+                ],
+        'd' :[
+                   [7, 5, 'blue'],   [8, 5, 'blue'],  [9, 5, 'blue'],
+                  [16, 5, 'blue'],  [17, 5, 'blue'], [18, 5, 'blue'],
+                  [25, 5, 'blue'],  [26, 5, 'blue'], [27, 5, 'blue']
+                ],
+        'b' :[
+                  [21, 6, 'pink'],  [20, 6, 'pink'], [19, 6, 'pink'],
+                  [24, 6, 'pink'],  [23, 6, 'pink'], [22, 6, 'pink'],
+                  [27, 6, 'pink'],  [26, 6, 'pink'], [25, 6, 'pink']
+                ],
+        'l' :[
+                  [19, 2, 'red'],  [10, 2, 'red'],  [1, 2, 'red'],
+                  [22, 2, 'red'],  [13, 2, 'red'],  [4, 2, 'red'],
+                  [25, 2, 'red'],  [16, 2, 'red'],  [7, 2, 'red']
+                ],
+        'r':[
+                   [3, 4, 'green'],  [12, 4, 'green'], [21, 4, 'green'],
+                   [6, 4, 'green'],  [15, 4, 'green'], [24, 4, 'green'],
+                   [9, 4, 'green'],  [18, 4, 'green'], [27, 4, 'green']
+                ],
+    };
 
 
     // magic cube 每个小cube都有一个槽点，槽点是我自定义的，1-27编号，有固定顺序，
@@ -190,6 +166,7 @@ window.onload = function(){
                      bigSixFace['b'][5][0],bigSixFace['b'][4][0],bigSixFace['b'][3][0],
                      bigSixFace['b'][8][0],bigSixFace['b'][7][0],bigSixFace['b'][6][0],
                    ];
+                   
     };
 
 
@@ -234,7 +211,10 @@ window.onload = function(){
                             [bigSixFace["b"][7],bigSixFace["d"][7]],//26
                             [bigSixFace["b"][6],bigSixFace["d"][8],bigSixFace["r"][8]]
                         ];
+
+                        
     };
+
 
 
 
@@ -481,101 +461,115 @@ window.onload = function(){
             bigSixFace[whichFace] = tep_05;
         } else if(Math.abs(deg) == 90 && !dir) {
             console.log("逆90");
-                if(whichFace == "f"){
-                    let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
-                    let tep_02 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
-                    let tep_03 = [bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]];
-                    let tep_04 = bigSixFace['u'].slice(6).reverse().concat(bigSixFace['d'].slice(3));
-                    bigSixFace['u'] = tep_01;
-                    bigSixFace['l'][2] = tep_02[0];
-                    bigSixFace['l'][5] = tep_02[1];
-                    bigSixFace['l'][8] = tep_02[2];
-                    bigSixFace['r'][0] = tep_03[0];
-                    bigSixFace['r'][3] = tep_03[1];
-                    bigSixFace['r'][6] = tep_03[2];
-                    bigSixFace['d'] = tep_04;
-                };
-                if(whichFace == "u"){
-                    let tep_01 = bigSixFace['b'].slice(0,3).concat(bigSixFace['f'].slice(3));
-                    let tep_02 = bigSixFace['r'].slice(0,3).concat(bigSixFace['l'].slice(3));
-                    let tep_03 = bigSixFace['l'].slice(0,3).concat(bigSixFace['r'].slice(3));
-                    let tep_04 = bigSixFace['f'].slice(0,3).concat(bigSixFace['b'].slice(3));
-                    bigSixFace['f'] = tep_01;
-                    bigSixFace['l'] = tep_02;
-                    bigSixFace['r'] = tep_03;
-                    bigSixFace['b'] = tep_04;
-                };
-                if(whichFace == "r"){
-                    let tep_01 = [bigSixFace['b'][6],bigSixFace['b'][3],bigSixFace['b'][0]];
-                    let tep_02 = [bigSixFace['d'][2],bigSixFace['d'][5],bigSixFace['d'][8]];
-                    let tep_03 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
-                    let tep_04 = [bigSixFace['u'][2],bigSixFace['u'][5],bigSixFace['u'][8]];
-                    bigSixFace['f'][2] = tep_01[0];
-                    bigSixFace['f'][5] = tep_01[1];
-                    bigSixFace['f'][8] = tep_01[2];
-                    bigSixFace['u'][2] = tep_02[0];
-                    bigSixFace['u'][5] = tep_02[1];
-                    bigSixFace['u'][8] = tep_02[2];
-                    bigSixFace['b'][0] = tep_03[0];
-                    bigSixFace['b'][3] = tep_03[1];
-                    bigSixFace['b'][6] = tep_03[2];
-                    bigSixFace['d'][2] = tep_04[0];
-                    bigSixFace['d'][5] = tep_04[1];
-                    bigSixFace['d'][8] = tep_04[2];
-                };
-                if(whichFace == "l"){
-                    let tep_01 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
-                    let tep_02 = [bigSixFace['d'][0],bigSixFace['d'][3],bigSixFace['d'][6]];
-                    let tep_03 = [bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]];
-                    let tep_04 = [bigSixFace['u'][0],bigSixFace['u'][3],bigSixFace['u'][6]];
+               if(whichFace == "f"){
+                   let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['r'][0]],[bigSixFace['r'][3]],[bigSixFace['r'][6]]);
+                   let tep_02 = bigSixFace['u'].slice(6).reverse();
+                   let tep_03 = bigSixFace['d'].slice(0,3).reverse();
 
-                    bigSixFace['f'][0] = tep_01[0];
-                    bigSixFace['f'][3] = tep_01[1];
-                    bigSixFace['f'][6] = tep_01[2];
-                    bigSixFace['u'][0] = tep_02[0];
-                    bigSixFace['u'][3] = tep_02[1];
-                    bigSixFace['u'][6] = tep_02[2];
-                    bigSixFace['b'][2] = tep_03[0];
-                    bigSixFace['b'][5] = tep_03[1];
-                    bigSixFace['b'][8] = tep_03[2];
-                    bigSixFace['d'][0] = tep_04[0];
-                    bigSixFace['d'][3] = tep_04[1];
-                    bigSixFace['d'][6] = tep_04[2];
-                };
-                if(whichFace == "b"){
-                    let tep_01 = bigSixFace['d'].slice(6).reverse().concat(bigSixFace['u'].slice(3));
-                    let tep_02 = [bigSixFace['r'][8],bigSixFace['r'][5],bigSixFace['r'][2]];
-                    let tep_03 = [bigSixFace['l'][6],bigSixFace['l'][3],bigSixFace['l'][0]];
-                    let tep_04 = bigSixFace['d'].slice(0,6).concat(bigSixFace['u'].slice(0,3).reverse());
+                   let tep_04 = [bigSixFace['l'][2],bigSixFace['l'][5],bigSixFace['l'][8]].concat(bigSixFace['d'].slice(3));
 
-                    bigSixFace['u'] = tep_01;
-                    bigSixFace['l'][0] = tep_02[0];
-                    bigSixFace['l'][3] = tep_02[1];
-                    bigSixFace['l'][6] = tep_02[2];
-                    bigSixFace['r'][2] = tep_03[0];
-                    bigSixFace['r'][5] = tep_03[1];
-                    bigSixFace['r'][8] = tep_03[2];
-                    bigSixFace['d'] = tep_04;
-                };
-                if(whichFace == "d"){
-                   let tep_01 = bigSixFace['f'].slice(0,6).concat(bigSixFace['b'].slice(6));
-                   let tep_02 = bigSixFace['l'].slice(0,6).concat(bigSixFace['r'].slice(6));
-                   let tep_03 = bigSixFace['r'].slice(0,6).concat(bigSixFace['l'].slice(6));
-                   let tep_04 = bigSixFace['b'].slice(0,6).concat(bigSixFace['f'].slice(6));
+                   bigSixFace['u'] = tep_01;
+                   bigSixFace['l'][2] = tep_02[0];
+                   bigSixFace['l'][5] = tep_02[1];
+                   bigSixFace['l'][8] = tep_02[2];
+                   bigSixFace['r'][0] = tep_03[0];
+                   bigSixFace['r'][3] = tep_03[1];
+                   bigSixFace['r'][6] = tep_03[2];
+                   bigSixFace['d'] = tep_04;
+
+               };
+               if(whichFace == "u"){
+                   let tep_01 = bigSixFace['l'].slice(0,3).concat(bigSixFace['f'].slice(3));
+                   let tep_02 = bigSixFace['b'].slice(0,3).concat(bigSixFace['l'].slice(3));
+                   let tep_03 = bigSixFace['f'].slice(0,3).concat(bigSixFace['r'].slice(3));
+                   let tep_04 = bigSixFace['r'].slice(0,3).concat(bigSixFace['b'].slice(3));
                    bigSixFace['f'] = tep_01;
                    bigSixFace['l'] = tep_02;
                    bigSixFace['r'] = tep_03;
                    bigSixFace['b'] = tep_04;
-                }; 
+               };
+               if(whichFace == "r"){
+                   let tep_01 = [bigSixFace['u'][2],bigSixFace['u'][5],bigSixFace['u'][8]];
+                   let tep_02 = [bigSixFace['b'][6],bigSixFace['b'][3],bigSixFace['b'][0]];
+                   let tep_03 = [bigSixFace['d'][8],bigSixFace['d'][5],bigSixFace['d'][2]];
+                   let tep_04 = [bigSixFace['f'][2],bigSixFace['f'][5],bigSixFace['f'][8]];
+                   bigSixFace['f'][2] = tep_01[0];
+                   bigSixFace['f'][5] = tep_01[1];
+                   bigSixFace['f'][8] = tep_01[2];
+                   bigSixFace['u'][2] = tep_02[0];
+                   bigSixFace['u'][5] = tep_02[1];
+                   bigSixFace['u'][8] = tep_02[2];
+                   bigSixFace['b'][0] = tep_03[0];
+                   bigSixFace['b'][3] = tep_03[1];
+                   bigSixFace['b'][6] = tep_03[2];
+                   bigSixFace['d'][2] = tep_04[0];
+                   bigSixFace['d'][5] = tep_04[1];
+                   bigSixFace['d'][8] = tep_04[2];
+               };
+               if(whichFace == "l"){
+                   let tep_01 = [bigSixFace['d'][0],bigSixFace['d'][3],bigSixFace['d'][6]];
+                   let tep_02 = [bigSixFace['f'][0],bigSixFace['f'][3],bigSixFace['f'][6]];
+                   let tep_03 = [bigSixFace['u'][6],bigSixFace['u'][3],bigSixFace['u'][0]];
+                   let tep_04 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
+
+                   bigSixFace['f'][0] = tep_01[0];
+                   bigSixFace['f'][3] = tep_01[1];
+                   bigSixFace['f'][6] = tep_01[2];
+                   bigSixFace['u'][0] = tep_02[0];
+                   bigSixFace['u'][3] = tep_02[1];
+                   bigSixFace['u'][6] = tep_02[2];
+                   bigSixFace['b'][2] = tep_03[0];
+                   bigSixFace['b'][5] = tep_03[1];
+                   bigSixFace['b'][8] = tep_03[2];
+                   bigSixFace['d'][0] = tep_04[0];
+                   bigSixFace['d'][3] = tep_04[1];
+                   bigSixFace['d'][6] = tep_04[2];
+               };
+               if(whichFace == "b"){
+                   let tep_01 = [bigSixFace['l'][6],bigSixFace['l'][0],bigSixFace['l'][3]].concat(bigSixFace['u'].slice(3));
+                   let tep_02 = bigSixFace['d'].slice(6);
+                   let tep_03 = bigSixFace['u'].slice(0,3);
+                   let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['r'][8]],[bigSixFace['r'][5]],[bigSixFace['r'][2]]);
+
+                   bigSixFace['u'] = tep_01;
+                   bigSixFace['l'][0] = tep_02[0];
+                   bigSixFace['l'][3] = tep_02[1];
+                   bigSixFace['l'][6] = tep_02[2];
+                   bigSixFace['r'][2] = tep_03[0];
+                   bigSixFace['r'][5] = tep_03[1];
+                   bigSixFace['r'][8] = tep_03[2];
+                   bigSixFace['d'] = tep_04;
+               };
+               if(whichFace == "d"){
+                  let tep_01 = bigSixFace['f'].slice(0,6).concat(bigSixFace['r'].slice(6));
+                  let tep_02 = bigSixFace['l'].slice(0,6).concat(bigSixFace['f'].slice(6));
+                  let tep_03 = bigSixFace['r'].slice(0,6).concat(bigSixFace['b'].slice(6));
+                  let tep_04 = bigSixFace['b'].slice(0,6).concat(bigSixFace['l'].slice(6));
+                  bigSixFace['f'] = tep_01;
+                  bigSixFace['l'] = tep_02;
+                  bigSixFace['r'] = tep_03;
+                  bigSixFace['b'] = tep_04;
+               };
+
+
+               let tep_05 = [
+                               bigSixFace[whichFace][2],bigSixFace[whichFace][5],bigSixFace[whichFace][8],
+                               bigSixFace[whichFace][1],bigSixFace[whichFace][4],bigSixFace[whichFace][7],
+                               bigSixFace[whichFace][0],bigSixFace[whichFace][3],bigSixFace[whichFace][6]
+                            ];
+
+               bigSixFace[whichFace] = tep_05;
         }
 
 
-        upDateCubeSlot ();//更新 cubeSlot
+        // upDateCubeSlot ();//更新 cubeSlot
 
 
-        upDateCubeBoxFaces ();
+        // upDateCubeBoxFaces ();
 
-console.log(cubeBoxFaces);
+        console.log(cubeSlot)
+        console.log(cubeBoxFaces)
+        console.log(bigSixFace)
 
     };
 
@@ -591,11 +585,20 @@ console.log(cubeBoxFaces);
     };
     // 每个cube的六个小面
     function sixFace(i) {
+        if(i==1){
+        console.log(cubeBoxFaces)            
+        }
+
         var cubeFaces = "";
 
         for (let j = 0; j < cubeBoxFaces[i-1].length; j++){
 
-            cubeFaces += '<div class="face_0'+cubeBoxFaces[i-1][j][1]+'">'+i+'!'+cubeBoxFaces[i-1][j][1]+'</div>';
+            cubeFaces = '<div style="background-color:orange" class="face_01"></div>'+
+                        '<div style="background-color:red" class="face_02"></div>'+
+                        '<div style="background-color:yellow" class="face_03"></div>'+
+                        '<div style="background-color:green" class="face_04"></div>'+
+                        '<div style="background-color:blue" class="face_05"></div>'+
+                        '<div style="background-color:pink" class="face_06"></div>';
         }
 
 
@@ -607,22 +610,26 @@ console.log(cubeBoxFaces);
 
     // 渲染cubes
     function renderCube (init, whichFace) {
+        upDateCubeSlot ();//更新 cubeSlot
+
+
+        upDateCubeBoxFaces ();
     	var onOff = true;
-    	$("#big_box").innerHTML="";
+    	get("#big_box").innerHTML="";
 		for (let i = 1; i <= cubeNum; i++) {
 			if (init) {
-				$("#big_box").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(cubeSlot[i-1])+'</div>';
+				get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 			} else {
 				if (i == defaultBigSixFace[whichFace][0][0] || i == defaultBigSixFace[whichFace][1][0] || i == defaultBigSixFace[whichFace][2][0] || i == defaultBigSixFace[whichFace][3][0] || i == defaultBigSixFace[whichFace][4][0] || i == defaultBigSixFace[whichFace][5][0] || i == defaultBigSixFace[whichFace][6][0] || i == defaultBigSixFace[whichFace][7][0] || i == defaultBigSixFace[whichFace][8][0] ) {
 					if (onOff) {
-						$("#big_box").innerHTML += '<div class="litteWrap"></div>';
-						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(cubeSlot[i-1])+'</div>';
+						get("#big_box").innerHTML += '<div class="litteWrap"></div>';
+						get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 						onOff = false;
 					} else {
-						$(".litteWrap").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(cubeSlot[i-1])+'</div>';
+						get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 					}
 				} else {
-					$("#big_box").innerHTML += '<div index="'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(cubeSlot[i-1])+'</div>';
+					get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 				}
 			};
     	};
@@ -632,12 +639,55 @@ console.log(cubeBoxFaces);
     // 旋转，同时更新cube的空间位置,同时更新html布局
     function rotateCubeFace(whichFace, axis, deg, dir){
         
+        
         renderCube (false, whichFace);
-changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
-        setTimeout(function(){
-                $(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
+
+
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["u"][i][0]).find(".face_01").css({
+                backgroundColor : bigSixFace["u"][i][2]
+            })
+        }
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["l"][i][0]).find(".face_02").css({
+                backgroundColor : bigSixFace["l"][i][2]
+            })
+        }
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["f"][i][0]).find(".face_03").css({
+                backgroundColor : bigSixFace["f"][i][2]
+            })
+        }
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["r"][i][0]).find(".face_04").css({
+                backgroundColor : bigSixFace["r"][i][2]
+            })
+        }
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["d"][i][0]).find(".face_05").css({
+                backgroundColor : bigSixFace["d"][i][2]
+            })
+        }
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["b"][i][0]).find(".face_06").css({
+                backgroundColor : bigSixFace["b"][i][2]
+            })
+        }
+
+
+
+
+
+
+
+
+
+        changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
                 
-        },10);
+        setTimeout(function(){
+                get(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
+                
+        },20);
 
 
 
@@ -651,56 +701,89 @@ changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
 
 
     // 六个面的旋转按钮
-    $('.btn1').onclick = function(){
+    get('.btn1').onclick = function(){
         rotateCubeFace('u', "Y", -180, true);
-        console.log(bigSixFace);
-        console.log(cubeBoxFaces);
+        // console.log(bigSixFace);
+        // console.log(cubeBoxFaces);
     };
-    $('.btn2').onclick = function(){
+    get('.btn2').onclick = function(){
         rotateCubeFace('l', "X", -180, true);
-        console.log(bigSixFace);
+        // console.log(bigSixFace);
     };
-    $('.btn3').onclick = function(){
+    get('.btn3').onclick = function(){
         rotateCubeFace('f', "Z", 180, true);
-        console.log(bigSixFace);
-        console.log(cubeBoxFaces);
+        // console.log(bigSixFace);
+        // console.log(cubeBoxFaces);
     };
-    $('.btn4').onclick = function(){
+    get('.btn4').onclick = function(){
         rotateCubeFace('r', "X", 180, true);
         console.log(bigSixFace);
     };
-    $('.btn5').onclick = function(){
+    get('.btn5').onclick = function(){
         rotateCubeFace('d', "Y", 180, true);
         console.log(bigSixFace);
     };
-    $('.btn6').onclick = function(){
+    get('.btn6').onclick = function(){
         rotateCubeFace('b', "Z", -180, true);
         console.log(bigSixFace);
     };
 
-    $('.btn7').onclick = function(){
+    // 六个面的旋转按钮
+    get('.btn01').onclick = function(){
+        rotateCubeFace('u', "Y", 180, false);
+    };
+    get('.btn02').onclick = function(){
+        rotateCubeFace('l', "X", 180, false);
+    };
+    get('.btn03').onclick = function(){
+        rotateCubeFace('f', "Z", -180, false);
+    };
+    get('.btn04').onclick = function(){
+        rotateCubeFace('r', "X", -180, false);
+    };
+    get('.btn05').onclick = function(){
+        rotateCubeFace('d', "Y", -180, false);
+    };
+    get('.btn06').onclick = function(){
+        rotateCubeFace('b', "Z", 180, false);
+    };
+    get('.btn7').onclick = function(){
         rotateCubeFace('u', "Y", -90, true);
-        // console.log(bigSixFace);
     };
-    $('.btn8').onclick = function(){
+    get('.btn8').onclick = function(){
         rotateCubeFace('l', "X", -90, true);
-        // console.log(bigSixFace);
     };
-    $('.btn9').onclick = function(){
+    get('.btn9').onclick = function(){
         rotateCubeFace('f', "Z", 90, true);
-        // console.log(bigSixFace);
     };
-    $('.btn10').onclick = function(){
+    get('.btn10').onclick = function(){
         rotateCubeFace('r', "X", 90, true);
-        // console.log(bigSixFace);
     };
-    $('.btn11').onclick = function(){
+    get('.btn11').onclick = function(){
         rotateCubeFace('d', "Y", 90, true);
-        // console.log(bigSixFace);
     };
-    $('.btn12').onclick = function(){
+    get('.btn12').onclick = function(){
         rotateCubeFace('b', "Z", -90, true);
-        // console.log(bigSixFace);
+    };
+
+
+    get('.btn13').onclick = function(){
+        rotateCubeFace('u', "Y", 90, false);
+    };
+    get('.btn14').onclick = function(){
+        rotateCubeFace('l', "X", 90, false);
+    };
+    get('.btn15').onclick = function(){
+        rotateCubeFace('f', "Z", -90, false);
+    };
+    get('.btn16').onclick = function(){
+        rotateCubeFace('r', "X", -90, false);
+    };
+    get('.btn17').onclick = function(){
+        rotateCubeFace('d', "Y", -90, false);
+    };
+    get('.btn18').onclick = function(){
+        rotateCubeFace('b', "Z", 90, false);
     };
 
 }
