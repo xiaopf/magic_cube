@@ -567,9 +567,7 @@ window.onload = function(){
 
         // upDateCubeBoxFaces ();
 
-        console.log(cubeSlot)
-        console.log(cubeBoxFaces)
-        console.log(bigSixFace)
+
 
     };
 
@@ -585,23 +583,12 @@ window.onload = function(){
     };
     // 每个cube的六个小面
     function sixFace(i) {
-        if(i==1){
-        console.log(cubeBoxFaces)            
-        }
-
-        var cubeFaces = "";
-
-        for (let j = 0; j < cubeBoxFaces[i-1].length; j++){
-
-            cubeFaces = '<div style="background-color:orange" class="face_01"></div>'+
+        var cubeFaces = '<div style="background-color:orange" class="face_01"></div>'+
                         '<div style="background-color:red" class="face_02"></div>'+
                         '<div style="background-color:yellow" class="face_03"></div>'+
                         '<div style="background-color:green" class="face_04"></div>'+
                         '<div style="background-color:blue" class="face_05"></div>'+
                         '<div style="background-color:pink" class="face_06"></div>';
-        }
-
-
         return cubeFaces;
     };
 
@@ -639,36 +626,26 @@ window.onload = function(){
     // 旋转，同时更新cube的空间位置,同时更新html布局
     function rotateCubeFace(whichFace, axis, deg, dir){
         
-        
+        // 每次旋转重新渲染一下cubes
         renderCube (false, whichFace);
 
-
+        // 每次渲染6个大面的颜色
         for(let i = 0; i < 9; i++) {
             $("#box_"+defaultBigSixFace["u"][i][0]).find(".face_01").css({
                 backgroundColor : bigSixFace["u"][i][2]
             })
-        }
-        for(let i = 0; i < 9; i++) {
             $("#box_"+defaultBigSixFace["l"][i][0]).find(".face_02").css({
                 backgroundColor : bigSixFace["l"][i][2]
             })
-        }
-        for(let i = 0; i < 9; i++) {
             $("#box_"+defaultBigSixFace["f"][i][0]).find(".face_03").css({
                 backgroundColor : bigSixFace["f"][i][2]
             })
-        }
-        for(let i = 0; i < 9; i++) {
             $("#box_"+defaultBigSixFace["r"][i][0]).find(".face_04").css({
                 backgroundColor : bigSixFace["r"][i][2]
             })
-        }
-        for(let i = 0; i < 9; i++) {
             $("#box_"+defaultBigSixFace["d"][i][0]).find(".face_05").css({
                 backgroundColor : bigSixFace["d"][i][2]
             })
-        }
-        for(let i = 0; i < 9; i++) {
             $("#box_"+defaultBigSixFace["b"][i][0]).find(".face_06").css({
                 backgroundColor : bigSixFace["b"][i][2]
             })
@@ -681,15 +658,13 @@ window.onload = function(){
 
 
 
-
+        
         changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
-                
+        
+        //避免渲染和旋转动作同时进行 
         setTimeout(function(){
-                get(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)";
-                
-        },20);
-
-
+            get(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)"; 
+        },10);
 
     };
 
@@ -700,35 +675,27 @@ window.onload = function(){
 
 
 
-    // 六个面的旋转按钮
+    // 顺时针旋转180度
     get('.btn1').onclick = function(){
         rotateCubeFace('u', "Y", -180, true);
-        // console.log(bigSixFace);
-        // console.log(cubeBoxFaces);
     };
     get('.btn2').onclick = function(){
         rotateCubeFace('l', "X", -180, true);
-        // console.log(bigSixFace);
     };
     get('.btn3').onclick = function(){
         rotateCubeFace('f', "Z", 180, true);
-        // console.log(bigSixFace);
-        // console.log(cubeBoxFaces);
     };
     get('.btn4').onclick = function(){
         rotateCubeFace('r', "X", 180, true);
-        console.log(bigSixFace);
     };
     get('.btn5').onclick = function(){
         rotateCubeFace('d', "Y", 180, true);
-        console.log(bigSixFace);
     };
     get('.btn6').onclick = function(){
         rotateCubeFace('b', "Z", -180, true);
-        console.log(bigSixFace);
     };
 
-    // 六个面的旋转按钮
+    // 逆时针旋转180度
     get('.btn01').onclick = function(){
         rotateCubeFace('u', "Y", 180, false);
     };
@@ -747,6 +714,7 @@ window.onload = function(){
     get('.btn06').onclick = function(){
         rotateCubeFace('b', "Z", 180, false);
     };
+    // 逆时针旋转90度按钮
     get('.btn7').onclick = function(){
         rotateCubeFace('u', "Y", -90, true);
     };
@@ -766,7 +734,7 @@ window.onload = function(){
         rotateCubeFace('b', "Z", -90, true);
     };
 
-
+    // 逆时针旋转90度按钮
     get('.btn13').onclick = function(){
         rotateCubeFace('u', "Y", 90, false);
     };
