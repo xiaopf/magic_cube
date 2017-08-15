@@ -223,7 +223,7 @@ window.onload = function(){
 
     // 当旋转时，更新旋转面包含的cube块序列号
     // rerender之前把各个小cube位置重新定义
-    function changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir) {
+    function changeFace(whichFace, axis, deg, dir) {
         //去除上一次的槽点上的cube序号
         var tempSlot = [];
 
@@ -267,8 +267,7 @@ window.onload = function(){
 
         
 
-        if(Math.abs(deg) == 180){//11111111111111111111111111111111111
-            // console.log(180);
+        if(Math.abs(deg) == 180){//旋转180度，顺时针和逆时针结果一样
         	if(whichFace == "f"){
         		let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
         		let tep_02 = [bigSixFace['r'][6],bigSixFace['r'][3],bigSixFace['r'][0]];
@@ -359,8 +358,8 @@ window.onload = function(){
             let tep_05 = bigSixFace[whichFace].reverse();
         	bigSixFace[whichFace] = tep_05;
 
-        } else if(Math.abs(deg) == 90 && dir) {
-            console.log("顺90");
+        } else if(Math.abs(deg) == 90 && dir) { //顺时针旋转90度
+
             if(whichFace == "f"){
                 let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['l'][8]],[bigSixFace['l'][5]],[bigSixFace['l'][2]]);
                 let tep_02 = bigSixFace['d'].slice(0,3);
@@ -459,8 +458,8 @@ window.onload = function(){
                          ];
 
             bigSixFace[whichFace] = tep_05;
-        } else if(Math.abs(deg) == 90 && !dir) {
-            console.log("逆90");
+        } else if(Math.abs(deg) == 90 && !dir) { //逆时针旋转90度
+
                if(whichFace == "f"){
                    let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['r'][0]],[bigSixFace['r'][3]],[bigSixFace['r'][6]]);
                    let tep_02 = bigSixFace['u'].slice(6).reverse();
@@ -526,7 +525,7 @@ window.onload = function(){
                    bigSixFace['d'][6] = tep_04[2];
                };
                if(whichFace == "b"){
-                   let tep_01 = [bigSixFace['l'][6],bigSixFace['l'][0],bigSixFace['l'][3]].concat(bigSixFace['u'].slice(3));
+                   let tep_01 = [bigSixFace['l'][6],bigSixFace['l'][3],bigSixFace['l'][0]].concat(bigSixFace['u'].slice(3));
                    let tep_02 = bigSixFace['d'].slice(6);
                    let tep_03 = bigSixFace['u'].slice(0,3);
                    let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['r'][8]],[bigSixFace['r'][5]],[bigSixFace['r'][2]]);
@@ -652,14 +651,8 @@ window.onload = function(){
         }
 
 
-
-
-
-
-
-
-        
-        changeBigSixFaceAndCubePosition(whichFace, axis, deg, dir);
+        // 
+        changeFace(whichFace, axis, deg, dir);
         
         //避免渲染和旋转动作同时进行 
         setTimeout(function(){
