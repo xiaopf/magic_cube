@@ -5,11 +5,8 @@ window.onload = function(){
     const get = function (key) {
     	return document.querySelector(key);
     };
+
     // 初始化big_box的视角
-    // get("#big_box").style.transform = '';
-    // get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
-    // get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
-    // get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
 	get('.x_deg').innerHTML = get('.x_rotate').value + 'deg';
 	get('.y_deg').innerHTML = get('.y_rotate').value + 'deg';
 	get('.z_deg').innerHTML = get('.z_rotate').value + 'deg';
@@ -57,216 +54,103 @@ window.onload = function(){
         [0,   200, 0  ],//2
         [0,   400, 0  ],//3
         [200, 0,   0  ],//4
-        [200, 200, 0  ],//5!!!!
+        [200, 200, 0  ],//5
         [200, 400, 0  ],//6
         [400, 0,   0  ],//7
         [400, 200, 0  ],//8
         [400, 400, 0  ],//9
         [0,   0,   -200],//10
-        [0,   200, -200],//11!!!
+        [0,   200, -200],//11
         [0,   400, -200],//12
-        [200, 0,   -200],//13!!!
+        [200, 0,   -200],//13
         [200, 200, -200],//14???ccccccccccccccccccc
-        [200, 400, -200],//15!!!
+        [200, 400, -200],//15
         [400, 0,   -200],//16
-        [400, 200, -200],//17!!!
+        [400, 200, -200],//17
         [400, 400, -200],//18
         [0,   0,   -400],//19
         [0,   200, -400],//20
         [0,   400, -400],//21
         [200, 0,   -400],//22
-        [200, 200, -400],//23!!!
+        [200, 200, -400],//23
         [200, 400, -400],//24
         [400, 0,   -400],//25
         [400, 200, -400],//26
         [400, 400, -400]//27
     ];
 
+    //每个cube都有固定的顺序，在旋转的时候是不会变化的，所以是默认的，每个大面包含的cube也是不会变化的
     var defaultBigSixFace = {
-        'u' :[
-                [19, 1],  [20, 1], [21, 1],
-                [10, 1],  [11, 1], [12, 1],
-                 [1, 1],   [2, 1],  [3, 1]
-               ],
-        'f':[
-                 [1, 3],   [2, 3],  [3, 3],
-                 [4, 3],   [5, 3],  [6, 3],
-                 [7, 3],   [8, 3],  [9, 3]
-                ],
-        'd' :[
-                 [7, 5],   [8, 5],  [9, 5],
-                [16, 5],  [17, 5], [18, 5],
-                [25, 5],  [26, 5], [27, 5]
-                ],
-        'b' :[
-                [21, 6],  [20, 6], [19, 6],
-                [24, 6],  [23, 6], [22, 6],
-                [27, 6],  [26, 6], [25, 6]
-                ],
-        'l' :[
-                [19, 2],  [10, 2],  [1, 2],
-                [22, 2],  [13, 2],  [4, 2],
-                [25, 2],  [16, 2],  [7, 2]
-                ],
-        'r':[
-                 [3, 4],  [12, 4], [21, 4],
-                 [6, 4],  [15, 4], [24, 4],
-                 [9, 4],  [18, 4], [27, 4]
-                ],
-    };
-    var bigSixFace = {
-        'u' :[
-                  [19, 1, 'orange'],  [20, 1, 'orange'], [21, 1, 'orange'],
-                  [10, 1, 'orange'],  [11, 1, 'orange'], [12, 1, 'orange'],
-                   [1, 1, 'orange'],   [2, 1, 'orange'],  [3, 1, 'orange']
+        'u':[
+                19,  20, 21,
+                10,  11, 12,
+                 1,   2,  3
             ],
         'f':[
-                   [1, 3, 'yellow'],   [2, 3, 'yellow'],  [3, 3, 'yellow'],
-                   [4, 3, 'yellow'],   [5, 3, 'yellow'],  [6, 3, 'yellow'],
-                   [7, 3, 'yellow'],   [8, 3, 'yellow'],  [9, 3, 'yellow']
-                ],
-        'd' :[
-                   [7, 5, 'blue'],   [8, 5, 'blue'],  [9, 5, 'blue'],
-                  [16, 5, 'blue'],  [17, 5, 'blue'], [18, 5, 'blue'],
-                  [25, 5, 'blue'],  [26, 5, 'blue'], [27, 5, 'blue']
-                ],
-        'b' :[
-                  [21, 6, 'pink'],  [20, 6, 'pink'], [19, 6, 'pink'],
-                  [24, 6, 'pink'],  [23, 6, 'pink'], [22, 6, 'pink'],
-                  [27, 6, 'pink'],  [26, 6, 'pink'], [25, 6, 'pink']
-                ],
-        'l' :[
-                  [19, 2, 'red'],  [10, 2, 'red'],  [1, 2, 'red'],
-                  [22, 2, 'red'],  [13, 2, 'red'],  [4, 2, 'red'],
-                  [25, 2, 'red'],  [16, 2, 'red'],  [7, 2, 'red']
-                ],
+                 1,   2,  3,
+                 4,   5,  6,
+                 7,   8,  9
+            ],
+        'd':[
+                 7,   8,  9,
+                16,  17, 18,
+                25,  26, 27
+            ],
+        'b':[
+                21,  20, 19,
+                24,  23, 22,
+                27,  26, 25
+            ],
+        'l':[
+                19,  10,  1,
+                22,  13,  4,
+                25,  16,  7
+            ],
         'r':[
-                   [3, 4, 'green'],  [12, 4, 'green'], [21, 4, 'green'],
-                   [6, 4, 'green'],  [15, 4, 'green'], [24, 4, 'green'],
-                   [9, 4, 'green'],  [18, 4, 'green'], [27, 4, 'green']
-                ],
+                 3,  12, 21,
+                 6,  15, 24,
+                 9,  18, 27
+            ]
     };
-
-
-    // magic cube 每个小cube都有一个槽点，槽点是我自定义的，1-27编号，有固定顺序，
-    // 槽点的顺序是死的，固定的，
-    var cubeSlot = [];
-    upDateCubeSlot ();
-    function upDateCubeSlot () {
-        cubeSlot = [
-                     bigSixFace['f'][0][0],bigSixFace['f'][1][0],bigSixFace['f'][2][0],
-                     bigSixFace['f'][3][0],bigSixFace['f'][4][0],bigSixFace['f'][5][0],
-                     bigSixFace['f'][6][0],bigSixFace['f'][7][0],bigSixFace['f'][8][0],
-                     bigSixFace['u'][3][0],bigSixFace['u'][4][0],bigSixFace['u'][5][0],
-                     bigSixFace['l'][4][0],
-                     14,
-                     bigSixFace['r'][4][0],
-                     bigSixFace['d'][3][0],bigSixFace['d'][4][0],bigSixFace['d'][5][0],
-                     bigSixFace['b'][2][0],bigSixFace['b'][1][0],bigSixFace['b'][0][0],
-                     bigSixFace['b'][5][0],bigSixFace['b'][4][0],bigSixFace['b'][3][0],
-                     bigSixFace['b'][8][0],bigSixFace['b'][7][0],bigSixFace['b'][6][0],
-                   ];
-                   
-    };
-
-
-    var cubeBoxFaces = [];
-    upDateCubeBoxFaces ();
-    function upDateCubeBoxFaces () {
-        cubeBoxFaces =  [
-                            [bigSixFace["u"][6],bigSixFace["f"][0],bigSixFace["l"][2]],//1
-                            [bigSixFace["u"][7],bigSixFace["f"][1]],//2
-                            [bigSixFace["u"][8],bigSixFace["f"][2],bigSixFace["r"][0]],//3
-
-                            [bigSixFace["l"][5],bigSixFace["f"][3]],//4
-                            [bigSixFace["f"][4]],//5
-                            [bigSixFace["r"][3],bigSixFace["f"][5]],//6
-
-
-                            [bigSixFace["l"][3],bigSixFace["f"][6],bigSixFace["d"][0]],//7
-                            [bigSixFace["f"][7],bigSixFace["d"][1]],//8
-                            [bigSixFace["r"][6],bigSixFace["f"][8],bigSixFace["d"][2]],//9
-
-                            [bigSixFace["u"][3],bigSixFace["l"][1]],//10
-                            [bigSixFace["u"][4]],//11
-                            [bigSixFace["u"][5],bigSixFace["r"][1]],//12
-
-                            [bigSixFace["l"][4]],//13
-                            [],//14
-                            [bigSixFace["r"][4]],//15
-
-                            [bigSixFace["l"][7],bigSixFace["d"][3]],//16
-                            [bigSixFace["d"][4]],//17
-                            [bigSixFace["r"][7],bigSixFace["d"][4]],//18
-
-                            [bigSixFace["u"][0],bigSixFace["l"][0],bigSixFace["b"][2]],//19
-                            [bigSixFace["u"][1],bigSixFace["b"][1]],//20
-                            [bigSixFace["u"][2],bigSixFace["r"][2],bigSixFace["b"][0]],//21
-
-                            [bigSixFace["b"][5],bigSixFace["l"][3]],//22
-                            [bigSixFace["b"][4]],//23
-                            [bigSixFace["b"][3],bigSixFace["r"][5]],//24
-
-                            [bigSixFace["b"][8],bigSixFace["d"][6],bigSixFace["l"][6]],//25
-                            [bigSixFace["b"][7],bigSixFace["d"][7]],//26
-                            [bigSixFace["b"][6],bigSixFace["d"][8],bigSixFace["r"][8]]
-                        ];
-
-                        
+    //每个cube的颜色是变化的，每个色块是在每次旋转都会变化的，所以每次旋转后都会更新每个大面包含的小cube的面颜色
+    var bigSixFace = {
+        'u':[
+                'orange',   'orange',   'orange',
+                'orange',   'orange',   'orange',
+                'orange',   'orange',   'orange'
+            ],
+        'f':[
+                'yellow',   'yellow',   'yellow',
+                'yellow',   'yellow',   'yellow',
+                'yellow',   'yellow',   'yellow'
+            ],
+        'd':[
+                'blue',     'blue',     'blue',
+                'blue',     'blue',     'blue',
+                'blue',     'blue',     'blue'
+            ],
+        'b':[
+                'pink',     'pink',     'pink',
+                'pink',     'pink',     'pink',
+                'pink',     'pink',     'pink'
+            ],
+        'l':[
+                'red',      'red',      'red',
+                'red',      'red',      'red',
+                'red',      'red',      'red'
+            ],
+        'r':[
+                'green',    'green',    'green',
+                'green',    'green',    'green',
+                'green',    'green',    'green'
+            ]
     };
 
 
 
 
-
-
-
-    // 当旋转时，更新旋转面包含的cube块序列号
-    // rerender之前把各个小cube位置重新定义
+    // 当旋转时，更新各个大面上的小cube面
     function changeFace(whichFace, axis, deg, dir) {
-        //去除上一次的槽点上的cube序号
-        var tempSlot = [];
-
-
-
-        var tempBigSixFace = {
-            'u' :[[],[],[],[],[],[],[],[],[]],
-            'f' :[[],[],[],[],[],[],[],[],[]],
-            'd' :[[],[],[],[],[],[],[],[],[]],
-            'b' :[[],[],[],[],[],[],[],[],[]],
-            'l' :[[],[],[],[],[],[],[],[],[]],
-            'r' :[[],[],[],[],[],[],[],[],[]]
-        };
-
-
-
-
-
-        for (let i = 0; i < cubeSlot.length; i ++) {
-            tempSlot[i] = cubeSlot[i];
-        };
-
-
-        for (var m = 0; m < 9; m ++) {
-
-                tempBigSixFace['u'][m][0] = bigSixFace['u'][m][0];
-                tempBigSixFace['f'][m][0] = bigSixFace['f'][m][0];
-                tempBigSixFace['d'][m][0] = bigSixFace['d'][m][0];
-                tempBigSixFace['b'][m][0] = bigSixFace['b'][m][0];
-                tempBigSixFace['l'][m][0] = bigSixFace['l'][m][0];
-                tempBigSixFace['r'][m][0] = bigSixFace['r'][m][0];
-                tempBigSixFace['u'][m][1] = bigSixFace['u'][m][1];
-                tempBigSixFace['f'][m][1] = bigSixFace['f'][m][1];
-                tempBigSixFace['d'][m][1] = bigSixFace['d'][m][1];
-                tempBigSixFace['b'][m][1] = bigSixFace['b'][m][1];
-                tempBigSixFace['l'][m][1] = bigSixFace['l'][m][1];
-                tempBigSixFace['r'][m][1] = bigSixFace['r'][m][1];
-
-        };
-
-
-        
-
         if(Math.abs(deg) == 180){//旋转180度，顺时针和逆时针结果一样
         	if(whichFace == "f"){
         		let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
@@ -559,20 +443,7 @@ window.onload = function(){
 
                bigSixFace[whichFace] = tep_05;
         }
-
-
-        // upDateCubeSlot ();//更新 cubeSlot
-
-
-        // upDateCubeBoxFaces ();
-
-
-
     };
-
-
-
-
 
     // 根据给定的空间位置，设置内联样式
     function cubePositionStyle (i) {
@@ -580,7 +451,7 @@ window.onload = function(){
 		    	"left:"+cubePosition[i-1][1]+"px ;"+
 		    	"transform:translateZ("+cubePosition[i-1][2]+"px)";
     };
-    // 每个cube的六个小面
+    // 渲染每个cube的六个小面
     function sixFace(i) {
         var cubeFaces = '<div style="background-color:orange" class="face_01"></div>'+
                         '<div style="background-color:red" class="face_02"></div>'+
@@ -596,17 +467,13 @@ window.onload = function(){
 
     // 渲染cubes
     function renderCube (init, whichFace) {
-        upDateCubeSlot ();//更新 cubeSlot
-
-
-        upDateCubeBoxFaces ();
     	var onOff = true;
     	get("#big_box").innerHTML="";
 		for (let i = 1; i <= cubeNum; i++) {
 			if (init) {
 				get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
 			} else {
-				if (i == defaultBigSixFace[whichFace][0][0] || i == defaultBigSixFace[whichFace][1][0] || i == defaultBigSixFace[whichFace][2][0] || i == defaultBigSixFace[whichFace][3][0] || i == defaultBigSixFace[whichFace][4][0] || i == defaultBigSixFace[whichFace][5][0] || i == defaultBigSixFace[whichFace][6][0] || i == defaultBigSixFace[whichFace][7][0] || i == defaultBigSixFace[whichFace][8][0] ) {
+				if (i == defaultBigSixFace[whichFace][0] || i == defaultBigSixFace[whichFace][1] || i == defaultBigSixFace[whichFace][2] || i == defaultBigSixFace[whichFace][3] || i == defaultBigSixFace[whichFace][4] || i == defaultBigSixFace[whichFace][5] || i == defaultBigSixFace[whichFace][6] || i == defaultBigSixFace[whichFace][7] || i == defaultBigSixFace[whichFace][8] ) {
 					if (onOff) {
 						get("#big_box").innerHTML += '<div class="litteWrap"></div>';
 						get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
@@ -622,36 +489,35 @@ window.onload = function(){
     };
 
 
-    // 旋转，同时更新cube的空间位置,同时更新html布局
+    // 旋转，同时更新cube的面的颜色,同时更新html布局
     function rotateCubeFace(whichFace, axis, deg, dir){
         
         // 每次旋转重新渲染一下cubes
         renderCube (false, whichFace);
 
-        // 每次渲染6个大面的颜色
+        // 每次渲染6个大面小cube面的颜色
         for(let i = 0; i < 9; i++) {
-            $("#box_"+defaultBigSixFace["u"][i][0]).find(".face_01").css({
-                backgroundColor : bigSixFace["u"][i][2]
+            $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
+                backgroundColor : bigSixFace["u"][i]
             })
-            $("#box_"+defaultBigSixFace["l"][i][0]).find(".face_02").css({
-                backgroundColor : bigSixFace["l"][i][2]
+            $("#box_"+defaultBigSixFace["l"][i]).find(".face_02").css({
+                backgroundColor : bigSixFace["l"][i]
             })
-            $("#box_"+defaultBigSixFace["f"][i][0]).find(".face_03").css({
-                backgroundColor : bigSixFace["f"][i][2]
+            $("#box_"+defaultBigSixFace["f"][i]).find(".face_03").css({
+                backgroundColor : bigSixFace["f"][i]
             })
-            $("#box_"+defaultBigSixFace["r"][i][0]).find(".face_04").css({
-                backgroundColor : bigSixFace["r"][i][2]
+            $("#box_"+defaultBigSixFace["r"][i]).find(".face_04").css({
+                backgroundColor : bigSixFace["r"][i]
             })
-            $("#box_"+defaultBigSixFace["d"][i][0]).find(".face_05").css({
-                backgroundColor : bigSixFace["d"][i][2]
+            $("#box_"+defaultBigSixFace["d"][i]).find(".face_05").css({
+                backgroundColor : bigSixFace["d"][i]
             })
-            $("#box_"+defaultBigSixFace["b"][i][0]).find(".face_06").css({
-                backgroundColor : bigSixFace["b"][i][2]
+            $("#box_"+defaultBigSixFace["b"][i]).find(".face_06").css({
+                backgroundColor : bigSixFace["b"][i]
             })
         }
 
-
-        // 
+        // 调用小cubea面变换函数
         changeFace(whichFace, axis, deg, dir);
         
         //避免渲染和旋转动作同时进行 
