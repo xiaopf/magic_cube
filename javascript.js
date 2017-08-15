@@ -146,9 +146,6 @@ window.onload = function(){
             ]
     };
 
-
-
-
     // 当旋转时，更新各个大面上的小cube面
     function changeFace(whichFace, axis, deg, dir) {
         if(Math.abs(deg) == 180){//旋转180度，顺时针和逆时针结果一样
@@ -241,16 +238,13 @@ window.onload = function(){
         	};
             let tep_05 = bigSixFace[whichFace].reverse();
         	bigSixFace[whichFace] = tep_05;
-
         } else if(Math.abs(deg) == 90 && dir) { //顺时针旋转90度
 
             if(whichFace == "f"){
                 let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['l'][8]],[bigSixFace['l'][5]],[bigSixFace['l'][2]]);
                 let tep_02 = bigSixFace['d'].slice(0,3);
                 let tep_03 = bigSixFace['u'].slice(6);
-
                 let tep_04 = [bigSixFace['r'][6],bigSixFace['r'][3],bigSixFace['r'][0]].concat(bigSixFace['d'].slice(3));
-
                 bigSixFace['u'] = tep_01;
                 bigSixFace['l'][2] = tep_02[0];
                 bigSixFace['l'][5] = tep_02[1];
@@ -259,7 +253,6 @@ window.onload = function(){
                 bigSixFace['r'][3] = tep_03[1];
                 bigSixFace['r'][6] = tep_03[2];
                 bigSixFace['d'] = tep_04;
-
             };
             if(whichFace == "u"){
                 let tep_01 = bigSixFace['r'].slice(0,3).concat(bigSixFace['f'].slice(3));
@@ -294,7 +287,6 @@ window.onload = function(){
                 let tep_02 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
                 let tep_03 = [bigSixFace['d'][6],bigSixFace['d'][3],bigSixFace['d'][0]];
                 let tep_04 = [bigSixFace['f'][0],bigSixFace['f'][3],bigSixFace['f'][6]];
-
                 bigSixFace['f'][0] = tep_01[0];
                 bigSixFace['f'][3] = tep_01[1];
                 bigSixFace['f'][6] = tep_01[2];
@@ -313,7 +305,6 @@ window.onload = function(){
                 let tep_02 = bigSixFace['u'].slice(0,3).reverse();
                 let tep_03 = bigSixFace['d'].slice(6).reverse();
                 let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['l'][0]],[bigSixFace['l'][3]],[bigSixFace['l'][6]]);
-
                 bigSixFace['u'] = tep_01;
                 bigSixFace['l'][0] = tep_02[0];
                 bigSixFace['l'][3] = tep_02[1];
@@ -333,24 +324,18 @@ window.onload = function(){
                bigSixFace['r'] = tep_03;
                bigSixFace['b'] = tep_04;
             };
-
-
             let tep_05 = [
                             bigSixFace[whichFace][6],bigSixFace[whichFace][3],bigSixFace[whichFace][0],
                             bigSixFace[whichFace][7],bigSixFace[whichFace][4],bigSixFace[whichFace][1],
                             bigSixFace[whichFace][8],bigSixFace[whichFace][5],bigSixFace[whichFace][2]
                          ];
-
             bigSixFace[whichFace] = tep_05;
         } else if(Math.abs(deg) == 90 && !dir) { //逆时针旋转90度
-
                if(whichFace == "f"){
                    let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['r'][0]],[bigSixFace['r'][3]],[bigSixFace['r'][6]]);
                    let tep_02 = bigSixFace['u'].slice(6).reverse();
                    let tep_03 = bigSixFace['d'].slice(0,3).reverse();
-
                    let tep_04 = [bigSixFace['l'][2],bigSixFace['l'][5],bigSixFace['l'][8]].concat(bigSixFace['d'].slice(3));
-
                    bigSixFace['u'] = tep_01;
                    bigSixFace['l'][2] = tep_02[0];
                    bigSixFace['l'][5] = tep_02[1];
@@ -359,7 +344,6 @@ window.onload = function(){
                    bigSixFace['r'][3] = tep_03[1];
                    bigSixFace['r'][6] = tep_03[2];
                    bigSixFace['d'] = tep_04;
-
                };
                if(whichFace == "u"){
                    let tep_01 = bigSixFace['l'].slice(0,3).concat(bigSixFace['f'].slice(3));
@@ -394,7 +378,6 @@ window.onload = function(){
                    let tep_02 = [bigSixFace['f'][0],bigSixFace['f'][3],bigSixFace['f'][6]];
                    let tep_03 = [bigSixFace['u'][6],bigSixFace['u'][3],bigSixFace['u'][0]];
                    let tep_04 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
-
                    bigSixFace['f'][0] = tep_01[0];
                    bigSixFace['f'][3] = tep_01[1];
                    bigSixFace['f'][6] = tep_01[2];
@@ -413,7 +396,6 @@ window.onload = function(){
                    let tep_02 = bigSixFace['d'].slice(6);
                    let tep_03 = bigSixFace['u'].slice(0,3);
                    let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['r'][8]],[bigSixFace['r'][5]],[bigSixFace['r'][2]]);
-
                    bigSixFace['u'] = tep_01;
                    bigSixFace['l'][0] = tep_02[0];
                    bigSixFace['l'][3] = tep_02[1];
@@ -434,13 +416,11 @@ window.onload = function(){
                   bigSixFace['b'] = tep_04;
                };
 
-
                let tep_05 = [
                                bigSixFace[whichFace][2],bigSixFace[whichFace][5],bigSixFace[whichFace][8],
                                bigSixFace[whichFace][1],bigSixFace[whichFace][4],bigSixFace[whichFace][7],
                                bigSixFace[whichFace][0],bigSixFace[whichFace][3],bigSixFace[whichFace][6]
                             ];
-
                bigSixFace[whichFace] = tep_05;
         }
     };
@@ -520,8 +500,13 @@ window.onload = function(){
         // 调用小cubea面变换函数
         changeFace(whichFace, axis, deg, dir);
         
-        //避免渲染和旋转动作同时进行 
+        //避免渲染和旋转动作同时进行 ,旋转的时间根据角度不同设置不同的值
         setTimeout(function(){
+            if (Math.abs(deg) == 180) {
+                get(".litteWrap").style.transitionDuration = "1s"; 
+            } else if (Math.abs(deg) == 90) {
+                get(".litteWrap").style.transitionDuration = "0.5s"; 
+            }
             get(".litteWrap").style.transform = "rotate"+axis+"("+deg+"deg)"; 
         },10);
 
