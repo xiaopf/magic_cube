@@ -511,11 +511,160 @@ window.onload = function(){
         },10);
 
     };
+    // var bigSixFace = {
+    //     'u':[
+    //             'orange',   'orange',   'orange',
+    //             'orange',   'orange',   'orange',
+    //             'orange',   'orange',   'orange'
+    //         ],
+    //     'f':[
+    //             'yellow',   'yellow',   'yellow',
+    //             'yellow',   'yellow',   'yellow',
+    //             'yellow',   'yellow',   'yellow'
+    //         ],
+    //     'd':[
+    //             'blue',     'blue',     'blue',
+    //             'blue',     'blue',     'blue',
+    //             'blue',     'blue',     'blue'
+    //         ],
+    //     'b':[
+    //             'pink',     'pink',     'pink',
+    //             'pink',     'pink',     'pink',
+    //             'pink',     'pink',     'pink'
+    //         ],
+    //     'l':[
+    //             'red',      'red',      'red',
+    //             'red',      'red',      'red',
+    //             'red',      'red',      'red'
+    //         ],
+    //     'r':[
+    //             'green',    'green',    'green',
+    //             'green',    'green',    'green',
+    //             'green',    'green',    'green'
+    //         ]
+    // }
+ //    let dirArr = ['d','u','l','f','r','b'];
+ //    var autoStep = [];
+
+ //    function auto(){
+ //        // while(!(bigSixFace['d'][1]===bigSixFace['d'][4] && bigSixFace['d'][3]===bigSixFace['d'][4] && bigSixFace['d'][5]===bigSixFace['d'][4] && bigSixFace['d'][7]===bigSixFace['d'][4])){
+ //            for(let i = 1; i < 6;i ++){
+ //                for(let j = 1; j < 8; j+=2) {
+ //                    if(bigSixFace[dirArr[i]][j] === bigSixFace[dirArr[0]][4]){
+ //                        if(dirArr[i]==='u'){
+ //                            switch(j){
+ //                                case 1:
+ //                                    if(bigSixFace['b'][1] === bigSixFace['b'][4]){
+ //                                        autoStep.push(['b', "Z", 180, true]);
+ //                                    }else{
+ //                                        switch(bigSixFace['b'][1]){
+ //                                            case bigSixFace['r'][4]:
+ //                                                 autoStep.push(['u', "Y", -90, true]);
+ //                                                 autoStep.push(['r', "X", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['l'][4]:
+ //                                                 autoStep.push(['u', "Y", 90, false]);
+ //                                                 autoStep.push(['l', "X", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['f'][4]:
+ //                                                 autoStep.push(['u', "Y", -180, true]);
+ //                                                 autoStep.push(['f', "Z", 180, true]);
+ //                                                 break;
+ //                                        };
+                                        
+ //                                    }
+ //                                break;
+ //                                case 3:
+ //                                    if(bigSixFace['l'][1] === bigSixFace['l'][4]){
+ //                                        autoStep.push(['l', "X", -180, true]);
+ //                                    }else{
+ //                                        switch(bigSixFace['l'][1]){
+ //                                            case bigSixFace['r'][4]:
+ //                                                 autoStep.push(['u', "Y", -180, true]);
+ //                                                 autoStep.push(['r', "X", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['b'][4]:
+ //                                                 autoStep.push(['u', "Y", -90, true]);
+ //                                                 autoStep.push(['b', "Z", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['f'][4]:
+ //                                                 autoStep.push(['u', "Y", 90, false]);
+ //                                                 autoStep.push(['f', "Z", 180, true]);
+ //                                                 break;
+
+ //                                        };
+                                        
+ //                                    }
+ //                                break;
+ //                                case 5:
+ //                                    if(bigSixFace['r'][1] === bigSixFace['r'][4]){
+ //                                        autoStep.push(['r', "X", 180, true]);
+ //                                    }else{
+ //                                        switch(bigSixFace['r'][1]){
+
+ //                                            case bigSixFace['l'][4]:
+ //                                                 autoStep.push(['u', "Y", -180, true]);
+ //                                                 autoStep.push(['l', "X", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['f'][4]:
+ //                                                 autoStep.push(['u', "Y", -90, true]);
+ //                                                 autoStep.push(['f', "Z", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['b'][4]:
+ //                                                 autoStep.push(['u', "Y", 90, false]);
+ //                                                 autoStep.push(['b', "Z", 180, true]);
+ //                                                 break;
+
+ //                                        };
+                                       
+ //                                    }
+ //                                break;
+ //                                case 7:
+ //                                    if(bigSixFace['f'][1] === bigSixFace['f'][4]){
+ //                                        autoStep.push(['f', "Z", 180, true]);
+ //                                    }else{
+ //                                        switch(bigSixFace['f'][1]){
+ //                                            case bigSixFace['b'][4]:
+ //                                                 autoStep.push(['u', "Y", -180, true]);
+ //                                                 autoStep.push(['b', "Z", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['l'][4]:
+ //                                                 autoStep.push(['u', "Y", -90, true]);
+ //                                                 autoStep.push(['l', "X", 180, true]);
+ //                                                 break;
+ //                                            case bigSixFace['r'][4]:
+ //                                                 autoStep.push(['u', "Y", 90, false]);
+ //                                                 autoStep.push(['r', "X", 180, true]);
+ //                                                 break;
+ //                                        };
+                                        
+ //                                    }
+ //                                break;
+ //                            }
+ //                        }
+ //                    }
+ //                }
+ //            }
+       
+ //        rotateCubeFace.apply(null,autoStep[0]);
+ //        var index = 1;
+ //        clearInterval(timer);
+ //        var timer = setInterval(function(){
+ //            if(index === autoStep.length){
+ //                clearInterval(timer);
+ //            }else{
+ //                rotateCubeFace.apply(null,autoStep[index]);
+ //                index ++;    
+ //            }
+ //        },1000);
+ // // }
+ //    }
 
 
 
-
-
+    get('.btn19').onclick = function(){
+        auto();
+    };
 
 
 
@@ -597,5 +746,6 @@ window.onload = function(){
     get('.btn18').onclick = function(){
         rotateCubeFace('b', "Z", 90, false);
     };
+
 
 }
