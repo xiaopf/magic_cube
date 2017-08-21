@@ -470,7 +470,29 @@ window.onload = function(){
 
 
     // 旋转，同时更新cube的面的颜色,同时更新html布局
-    function rotateCubeFace(whichFace, axis, deg, dir){
+    function rotateCubeFace(whichFace, deg, dir){
+
+        let axis = "";
+        switch(whichFace){
+            case 'u':
+                axis = 'Y';
+                break;
+            case 'd':
+                axis = 'Y';
+                break;
+            case 'f':
+                axis = 'Z';
+                break;
+            case 'b':
+                axis = 'Z';
+                break;
+            case 'l':
+                axis = 'X';
+                break;
+            case 'r':
+                axis = 'X';
+                break;
+        };
         
         // 每次旋转重新渲染一下cubes
         renderCube (false, whichFace);
@@ -543,209 +565,315 @@ window.onload = function(){
     //             'green',    'green',    'green'
     //         ]
     // }
- //    let dirArr = ['d','u','l','f','r','b'];
- //    var autoStep = [];
+    let dirArr = ['d','u','l','f','r','b'];
+    var autoStep = [];
+    var tempCube = [];
 
- //    function auto(){
- //        // while(!(bigSixFace['d'][1]===bigSixFace['d'][4] && bigSixFace['d'][3]===bigSixFace['d'][4] && bigSixFace['d'][5]===bigSixFace['d'][4] && bigSixFace['d'][7]===bigSixFace['d'][4])){
- //            for(let i = 1; i < 6;i ++){
- //                for(let j = 1; j < 8; j+=2) {
- //                    if(bigSixFace[dirArr[i]][j] === bigSixFace[dirArr[0]][4]){
- //                        if(dirArr[i]==='u'){
- //                            switch(j){
- //                                case 1:
- //                                    if(bigSixFace['b'][1] === bigSixFace['b'][4]){
- //                                        autoStep.push(['b', "Z", 180, true]);
- //                                    }else{
- //                                        switch(bigSixFace['b'][1]){
- //                                            case bigSixFace['r'][4]:
- //                                                 autoStep.push(['u', "Y", -90, true]);
- //                                                 autoStep.push(['r', "X", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['l'][4]:
- //                                                 autoStep.push(['u', "Y", 90, false]);
- //                                                 autoStep.push(['l', "X", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['f'][4]:
- //                                                 autoStep.push(['u', "Y", -180, true]);
- //                                                 autoStep.push(['f', "Z", 180, true]);
- //                                                 break;
- //                                        };
-                                        
- //                                    }
- //                                break;
- //                                case 3:
- //                                    if(bigSixFace['l'][1] === bigSixFace['l'][4]){
- //                                        autoStep.push(['l', "X", -180, true]);
- //                                    }else{
- //                                        switch(bigSixFace['l'][1]){
- //                                            case bigSixFace['r'][4]:
- //                                                 autoStep.push(['u', "Y", -180, true]);
- //                                                 autoStep.push(['r', "X", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['b'][4]:
- //                                                 autoStep.push(['u', "Y", -90, true]);
- //                                                 autoStep.push(['b', "Z", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['f'][4]:
- //                                                 autoStep.push(['u', "Y", 90, false]);
- //                                                 autoStep.push(['f', "Z", 180, true]);
- //                                                 break;
+    function searchCube(searchColor){
 
- //                                        };
-                                        
- //                                    }
- //                                break;
- //                                case 5:
- //                                    if(bigSixFace['r'][1] === bigSixFace['r'][4]){
- //                                        autoStep.push(['r', "X", 180, true]);
- //                                    }else{
- //                                        switch(bigSixFace['r'][1]){
 
- //                                            case bigSixFace['l'][4]:
- //                                                 autoStep.push(['u', "Y", -180, true]);
- //                                                 autoStep.push(['l', "X", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['f'][4]:
- //                                                 autoStep.push(['u', "Y", -90, true]);
- //                                                 autoStep.push(['f', "Z", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['b'][4]:
- //                                                 autoStep.push(['u', "Y", 90, false]);
- //                                                 autoStep.push(['b', "Z", 180, true]);
- //                                                 break;
+        function caseJ(i,j,arr,arr2){
+            switch(j){
+              case 1:
+               if(bigSixFace[arr[0]][arr2[0]] === searchColor){
+                 tempCube = [dirArr[i],j];
+               }
+              break;
+              case 3:
+               if(bigSixFace[arr[1]][arr2[1]] === searchColor){
+                 tempCube = [dirArr[i],j];
+               }
+              break;
+              case 5:
+               if(bigSixFace[arr[2]][arr2[2]] === searchColor){
+                 tempCube = [dirArr[i],j];
+               }
+              break;
+              case 7:
+               if(bigSixFace[arr[3]][arr2[3]] === searchColor ){
+                 tempCube = [dirArr[i],j];
+               }
+              break;
+            }
+        }
 
- //                                        };
-                                       
- //                                    }
- //                                break;
- //                                case 7:
- //                                    if(bigSixFace['f'][1] === bigSixFace['f'][4]){
- //                                        autoStep.push(['f', "Z", 180, true]);
- //                                    }else{
- //                                        switch(bigSixFace['f'][1]){
- //                                            case bigSixFace['b'][4]:
- //                                                 autoStep.push(['u', "Y", -180, true]);
- //                                                 autoStep.push(['b', "Z", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['l'][4]:
- //                                                 autoStep.push(['u', "Y", -90, true]);
- //                                                 autoStep.push(['l', "X", 180, true]);
- //                                                 break;
- //                                            case bigSixFace['r'][4]:
- //                                                 autoStep.push(['u', "Y", 90, false]);
- //                                                 autoStep.push(['r', "X", 180, true]);
- //                                                 break;
- //                                        };
-                                        
- //                                    }
- //                                break;
- //                            }
- //                        }
- //                    }
- //                }
- //            }
-       
- //        rotateCubeFace.apply(null,autoStep[0]);
- //        var index = 1;
- //        clearInterval(timer);
- //        var timer = setInterval(function(){
- //            if(index === autoStep.length){
- //                clearInterval(timer);
- //            }else{
- //                rotateCubeFace.apply(null,autoStep[index]);
- //                index ++;    
- //            }
- //        },1000);
- // // }
- //    }
+
+        for(let i = 0; i < 6;i ++){
+            for(let j = 1; j < 8; j+=2) {
+                if(bigSixFace[dirArr[i]][j] === bigSixFace[dirArr[0]][4]){
+                    switch(dirArr[i]){
+                       case 'u':
+                           caseJ(i,j,['b','l','r','f'],[1,1,1,1]);
+                           break;
+                       case 'd':
+                           caseJ(i,j,['f','l','r','b'],[7,7,7,7]);
+                           break;
+                       case 'f':
+                           caseJ(i,j,['u','l','r','d'],[7,5,3,1]);
+                           break;
+                       case 'b':
+                           caseJ(i,j,['u','r','l','d'],[1,5,3,7]);
+                           break;
+                       case 'l':
+                           caseJ(i,j,['u','b','f','d'],[3,5,3,3]);
+                           break;
+                       case 'r':
+                           caseJ(i,j,['u','f','b','d'],[5,5,3,5]);
+                           break; 
+                    }
+                }
+            }
+        }
+    }
+
+    function findStep(sideface){
+        console.log(tempCube)
+        switch(tempCube[0]){
+            case 'u':
+                switch(tempCube[1]){
+                    case 1:
+                        autoStep.push(['f', 180, true])
+                    break;
+                    case 3:
+                        autoStep.push(['u', -90, true])
+                        autoStep.push(['b', -180, true])
+                    break;
+                    case 5:
+                    autoStep.push(['f', 180, true])
+                    break;
+                    case 7:
+                    autoStep.push(['f', 180, true])
+                    break;
+                }
+                break;
+            // case 'd':
+            //     switch(){
+            //         case 1:
+            //         case 3:
+            //         case 5:
+            //         case 7:
+            //     }
+            //     break;
+            case 'f':
+                switch(tempCube[1]){
+                    case 1:
+                    autoStep.push(['r', -90, false])
+                    autoStep.push(['u', -180, true])
+                    autoStep.push(['r', 90, true])
+                    autoStep.push(['l', 180, false])
+                    break;
+                    case 3:
+                    autoStep.push(['r', -90, false])
+                    autoStep.push(['u', -180, true])
+                    autoStep.push(['r', 90, true])
+                    autoStep.push(['l', 180, false])
+                    break;
+                    case 5:
+                    autoStep.push(['r', -90, false])
+                    autoStep.push(['u', -180, true])
+                    autoStep.push(['r', 90, true])
+                    autoStep.push(['l', 180, false])
+                    break;
+                    case 7:
+                    autoStep.push(['r', -90, false])
+                    autoStep.push(['u', -180, true])
+                    autoStep.push(['r', 90, true])
+                    autoStep.push(['l', 180, false])
+                    break;
+                }
+                break;
+            case 'b':
+                switch(tempCube[1]){
+                    case 1:
+                            autoStep.push(['r', 90, true])
+                        break;
+                    case 3:
+                            autoStep.push(['r', 90, true])
+                        break;
+                    case 5:
+                            autoStep.push(['r', 90, true])
+                        break;
+                    case 7:
+                            autoStep.push(['r', 90, true])
+                        break;
+                }
+                break;
+            // case 'l':
+            //     switch(){
+            //         case 1:
+            //         case 3:
+            //         case 5:
+            //         case 7:
+            //     }
+            //     break;
+            // case 'r':
+            //     switch(){
+            //         case 1:
+            //         case 3:
+            //         case 5:
+            //         case 7:
+            //     }
+            //     break;
+        }
+    }
+
+    function auto(){
+        searchCube(bigSixFace['b'][4]);
+        findStep('b');
+
+        stepBystep(autoStep,500)
+
+        searchCube(bigSixFace['f'][4]);
+        findStep('f');
+
+        searchCube(bigSixFace['r'][4]);
+        findStep('r');
+
+        searchCube(bigSixFace['l'][4]);
+        findStep('l');
+        
+    }
+
+
+
+
+    function stepBystep(autoStep,t){
+        rotateCubeFace.apply(null,autoStep[0]);
+        var index = 1;
+        clearInterval(timer);
+        var timer = setInterval(function(){
+            if(index === autoStep.length){
+                clearInterval(timer);
+            }else{
+                rotateCubeFace.apply(null,autoStep[index]);
+                index ++;    
+            }
+        },t);
+    };
+
+    function random(){
+        let randomArr = [];
+
+        randomArr.push(['u', 180, false])
+        randomArr.push(['r', 90, true])
+        randomArr.push(['l', 90, false])
+        randomArr.push(['d', 90, true])
+        randomArr.push(['b', 90, false])
+        randomArr.push(['f', -180, false])
+        randomArr.push(['l', 90, false])
+        randomArr.push(['r', 180, true])
+        randomArr.push(['b', -180, true])
+        randomArr.push(['d', 90, true])
+        randomArr.push(['l', 90, false])
+        randomArr.push(['d', 180, true])
+
+        stepBystep(randomArr,10)
+
+    }
 
 
 
     get('.btn19').onclick = function(){
         auto();
     };
+    get('.btn20').onclick = function(){
+        random();
+    };
 
 
 
     // 顺时针旋转180度
     get('.btn1').onclick = function(){
-        rotateCubeFace('u', "Y", -180, true);
+        rotateCubeFace('u', -180, true);
     };
     get('.btn2').onclick = function(){
-        rotateCubeFace('l', "X", -180, true);
+        rotateCubeFace('l', -180, true);
     };
     get('.btn3').onclick = function(){
-        rotateCubeFace('f', "Z", 180, true);
+        rotateCubeFace('f', 180, true);
     };
     get('.btn4').onclick = function(){
-        rotateCubeFace('r', "X", 180, true);
+        rotateCubeFace('r', 180, true);
     };
     get('.btn5').onclick = function(){
-        rotateCubeFace('d', "Y", 180, true);
+        rotateCubeFace('d', 180, true);
     };
     get('.btn6').onclick = function(){
-        rotateCubeFace('b', "Z", -180, true);
+        rotateCubeFace('b', -180, true);
     };
 
     // 逆时针旋转180度
     get('.btn01').onclick = function(){
-        rotateCubeFace('u', "Y", 180, false);
+        rotateCubeFace('u', 180, false);
     };
     get('.btn02').onclick = function(){
-        rotateCubeFace('l', "X", 180, false);
+        rotateCubeFace('l', 180, false);
     };
     get('.btn03').onclick = function(){
-        rotateCubeFace('f', "Z", -180, false);
+        rotateCubeFace('f', -180, false);
     };
     get('.btn04').onclick = function(){
-        rotateCubeFace('r', "X", -180, false);
+        rotateCubeFace('r', -180, false);
     };
     get('.btn05').onclick = function(){
-        rotateCubeFace('d', "Y", -180, false);
+        rotateCubeFace('d', -180, false);
     };
     get('.btn06').onclick = function(){
-        rotateCubeFace('b', "Z", 180, false);
+        rotateCubeFace('b', 180, false);
     };
     // 逆时针旋转90度按钮
     get('.btn7').onclick = function(){
-        rotateCubeFace('u', "Y", -90, true);
+        rotateCubeFace('u', -90, true);
     };
     get('.btn8').onclick = function(){
-        rotateCubeFace('l', "X", -90, true);
+        rotateCubeFace('l', -90, true);
     };
     get('.btn9').onclick = function(){
-        rotateCubeFace('f', "Z", 90, true);
+        rotateCubeFace('f', 90, true);
     };
     get('.btn10').onclick = function(){
-        rotateCubeFace('r', "X", 90, true);
+        rotateCubeFace('r', 90, true);
     };
     get('.btn11').onclick = function(){
-        rotateCubeFace('d', "Y", 90, true);
+        rotateCubeFace('d', 90, true);
     };
     get('.btn12').onclick = function(){
-        rotateCubeFace('b', "Z", -90, true);
+        rotateCubeFace('b', -90, true);
     };
 
     // 逆时针旋转90度按钮
     get('.btn13').onclick = function(){
-        rotateCubeFace('u', "Y", 90, false);
+        rotateCubeFace('u', 90, false);
     };
     get('.btn14').onclick = function(){
-        rotateCubeFace('l', "X", 90, false);
+        rotateCubeFace('l', 90, false);
     };
     get('.btn15').onclick = function(){
-        rotateCubeFace('f', "Z", -90, false);
+        rotateCubeFace('f', -90, false);
     };
     get('.btn16').onclick = function(){
-        rotateCubeFace('r', "X", -90, false);
+        rotateCubeFace('r', -90, false);
     };
     get('.btn17').onclick = function(){
-        rotateCubeFace('d', "Y", -90, false);
+        rotateCubeFace('d', -90, false);
     };
     get('.btn18').onclick = function(){
-        rotateCubeFace('b', "Z", 90, false);
+        rotateCubeFace('b', 90, false);
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
