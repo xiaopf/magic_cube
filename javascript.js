@@ -146,8 +146,41 @@ window.onload = function(){
             ]
     };
 
+    var fakeBigSixFace = {
+        'u':[
+                'orange',   'orange',   'orange',
+                'orange',   'orange',   'orange',
+                'orange',   'orange',   'orange'
+            ],
+        'f':[
+                'yellow',   'yellow',   'yellow',
+                'yellow',   'yellow',   'yellow',
+                'yellow',   'yellow',   'yellow'
+            ],
+        'd':[
+                'blue',     'blue',     'blue',
+                'blue',     'blue',     'blue',
+                'blue',     'blue',     'blue'
+            ],
+        'b':[
+                'pink',     'pink',     'pink',
+                'pink',     'pink',     'pink',
+                'pink',     'pink',     'pink'
+            ],
+        'l':[
+                'red',      'red',      'red',
+                'red',      'red',      'red',
+                'red',      'red',      'red'
+            ],
+        'r':[
+                'green',    'green',    'green',
+                'green',    'green',    'green',
+                'green',    'green',    'green'
+            ]
+    };
+
     // 当旋转时，更新各个大面上的小cube面
-    function changeFace(whichFace, axis, deg, dir) {
+    function changeFace(whichFace, axis, deg, dir,faceArr) {
         if(Math.abs(deg) == 180){//旋转180度，顺时针和逆时针结果一样
         	if(whichFace == "f"){
         		let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
@@ -533,64 +566,33 @@ window.onload = function(){
         },10);
 
     };
-    // var bigSixFace = {
-    //     'u':[
-    //             'orange',   'orange',   'orange',
-    //             'orange',   'orange',   'orange',
-    //             'orange',   'orange',   'orange'
-    //         ],
-    //     'f':[
-    //             'yellow',   'yellow',   'yellow',
-    //             'yellow',   'yellow',   'yellow',
-    //             'yellow',   'yellow',   'yellow'
-    //         ],
-    //     'd':[
-    //             'blue',     'blue',     'blue',
-    //             'blue',     'blue',     'blue',
-    //             'blue',     'blue',     'blue'
-    //         ],
-    //     'b':[
-    //             'pink',     'pink',     'pink',
-    //             'pink',     'pink',     'pink',
-    //             'pink',     'pink',     'pink'
-    //         ],
-    //     'l':[
-    //             'red',      'red',      'red',
-    //             'red',      'red',      'red',
-    //             'red',      'red',      'red'
-    //         ],
-    //     'r':[
-    //             'green',    'green',    'green',
-    //             'green',    'green',    'green',
-    //             'green',    'green',    'green'
-    //         ]
-    // }
+// ////////////////////////////////////////////////////////////
     let dirArr = ['d','u','l','f','r','b'];
     var autoStep = [];
     var tempCube = [];
 
-    function searchCube(searchColor){
+    function searchCube(searchFace,resolve){
 
 
         function caseJ(i,j,arr,arr2){
             switch(j){
               case 1:
-               if(bigSixFace[arr[0]][arr2[0]] === searchColor){
+               if(bigSixFace[arr[0]][arr2[0]] === bigSixFace[searchFace][4]){
                  tempCube = [dirArr[i],j];
                }
               break;
               case 3:
-               if(bigSixFace[arr[1]][arr2[1]] === searchColor){
+               if(bigSixFace[arr[1]][arr2[1]] === bigSixFace[searchFace][4]){
                  tempCube = [dirArr[i],j];
                }
               break;
               case 5:
-               if(bigSixFace[arr[2]][arr2[2]] === searchColor){
+               if(bigSixFace[arr[2]][arr2[2]] === bigSixFace[searchFace][4]){
                  tempCube = [dirArr[i],j];
                }
               break;
               case 7:
-               if(bigSixFace[arr[3]][arr2[3]] === searchColor ){
+               if(bigSixFace[arr[3]][arr2[3]] === bigSixFace[searchFace][4] ){
                  tempCube = [dirArr[i],j];
                }
               break;
@@ -624,6 +626,23 @@ window.onload = function(){
                 }
             }
         }
+
+
+
+
+
+        findStep(searchFace);
+
+        stepBystep(autoStep,1000);
+
+        autoStep = [];
+
+        if(resolve){
+            resolve();
+        }
+        
+        
+
     }
 
     function findStep(sideface){
@@ -718,19 +737,51 @@ window.onload = function(){
     }
 
     function auto(){
-        searchCube(bigSixFace['b'][4]);
-        findStep('b');
+        let promise = new Promise(function(resolve,reject){
+            console.log('promise begin');
+            resolve();
+        });
 
-        stepBystep(autoStep,500)
+        promise.then(function(){
+            
+            return new Promise(function(resolve,reject){
+                searchCube('b',resolve);
+            });
+            
+            
 
-        searchCube(bigSixFace['f'][4]);
-        findStep('f');
+        }).then(function(){
+            
+            return new Promise(function(resolve,reject){
+                searchCube('f',resolve);
+            });
+            
+            
 
-        searchCube(bigSixFace['r'][4]);
-        findStep('r');
+        }).then(function(){
+            
+            return new Promise(function(resolve,reject){
+                searchCube('r',resolve);
+            });
+            
+            
 
-        searchCube(bigSixFace['l'][4]);
-        findStep('l');
+        }).then(function(){
+               searchCube('l');    
+        })
+        
+
+
+        
+
+        
+
+
+        
+
+
+        
+
         
     }
 
@@ -780,7 +831,7 @@ window.onload = function(){
         random();
     };
 
-
+// ///////////////////////////////////////////////////
 
     // 顺时针旋转180度
     get('.btn1').onclick = function(){
