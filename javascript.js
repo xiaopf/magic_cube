@@ -183,278 +183,278 @@ window.onload = function(){
     function changeFace(whichFace, axis, deg, dir,faceArr) {
         if(Math.abs(deg) == 180){//旋转180度，顺时针和逆时针结果一样
         	if(whichFace == "f"){
-        		let tep_01 = bigSixFace['u'].slice(0,6).concat(bigSixFace['d'].slice(0,3).reverse());
-        		let tep_02 = [bigSixFace['r'][6],bigSixFace['r'][3],bigSixFace['r'][0]];
-        		let tep_03 = [bigSixFace['l'][8],bigSixFace['l'][5],bigSixFace['l'][2]];
-        		let tep_04 = bigSixFace['u'].slice(6).reverse().concat(bigSixFace['d'].slice(3));
-        		bigSixFace['u'] = tep_01;
-        		bigSixFace['l'][2] = tep_02[0];
-        		bigSixFace['l'][5] = tep_02[1];
-        		bigSixFace['l'][8] = tep_02[2];
-        		bigSixFace['r'][0] = tep_03[0];
-        		bigSixFace['r'][3] = tep_03[1];
-        		bigSixFace['r'][6] = tep_03[2];
-        		bigSixFace['d'] = tep_04;
+        		let tep_01 = faceArr['u'].slice(0,6).concat(faceArr['d'].slice(0,3).reverse());
+        		let tep_02 = [faceArr['r'][6],faceArr['r'][3],faceArr['r'][0]];
+        		let tep_03 = [faceArr['l'][8],faceArr['l'][5],faceArr['l'][2]];
+        		let tep_04 = faceArr['u'].slice(6).reverse().concat(faceArr['d'].slice(3));
+        		faceArr['u'] = tep_01;
+        		faceArr['l'][2] = tep_02[0];
+        		faceArr['l'][5] = tep_02[1];
+        		faceArr['l'][8] = tep_02[2];
+        		faceArr['r'][0] = tep_03[0];
+        		faceArr['r'][3] = tep_03[1];
+        		faceArr['r'][6] = tep_03[2];
+        		faceArr['d'] = tep_04;
         	};
         	if(whichFace == "u"){
-        		let tep_01 = bigSixFace['b'].slice(0,3).concat(bigSixFace['f'].slice(3));
-        		let tep_02 = bigSixFace['r'].slice(0,3).concat(bigSixFace['l'].slice(3));
-        		let tep_03 = bigSixFace['l'].slice(0,3).concat(bigSixFace['r'].slice(3));
-        		let tep_04 = bigSixFace['f'].slice(0,3).concat(bigSixFace['b'].slice(3));
-        		bigSixFace['f'] = tep_01;
-        		bigSixFace['l'] = tep_02;
-        		bigSixFace['r'] = tep_03;
-        		bigSixFace['b'] = tep_04;
+        		let tep_01 = faceArr['b'].slice(0,3).concat(faceArr['f'].slice(3));
+        		let tep_02 = faceArr['r'].slice(0,3).concat(faceArr['l'].slice(3));
+        		let tep_03 = faceArr['l'].slice(0,3).concat(faceArr['r'].slice(3));
+        		let tep_04 = faceArr['f'].slice(0,3).concat(faceArr['b'].slice(3));
+        		faceArr['f'] = tep_01;
+        		faceArr['l'] = tep_02;
+        		faceArr['r'] = tep_03;
+        		faceArr['b'] = tep_04;
         	};
         	if(whichFace == "r"){
-        		let tep_01 = [bigSixFace['b'][6],bigSixFace['b'][3],bigSixFace['b'][0]];
-        		let tep_02 = [bigSixFace['d'][2],bigSixFace['d'][5],bigSixFace['d'][8]];
-        		let tep_03 = [bigSixFace['f'][8],bigSixFace['f'][5],bigSixFace['f'][2]];
-        		let tep_04 = [bigSixFace['u'][2],bigSixFace['u'][5],bigSixFace['u'][8]];
+        		let tep_01 = [faceArr['b'][6],faceArr['b'][3],faceArr['b'][0]];
+        		let tep_02 = [faceArr['d'][2],faceArr['d'][5],faceArr['d'][8]];
+        		let tep_03 = [faceArr['f'][8],faceArr['f'][5],faceArr['f'][2]];
+        		let tep_04 = [faceArr['u'][2],faceArr['u'][5],faceArr['u'][8]];
 
-        		bigSixFace['f'][2] = tep_01[0];
-        		bigSixFace['f'][5] = tep_01[1];
-        		bigSixFace['f'][8] = tep_01[2];
-        		bigSixFace['u'][2] = tep_02[0];
-        		bigSixFace['u'][5] = tep_02[1];
-        		bigSixFace['u'][8] = tep_02[2];
-        		bigSixFace['b'][0] = tep_03[0];
-        		bigSixFace['b'][3] = tep_03[1];
-        		bigSixFace['b'][6] = tep_03[2];
-        		bigSixFace['d'][2] = tep_04[0];
-        		bigSixFace['d'][5] = tep_04[1];
-        		bigSixFace['d'][8] = tep_04[2];
+        		faceArr['f'][2] = tep_01[0];
+        		faceArr['f'][5] = tep_01[1];
+        		faceArr['f'][8] = tep_01[2];
+        		faceArr['u'][2] = tep_02[0];
+        		faceArr['u'][5] = tep_02[1];
+        		faceArr['u'][8] = tep_02[2];
+        		faceArr['b'][0] = tep_03[0];
+        		faceArr['b'][3] = tep_03[1];
+        		faceArr['b'][6] = tep_03[2];
+        		faceArr['d'][2] = tep_04[0];
+        		faceArr['d'][5] = tep_04[1];
+        		faceArr['d'][8] = tep_04[2];
         	};
         	if(whichFace == "l"){
-        		let tep_01 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
-        		let tep_02 = [bigSixFace['d'][0],bigSixFace['d'][3],bigSixFace['d'][6]];
-        		let tep_03 = [bigSixFace['f'][6],bigSixFace['f'][3],bigSixFace['f'][0]];
-        		let tep_04 = [bigSixFace['u'][0],bigSixFace['u'][3],bigSixFace['u'][6]];
+        		let tep_01 = [faceArr['b'][8],faceArr['b'][5],faceArr['b'][2]];
+        		let tep_02 = [faceArr['d'][0],faceArr['d'][3],faceArr['d'][6]];
+        		let tep_03 = [faceArr['f'][6],faceArr['f'][3],faceArr['f'][0]];
+        		let tep_04 = [faceArr['u'][0],faceArr['u'][3],faceArr['u'][6]];
 
-        		bigSixFace['f'][0] = tep_01[0];
-        		bigSixFace['f'][3] = tep_01[1];
-        		bigSixFace['f'][6] = tep_01[2];
-        		bigSixFace['u'][0] = tep_02[0];
-        		bigSixFace['u'][3] = tep_02[1];
-        		bigSixFace['u'][6] = tep_02[2];
-        		bigSixFace['b'][2] = tep_03[0];
-        		bigSixFace['b'][5] = tep_03[1];
-        		bigSixFace['b'][8] = tep_03[2];
-        		bigSixFace['d'][0] = tep_04[0];
-        		bigSixFace['d'][3] = tep_04[1];
-        		bigSixFace['d'][6] = tep_04[2];
+        		faceArr['f'][0] = tep_01[0];
+        		faceArr['f'][3] = tep_01[1];
+        		faceArr['f'][6] = tep_01[2];
+        		faceArr['u'][0] = tep_02[0];
+        		faceArr['u'][3] = tep_02[1];
+        		faceArr['u'][6] = tep_02[2];
+        		faceArr['b'][2] = tep_03[0];
+        		faceArr['b'][5] = tep_03[1];
+        		faceArr['b'][8] = tep_03[2];
+        		faceArr['d'][0] = tep_04[0];
+        		faceArr['d'][3] = tep_04[1];
+        		faceArr['d'][6] = tep_04[2];
         	};
         	if(whichFace == "b"){
-        		let tep_01 = bigSixFace['d'].slice(6).reverse().concat(bigSixFace['u'].slice(3));
-        		let tep_02 = [bigSixFace['r'][8],bigSixFace['r'][5],bigSixFace['r'][2]];
-        		let tep_03 = [bigSixFace['l'][6],bigSixFace['l'][3],bigSixFace['l'][0]];
-        		let tep_04 = bigSixFace['d'].slice(0,6).concat(bigSixFace['u'].slice(0,3).reverse());
+        		let tep_01 = faceArr['d'].slice(6).reverse().concat(faceArr['u'].slice(3));
+        		let tep_02 = [faceArr['r'][8],faceArr['r'][5],faceArr['r'][2]];
+        		let tep_03 = [faceArr['l'][6],faceArr['l'][3],faceArr['l'][0]];
+        		let tep_04 = faceArr['d'].slice(0,6).concat(faceArr['u'].slice(0,3).reverse());
 
-        		bigSixFace['u'] = tep_01;
-        		bigSixFace['l'][0] = tep_02[0];
-        		bigSixFace['l'][3] = tep_02[1];
-        		bigSixFace['l'][6] = tep_02[2];
-        		bigSixFace['r'][2] = tep_03[0];
-        		bigSixFace['r'][5] = tep_03[1];
-        		bigSixFace['r'][8] = tep_03[2];
-        		bigSixFace['d'] = tep_04;
+        		faceArr['u'] = tep_01;
+        		faceArr['l'][0] = tep_02[0];
+        		faceArr['l'][3] = tep_02[1];
+        		faceArr['l'][6] = tep_02[2];
+        		faceArr['r'][2] = tep_03[0];
+        		faceArr['r'][5] = tep_03[1];
+        		faceArr['r'][8] = tep_03[2];
+        		faceArr['d'] = tep_04;
         	};
         	if(whichFace == "d"){
-    		   let tep_01 = bigSixFace['f'].slice(0,6).concat(bigSixFace['b'].slice(6));
-    		   let tep_02 = bigSixFace['l'].slice(0,6).concat(bigSixFace['r'].slice(6));
-    		   let tep_03 = bigSixFace['r'].slice(0,6).concat(bigSixFace['l'].slice(6));
-    		   let tep_04 = bigSixFace['b'].slice(0,6).concat(bigSixFace['f'].slice(6));
-    		   bigSixFace['f'] = tep_01;
-    		   bigSixFace['l'] = tep_02;
-    		   bigSixFace['r'] = tep_03;
-    		   bigSixFace['b'] = tep_04;
+    		   let tep_01 = faceArr['f'].slice(0,6).concat(faceArr['b'].slice(6));
+    		   let tep_02 = faceArr['l'].slice(0,6).concat(faceArr['r'].slice(6));
+    		   let tep_03 = faceArr['r'].slice(0,6).concat(faceArr['l'].slice(6));
+    		   let tep_04 = faceArr['b'].slice(0,6).concat(faceArr['f'].slice(6));
+    		   faceArr['f'] = tep_01;
+    		   faceArr['l'] = tep_02;
+    		   faceArr['r'] = tep_03;
+    		   faceArr['b'] = tep_04;
         	};
-            let tep_05 = bigSixFace[whichFace].reverse();
-        	bigSixFace[whichFace] = tep_05;
+            let tep_05 = faceArr[whichFace].reverse();
+        	faceArr[whichFace] = tep_05;
         } else if(Math.abs(deg) == 90 && dir) { //顺时针旋转90度
 
             if(whichFace == "f"){
-                let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['l'][8]],[bigSixFace['l'][5]],[bigSixFace['l'][2]]);
-                let tep_02 = bigSixFace['d'].slice(0,3);
-                let tep_03 = bigSixFace['u'].slice(6);
-                let tep_04 = [bigSixFace['r'][6],bigSixFace['r'][3],bigSixFace['r'][0]].concat(bigSixFace['d'].slice(3));
-                bigSixFace['u'] = tep_01;
-                bigSixFace['l'][2] = tep_02[0];
-                bigSixFace['l'][5] = tep_02[1];
-                bigSixFace['l'][8] = tep_02[2];
-                bigSixFace['r'][0] = tep_03[0];
-                bigSixFace['r'][3] = tep_03[1];
-                bigSixFace['r'][6] = tep_03[2];
-                bigSixFace['d'] = tep_04;
+                let tep_01 = faceArr['u'].slice(0,6).concat([faceArr['l'][8]],[faceArr['l'][5]],[faceArr['l'][2]]);
+                let tep_02 = faceArr['d'].slice(0,3);
+                let tep_03 = faceArr['u'].slice(6);
+                let tep_04 = [faceArr['r'][6],faceArr['r'][3],faceArr['r'][0]].concat(faceArr['d'].slice(3));
+                faceArr['u'] = tep_01;
+                faceArr['l'][2] = tep_02[0];
+                faceArr['l'][5] = tep_02[1];
+                faceArr['l'][8] = tep_02[2];
+                faceArr['r'][0] = tep_03[0];
+                faceArr['r'][3] = tep_03[1];
+                faceArr['r'][6] = tep_03[2];
+                faceArr['d'] = tep_04;
             };
             if(whichFace == "u"){
-                let tep_01 = bigSixFace['r'].slice(0,3).concat(bigSixFace['f'].slice(3));
-                let tep_02 = bigSixFace['f'].slice(0,3).concat(bigSixFace['l'].slice(3));
-                let tep_03 = bigSixFace['b'].slice(0,3).concat(bigSixFace['r'].slice(3));
-                let tep_04 = bigSixFace['l'].slice(0,3).concat(bigSixFace['b'].slice(3));
-                bigSixFace['f'] = tep_01;
-                bigSixFace['l'] = tep_02;
-                bigSixFace['r'] = tep_03;
-                bigSixFace['b'] = tep_04;
+                let tep_01 = faceArr['r'].slice(0,3).concat(faceArr['f'].slice(3));
+                let tep_02 = faceArr['f'].slice(0,3).concat(faceArr['l'].slice(3));
+                let tep_03 = faceArr['b'].slice(0,3).concat(faceArr['r'].slice(3));
+                let tep_04 = faceArr['l'].slice(0,3).concat(faceArr['b'].slice(3));
+                faceArr['f'] = tep_01;
+                faceArr['l'] = tep_02;
+                faceArr['r'] = tep_03;
+                faceArr['b'] = tep_04;
             };
             if(whichFace == "r"){
-                let tep_01 = [bigSixFace['d'][2],bigSixFace['d'][5],bigSixFace['d'][8]];
-                let tep_02 = [bigSixFace['f'][2],bigSixFace['f'][5],bigSixFace['f'][8]];
-                let tep_03 = [bigSixFace['u'][8],bigSixFace['u'][5],bigSixFace['u'][2]];
-                let tep_04 = [bigSixFace['b'][6],bigSixFace['b'][3],bigSixFace['b'][0]];
-                bigSixFace['f'][2] = tep_01[0];
-                bigSixFace['f'][5] = tep_01[1];
-                bigSixFace['f'][8] = tep_01[2];
-                bigSixFace['u'][2] = tep_02[0];
-                bigSixFace['u'][5] = tep_02[1];
-                bigSixFace['u'][8] = tep_02[2];
-                bigSixFace['b'][0] = tep_03[0];
-                bigSixFace['b'][3] = tep_03[1];
-                bigSixFace['b'][6] = tep_03[2];
-                bigSixFace['d'][2] = tep_04[0];
-                bigSixFace['d'][5] = tep_04[1];
-                bigSixFace['d'][8] = tep_04[2];
+                let tep_01 = [faceArr['d'][2],faceArr['d'][5],faceArr['d'][8]];
+                let tep_02 = [faceArr['f'][2],faceArr['f'][5],faceArr['f'][8]];
+                let tep_03 = [faceArr['u'][8],faceArr['u'][5],faceArr['u'][2]];
+                let tep_04 = [faceArr['b'][6],faceArr['b'][3],faceArr['b'][0]];
+                faceArr['f'][2] = tep_01[0];
+                faceArr['f'][5] = tep_01[1];
+                faceArr['f'][8] = tep_01[2];
+                faceArr['u'][2] = tep_02[0];
+                faceArr['u'][5] = tep_02[1];
+                faceArr['u'][8] = tep_02[2];
+                faceArr['b'][0] = tep_03[0];
+                faceArr['b'][3] = tep_03[1];
+                faceArr['b'][6] = tep_03[2];
+                faceArr['d'][2] = tep_04[0];
+                faceArr['d'][5] = tep_04[1];
+                faceArr['d'][8] = tep_04[2];
             };
             if(whichFace == "l"){
-                let tep_01 = [bigSixFace['u'][0],bigSixFace['u'][3],bigSixFace['u'][6]];
-                let tep_02 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
-                let tep_03 = [bigSixFace['d'][6],bigSixFace['d'][3],bigSixFace['d'][0]];
-                let tep_04 = [bigSixFace['f'][0],bigSixFace['f'][3],bigSixFace['f'][6]];
-                bigSixFace['f'][0] = tep_01[0];
-                bigSixFace['f'][3] = tep_01[1];
-                bigSixFace['f'][6] = tep_01[2];
-                bigSixFace['u'][0] = tep_02[0];
-                bigSixFace['u'][3] = tep_02[1];
-                bigSixFace['u'][6] = tep_02[2];
-                bigSixFace['b'][2] = tep_03[0];
-                bigSixFace['b'][5] = tep_03[1];
-                bigSixFace['b'][8] = tep_03[2];
-                bigSixFace['d'][0] = tep_04[0];
-                bigSixFace['d'][3] = tep_04[1];
-                bigSixFace['d'][6] = tep_04[2];
+                let tep_01 = [faceArr['u'][0],faceArr['u'][3],faceArr['u'][6]];
+                let tep_02 = [faceArr['b'][8],faceArr['b'][5],faceArr['b'][2]];
+                let tep_03 = [faceArr['d'][6],faceArr['d'][3],faceArr['d'][0]];
+                let tep_04 = [faceArr['f'][0],faceArr['f'][3],faceArr['f'][6]];
+                faceArr['f'][0] = tep_01[0];
+                faceArr['f'][3] = tep_01[1];
+                faceArr['f'][6] = tep_01[2];
+                faceArr['u'][0] = tep_02[0];
+                faceArr['u'][3] = tep_02[1];
+                faceArr['u'][6] = tep_02[2];
+                faceArr['b'][2] = tep_03[0];
+                faceArr['b'][5] = tep_03[1];
+                faceArr['b'][8] = tep_03[2];
+                faceArr['d'][0] = tep_04[0];
+                faceArr['d'][3] = tep_04[1];
+                faceArr['d'][6] = tep_04[2];
             };
             if(whichFace == "b"){
-                let tep_01 = [bigSixFace['r'][2],bigSixFace['r'][5],bigSixFace['r'][8]].concat(bigSixFace['u'].slice(3));
-                let tep_02 = bigSixFace['u'].slice(0,3).reverse();
-                let tep_03 = bigSixFace['d'].slice(6).reverse();
-                let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['l'][0]],[bigSixFace['l'][3]],[bigSixFace['l'][6]]);
-                bigSixFace['u'] = tep_01;
-                bigSixFace['l'][0] = tep_02[0];
-                bigSixFace['l'][3] = tep_02[1];
-                bigSixFace['l'][6] = tep_02[2];
-                bigSixFace['r'][2] = tep_03[0];
-                bigSixFace['r'][5] = tep_03[1];
-                bigSixFace['r'][8] = tep_03[2];
-                bigSixFace['d'] = tep_04;
+                let tep_01 = [faceArr['r'][2],faceArr['r'][5],faceArr['r'][8]].concat(faceArr['u'].slice(3));
+                let tep_02 = faceArr['u'].slice(0,3).reverse();
+                let tep_03 = faceArr['d'].slice(6).reverse();
+                let tep_04 = faceArr['d'].slice(0,6).concat([faceArr['l'][0]],[faceArr['l'][3]],[faceArr['l'][6]]);
+                faceArr['u'] = tep_01;
+                faceArr['l'][0] = tep_02[0];
+                faceArr['l'][3] = tep_02[1];
+                faceArr['l'][6] = tep_02[2];
+                faceArr['r'][2] = tep_03[0];
+                faceArr['r'][5] = tep_03[1];
+                faceArr['r'][8] = tep_03[2];
+                faceArr['d'] = tep_04;
             };
             if(whichFace == "d"){
-               let tep_01 = bigSixFace['f'].slice(0,6).concat(bigSixFace['l'].slice(6));
-               let tep_02 = bigSixFace['l'].slice(0,6).concat(bigSixFace['b'].slice(6));
-               let tep_03 = bigSixFace['r'].slice(0,6).concat(bigSixFace['f'].slice(6));
-               let tep_04 = bigSixFace['b'].slice(0,6).concat(bigSixFace['r'].slice(6));
-               bigSixFace['f'] = tep_01;
-               bigSixFace['l'] = tep_02;
-               bigSixFace['r'] = tep_03;
-               bigSixFace['b'] = tep_04;
+               let tep_01 = faceArr['f'].slice(0,6).concat(faceArr['l'].slice(6));
+               let tep_02 = faceArr['l'].slice(0,6).concat(faceArr['b'].slice(6));
+               let tep_03 = faceArr['r'].slice(0,6).concat(faceArr['f'].slice(6));
+               let tep_04 = faceArr['b'].slice(0,6).concat(faceArr['r'].slice(6));
+               faceArr['f'] = tep_01;
+               faceArr['l'] = tep_02;
+               faceArr['r'] = tep_03;
+               faceArr['b'] = tep_04;
             };
             let tep_05 = [
-                            bigSixFace[whichFace][6],bigSixFace[whichFace][3],bigSixFace[whichFace][0],
-                            bigSixFace[whichFace][7],bigSixFace[whichFace][4],bigSixFace[whichFace][1],
-                            bigSixFace[whichFace][8],bigSixFace[whichFace][5],bigSixFace[whichFace][2]
+                            faceArr[whichFace][6],faceArr[whichFace][3],faceArr[whichFace][0],
+                            faceArr[whichFace][7],faceArr[whichFace][4],faceArr[whichFace][1],
+                            faceArr[whichFace][8],faceArr[whichFace][5],faceArr[whichFace][2]
                          ];
-            bigSixFace[whichFace] = tep_05;
+            faceArr[whichFace] = tep_05;
         } else if(Math.abs(deg) == 90 && !dir) { //逆时针旋转90度
                if(whichFace == "f"){
-                   let tep_01 = bigSixFace['u'].slice(0,6).concat([bigSixFace['r'][0]],[bigSixFace['r'][3]],[bigSixFace['r'][6]]);
-                   let tep_02 = bigSixFace['u'].slice(6).reverse();
-                   let tep_03 = bigSixFace['d'].slice(0,3).reverse();
-                   let tep_04 = [bigSixFace['l'][2],bigSixFace['l'][5],bigSixFace['l'][8]].concat(bigSixFace['d'].slice(3));
-                   bigSixFace['u'] = tep_01;
-                   bigSixFace['l'][2] = tep_02[0];
-                   bigSixFace['l'][5] = tep_02[1];
-                   bigSixFace['l'][8] = tep_02[2];
-                   bigSixFace['r'][0] = tep_03[0];
-                   bigSixFace['r'][3] = tep_03[1];
-                   bigSixFace['r'][6] = tep_03[2];
-                   bigSixFace['d'] = tep_04;
+                   let tep_01 = faceArr['u'].slice(0,6).concat([faceArr['r'][0]],[faceArr['r'][3]],[faceArr['r'][6]]);
+                   let tep_02 = faceArr['u'].slice(6).reverse();
+                   let tep_03 = faceArr['d'].slice(0,3).reverse();
+                   let tep_04 = [faceArr['l'][2],faceArr['l'][5],faceArr['l'][8]].concat(faceArr['d'].slice(3));
+                   faceArr['u'] = tep_01;
+                   faceArr['l'][2] = tep_02[0];
+                   faceArr['l'][5] = tep_02[1];
+                   faceArr['l'][8] = tep_02[2];
+                   faceArr['r'][0] = tep_03[0];
+                   faceArr['r'][3] = tep_03[1];
+                   faceArr['r'][6] = tep_03[2];
+                   faceArr['d'] = tep_04;
                };
                if(whichFace == "u"){
-                   let tep_01 = bigSixFace['l'].slice(0,3).concat(bigSixFace['f'].slice(3));
-                   let tep_02 = bigSixFace['b'].slice(0,3).concat(bigSixFace['l'].slice(3));
-                   let tep_03 = bigSixFace['f'].slice(0,3).concat(bigSixFace['r'].slice(3));
-                   let tep_04 = bigSixFace['r'].slice(0,3).concat(bigSixFace['b'].slice(3));
-                   bigSixFace['f'] = tep_01;
-                   bigSixFace['l'] = tep_02;
-                   bigSixFace['r'] = tep_03;
-                   bigSixFace['b'] = tep_04;
+                   let tep_01 = faceArr['l'].slice(0,3).concat(faceArr['f'].slice(3));
+                   let tep_02 = faceArr['b'].slice(0,3).concat(faceArr['l'].slice(3));
+                   let tep_03 = faceArr['f'].slice(0,3).concat(faceArr['r'].slice(3));
+                   let tep_04 = faceArr['r'].slice(0,3).concat(faceArr['b'].slice(3));
+                   faceArr['f'] = tep_01;
+                   faceArr['l'] = tep_02;
+                   faceArr['r'] = tep_03;
+                   faceArr['b'] = tep_04;
                };
                if(whichFace == "r"){
-                   let tep_01 = [bigSixFace['u'][2],bigSixFace['u'][5],bigSixFace['u'][8]];
-                   let tep_02 = [bigSixFace['b'][6],bigSixFace['b'][3],bigSixFace['b'][0]];
-                   let tep_03 = [bigSixFace['d'][8],bigSixFace['d'][5],bigSixFace['d'][2]];
-                   let tep_04 = [bigSixFace['f'][2],bigSixFace['f'][5],bigSixFace['f'][8]];
-                   bigSixFace['f'][2] = tep_01[0];
-                   bigSixFace['f'][5] = tep_01[1];
-                   bigSixFace['f'][8] = tep_01[2];
-                   bigSixFace['u'][2] = tep_02[0];
-                   bigSixFace['u'][5] = tep_02[1];
-                   bigSixFace['u'][8] = tep_02[2];
-                   bigSixFace['b'][0] = tep_03[0];
-                   bigSixFace['b'][3] = tep_03[1];
-                   bigSixFace['b'][6] = tep_03[2];
-                   bigSixFace['d'][2] = tep_04[0];
-                   bigSixFace['d'][5] = tep_04[1];
-                   bigSixFace['d'][8] = tep_04[2];
+                   let tep_01 = [faceArr['u'][2],faceArr['u'][5],faceArr['u'][8]];
+                   let tep_02 = [faceArr['b'][6],faceArr['b'][3],faceArr['b'][0]];
+                   let tep_03 = [faceArr['d'][8],faceArr['d'][5],faceArr['d'][2]];
+                   let tep_04 = [faceArr['f'][2],faceArr['f'][5],faceArr['f'][8]];
+                   faceArr['f'][2] = tep_01[0];
+                   faceArr['f'][5] = tep_01[1];
+                   faceArr['f'][8] = tep_01[2];
+                   faceArr['u'][2] = tep_02[0];
+                   faceArr['u'][5] = tep_02[1];
+                   faceArr['u'][8] = tep_02[2];
+                   faceArr['b'][0] = tep_03[0];
+                   faceArr['b'][3] = tep_03[1];
+                   faceArr['b'][6] = tep_03[2];
+                   faceArr['d'][2] = tep_04[0];
+                   faceArr['d'][5] = tep_04[1];
+                   faceArr['d'][8] = tep_04[2];
                };
                if(whichFace == "l"){
-                   let tep_01 = [bigSixFace['d'][0],bigSixFace['d'][3],bigSixFace['d'][6]];
-                   let tep_02 = [bigSixFace['f'][0],bigSixFace['f'][3],bigSixFace['f'][6]];
-                   let tep_03 = [bigSixFace['u'][6],bigSixFace['u'][3],bigSixFace['u'][0]];
-                   let tep_04 = [bigSixFace['b'][8],bigSixFace['b'][5],bigSixFace['b'][2]];
-                   bigSixFace['f'][0] = tep_01[0];
-                   bigSixFace['f'][3] = tep_01[1];
-                   bigSixFace['f'][6] = tep_01[2];
-                   bigSixFace['u'][0] = tep_02[0];
-                   bigSixFace['u'][3] = tep_02[1];
-                   bigSixFace['u'][6] = tep_02[2];
-                   bigSixFace['b'][2] = tep_03[0];
-                   bigSixFace['b'][5] = tep_03[1];
-                   bigSixFace['b'][8] = tep_03[2];
-                   bigSixFace['d'][0] = tep_04[0];
-                   bigSixFace['d'][3] = tep_04[1];
-                   bigSixFace['d'][6] = tep_04[2];
+                   let tep_01 = [faceArr['d'][0],faceArr['d'][3],faceArr['d'][6]];
+                   let tep_02 = [faceArr['f'][0],faceArr['f'][3],faceArr['f'][6]];
+                   let tep_03 = [faceArr['u'][6],faceArr['u'][3],faceArr['u'][0]];
+                   let tep_04 = [faceArr['b'][8],faceArr['b'][5],faceArr['b'][2]];
+                   faceArr['f'][0] = tep_01[0];
+                   faceArr['f'][3] = tep_01[1];
+                   faceArr['f'][6] = tep_01[2];
+                   faceArr['u'][0] = tep_02[0];
+                   faceArr['u'][3] = tep_02[1];
+                   faceArr['u'][6] = tep_02[2];
+                   faceArr['b'][2] = tep_03[0];
+                   faceArr['b'][5] = tep_03[1];
+                   faceArr['b'][8] = tep_03[2];
+                   faceArr['d'][0] = tep_04[0];
+                   faceArr['d'][3] = tep_04[1];
+                   faceArr['d'][6] = tep_04[2];
                };
                if(whichFace == "b"){
-                   let tep_01 = [bigSixFace['l'][6],bigSixFace['l'][3],bigSixFace['l'][0]].concat(bigSixFace['u'].slice(3));
-                   let tep_02 = bigSixFace['d'].slice(6);
-                   let tep_03 = bigSixFace['u'].slice(0,3);
-                   let tep_04 = bigSixFace['d'].slice(0,6).concat([bigSixFace['r'][8]],[bigSixFace['r'][5]],[bigSixFace['r'][2]]);
-                   bigSixFace['u'] = tep_01;
-                   bigSixFace['l'][0] = tep_02[0];
-                   bigSixFace['l'][3] = tep_02[1];
-                   bigSixFace['l'][6] = tep_02[2];
-                   bigSixFace['r'][2] = tep_03[0];
-                   bigSixFace['r'][5] = tep_03[1];
-                   bigSixFace['r'][8] = tep_03[2];
-                   bigSixFace['d'] = tep_04;
+                   let tep_01 = [faceArr['l'][6],faceArr['l'][3],faceArr['l'][0]].concat(faceArr['u'].slice(3));
+                   let tep_02 = faceArr['d'].slice(6);
+                   let tep_03 = faceArr['u'].slice(0,3);
+                   let tep_04 = faceArr['d'].slice(0,6).concat([faceArr['r'][8]],[faceArr['r'][5]],[faceArr['r'][2]]);
+                   faceArr['u'] = tep_01;
+                   faceArr['l'][0] = tep_02[0];
+                   faceArr['l'][3] = tep_02[1];
+                   faceArr['l'][6] = tep_02[2];
+                   faceArr['r'][2] = tep_03[0];
+                   faceArr['r'][5] = tep_03[1];
+                   faceArr['r'][8] = tep_03[2];
+                   faceArr['d'] = tep_04;
                };
                if(whichFace == "d"){
-                  let tep_01 = bigSixFace['f'].slice(0,6).concat(bigSixFace['r'].slice(6));
-                  let tep_02 = bigSixFace['l'].slice(0,6).concat(bigSixFace['f'].slice(6));
-                  let tep_03 = bigSixFace['r'].slice(0,6).concat(bigSixFace['b'].slice(6));
-                  let tep_04 = bigSixFace['b'].slice(0,6).concat(bigSixFace['l'].slice(6));
-                  bigSixFace['f'] = tep_01;
-                  bigSixFace['l'] = tep_02;
-                  bigSixFace['r'] = tep_03;
-                  bigSixFace['b'] = tep_04;
+                  let tep_01 = faceArr['f'].slice(0,6).concat(faceArr['r'].slice(6));
+                  let tep_02 = faceArr['l'].slice(0,6).concat(faceArr['f'].slice(6));
+                  let tep_03 = faceArr['r'].slice(0,6).concat(faceArr['b'].slice(6));
+                  let tep_04 = faceArr['b'].slice(0,6).concat(faceArr['l'].slice(6));
+                  faceArr['f'] = tep_01;
+                  faceArr['l'] = tep_02;
+                  faceArr['r'] = tep_03;
+                  faceArr['b'] = tep_04;
                };
 
                let tep_05 = [
-                               bigSixFace[whichFace][2],bigSixFace[whichFace][5],bigSixFace[whichFace][8],
-                               bigSixFace[whichFace][1],bigSixFace[whichFace][4],bigSixFace[whichFace][7],
-                               bigSixFace[whichFace][0],bigSixFace[whichFace][3],bigSixFace[whichFace][6]
+                               faceArr[whichFace][2],faceArr[whichFace][5],faceArr[whichFace][8],
+                               faceArr[whichFace][1],faceArr[whichFace][4],faceArr[whichFace][7],
+                               faceArr[whichFace][0],faceArr[whichFace][3],faceArr[whichFace][6]
                             ];
-               bigSixFace[whichFace] = tep_05;
+               faceArr[whichFace] = tep_05;
         }
     };
 
@@ -553,7 +553,10 @@ window.onload = function(){
         }
 
         // 调用小cubea面变换函数
-        changeFace(whichFace, axis, deg, dir);
+        changeFace(whichFace, axis, deg, dir, bigSixFace);
+        
+
+        
         
         //避免渲染和旋转动作同时进行 ,旋转的时间根据角度不同设置不同的值
         setTimeout(function(){
@@ -571,7 +574,7 @@ window.onload = function(){
     var autoStep = [];
     var tempCube = [];
 
-    function searchCube(searchFace,resolve){
+    function searchCube(searchFace){
 
 
         function caseJ(i,j,arr,arr2){
@@ -631,16 +634,12 @@ window.onload = function(){
 
 
 
-        findStep(searchFace);
-
-        stepBystep(autoStep,1000);
-
-        autoStep = [];
-
-        if(resolve){
-            resolve();
-        }
         
+
+        
+
+        
+
         
 
     }
@@ -737,38 +736,48 @@ window.onload = function(){
     }
 
     function auto(){
-        let promise = new Promise(function(resolve,reject){
-            console.log('promise begin');
-            resolve();
-        });
+        // let promise = new Promise(function(resolve,reject){
+        //     console.log('promise begin');
+        //     resolve();
+        // });
 
-        promise.then(function(){
+        // promise.then(function(){
             
-            return new Promise(function(resolve,reject){
-                searchCube('b',resolve);
-            });
+            // return new Promise(function(resolve,reject){
+                searchCube('b');
+                findStep('b');
+                
+            // });
+            
+            stepBystep(autoStep,1000);
+            autoStep = [];
+
+        // }).then(function(){
+            
+            // return new Promise(function(resolve,reject){
+                searchCube('f');
+                findStep('f');
+                
+            // });
+            
+            stepBystep(autoStep,1000);
+            autoStep = [];
             
             
 
-        }).then(function(){
+        // }).then(function(){
             
-            return new Promise(function(resolve,reject){
-                searchCube('f',resolve);
-            });
-            
-            
-
-        }).then(function(){
-            
-            return new Promise(function(resolve,reject){
-                searchCube('r',resolve);
-            });
+            // return new Promise(function(resolve,reject){
+            searchCube('r');
+            findStep('r');
+            stepBystep(autoStep,1000);
+            autoStep = [];
             
             
 
-        }).then(function(){
-               searchCube('l');    
-        })
+        // }).then(function(){
+               // searchCube('l');    
+        // })
         
 
 
