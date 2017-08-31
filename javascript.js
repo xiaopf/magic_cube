@@ -1,51 +1,51 @@
 window.onload = function(){
-	let RANK = 3; // 定义魔方的阶数
+    let RANK = 3; // 定义魔方的阶数
     let cubeNum = RANK * RANK * RANK//计算立方体的个数
 
     const get = function (key) {
-    	return document.querySelector(key);
+        return document.querySelector(key);
     };
 
     // 初始化big_box的视角
-	get('.x_deg').innerHTML = get('.x_rotate').value + 'deg';
-	get('.y_deg').innerHTML = get('.y_rotate').value + 'deg';
-	get('.z_deg').innerHTML = get('.z_rotate').value + 'deg';
+    get('.x_deg').innerHTML = get('.x_rotate').value + 'deg';
+    get('.y_deg').innerHTML = get('.y_rotate').value + 'deg';
+    get('.z_deg').innerHTML = get('.z_rotate').value + 'deg';
 
     // 调整big_box的视角
-	get('.x_rotate').oninput = function(){
-		get('.x_deg').innerHTML = this.value + 'deg';
-		get("#big_box").style.transform = '';
-		get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
-		get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
-		get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
-	};
-	get('.y_rotate').oninput = function(){
-		get('.y_deg').innerHTML = this.value + 'deg';
-		get("#big_box").style.transform = '';
-		get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
-		get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
-		get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
-	};
-	get('.z_rotate').oninput = function(){
-		get('.z_deg').innerHTML = this.value + 'deg';
-		get("#big_box").style.transform = '';
-		get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
-		get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
-		get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
-	};
+    get('.x_rotate').oninput = function(){
+        get('.x_deg').innerHTML = this.value + 'deg';
+        get("#big_box").style.transform = '';
+        get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+        get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+        get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
+    };
+    get('.y_rotate').oninput = function(){
+        get('.y_deg').innerHTML = this.value + 'deg';
+        get("#big_box").style.transform = '';
+        get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+        get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+        get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
+    };
+    get('.z_rotate').oninput = function(){
+        get('.z_deg').innerHTML = this.value + 'deg';
+        get("#big_box").style.transform = '';
+        get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
+        get("#big_box").style.transform += 'rotateY('+get('.y_rotate').value+'deg)';
+        get("#big_box").style.transform += 'rotateZ('+get('.z_rotate').value+'deg)';
+    };
     // 视角复位
-	get('.btnF').onclick = function(){
-		get('.x_rotate').value = '-30';
-		get('.y_rotate').value = '-30';
-		get('.z_rotate').value = '0';
-		get('.x_deg').innerHTML = '-30deg';
-		get('.y_deg').innerHTML = '-30deg';
-		get('.z_deg').innerHTML = '0deg';
-		get("#big_box").style.transform = '';
-		get("#big_box").style.transform += 'rotateX(-30deg)';
-		get("#big_box").style.transform += 'rotateY(-30deg)';
-		get("#big_box").style.transform += 'rotateZ(0deg)';
-	}
+    get('.btnF').onclick = function(){
+        get('.x_rotate').value = '-30';
+        get('.y_rotate').value = '-30';
+        get('.z_rotate').value = '0';
+        get('.x_deg').innerHTML = '-30deg';
+        get('.y_deg').innerHTML = '-30deg';
+        get('.z_deg').innerHTML = '0deg';
+        get("#big_box").style.transform = '';
+        get("#big_box").style.transform += 'rotateX(-30deg)';
+        get("#big_box").style.transform += 'rotateY(-30deg)';
+        get("#big_box").style.transform += 'rotateZ(0deg)';
+    }
 
     // cube 的空间位置，x，y，z,旋转轴，旋转角度
     // 代表每一个块的空间位置，顺序是色块的序列号
@@ -182,95 +182,95 @@ window.onload = function(){
     // 当旋转时，更新各个大面上的小cube面
     function changeFace(whichFace, axis, deg, dir,faceArr) {
         if(Math.abs(deg) == 180){//旋转180度，顺时针和逆时针结果一样
-        	if(whichFace == "f"){
-        		let tep_01 = faceArr['u'].slice(0,6).concat(faceArr['d'].slice(0,3).reverse());
-        		let tep_02 = [faceArr['r'][6],faceArr['r'][3],faceArr['r'][0]];
-        		let tep_03 = [faceArr['l'][8],faceArr['l'][5],faceArr['l'][2]];
-        		let tep_04 = faceArr['u'].slice(6).reverse().concat(faceArr['d'].slice(3));
-        		faceArr['u'] = tep_01;
-        		faceArr['l'][2] = tep_02[0];
-        		faceArr['l'][5] = tep_02[1];
-        		faceArr['l'][8] = tep_02[2];
-        		faceArr['r'][0] = tep_03[0];
-        		faceArr['r'][3] = tep_03[1];
-        		faceArr['r'][6] = tep_03[2];
-        		faceArr['d'] = tep_04;
-        	};
-        	if(whichFace == "u"){
-        		let tep_01 = faceArr['b'].slice(0,3).concat(faceArr['f'].slice(3));
-        		let tep_02 = faceArr['r'].slice(0,3).concat(faceArr['l'].slice(3));
-        		let tep_03 = faceArr['l'].slice(0,3).concat(faceArr['r'].slice(3));
-        		let tep_04 = faceArr['f'].slice(0,3).concat(faceArr['b'].slice(3));
-        		faceArr['f'] = tep_01;
-        		faceArr['l'] = tep_02;
-        		faceArr['r'] = tep_03;
-        		faceArr['b'] = tep_04;
-        	};
-        	if(whichFace == "r"){
-        		let tep_01 = [faceArr['b'][6],faceArr['b'][3],faceArr['b'][0]];
-        		let tep_02 = [faceArr['d'][2],faceArr['d'][5],faceArr['d'][8]];
-        		let tep_03 = [faceArr['f'][8],faceArr['f'][5],faceArr['f'][2]];
-        		let tep_04 = [faceArr['u'][2],faceArr['u'][5],faceArr['u'][8]];
+            if(whichFace == "f"){
+                let tep_01 = faceArr['u'].slice(0,6).concat(faceArr['d'].slice(0,3).reverse());
+                let tep_02 = [faceArr['r'][6],faceArr['r'][3],faceArr['r'][0]];
+                let tep_03 = [faceArr['l'][8],faceArr['l'][5],faceArr['l'][2]];
+                let tep_04 = faceArr['u'].slice(6).reverse().concat(faceArr['d'].slice(3));
+                faceArr['u'] = tep_01;
+                faceArr['l'][2] = tep_02[0];
+                faceArr['l'][5] = tep_02[1];
+                faceArr['l'][8] = tep_02[2];
+                faceArr['r'][0] = tep_03[0];
+                faceArr['r'][3] = tep_03[1];
+                faceArr['r'][6] = tep_03[2];
+                faceArr['d'] = tep_04;
+            };
+            if(whichFace == "u"){
+                let tep_01 = faceArr['b'].slice(0,3).concat(faceArr['f'].slice(3));
+                let tep_02 = faceArr['r'].slice(0,3).concat(faceArr['l'].slice(3));
+                let tep_03 = faceArr['l'].slice(0,3).concat(faceArr['r'].slice(3));
+                let tep_04 = faceArr['f'].slice(0,3).concat(faceArr['b'].slice(3));
+                faceArr['f'] = tep_01;
+                faceArr['l'] = tep_02;
+                faceArr['r'] = tep_03;
+                faceArr['b'] = tep_04;
+            };
+            if(whichFace == "r"){
+                let tep_01 = [faceArr['b'][6],faceArr['b'][3],faceArr['b'][0]];
+                let tep_02 = [faceArr['d'][2],faceArr['d'][5],faceArr['d'][8]];
+                let tep_03 = [faceArr['f'][8],faceArr['f'][5],faceArr['f'][2]];
+                let tep_04 = [faceArr['u'][2],faceArr['u'][5],faceArr['u'][8]];
 
-        		faceArr['f'][2] = tep_01[0];
-        		faceArr['f'][5] = tep_01[1];
-        		faceArr['f'][8] = tep_01[2];
-        		faceArr['u'][2] = tep_02[0];
-        		faceArr['u'][5] = tep_02[1];
-        		faceArr['u'][8] = tep_02[2];
-        		faceArr['b'][0] = tep_03[0];
-        		faceArr['b'][3] = tep_03[1];
-        		faceArr['b'][6] = tep_03[2];
-        		faceArr['d'][2] = tep_04[0];
-        		faceArr['d'][5] = tep_04[1];
-        		faceArr['d'][8] = tep_04[2];
-        	};
-        	if(whichFace == "l"){
-        		let tep_01 = [faceArr['b'][8],faceArr['b'][5],faceArr['b'][2]];
-        		let tep_02 = [faceArr['d'][0],faceArr['d'][3],faceArr['d'][6]];
-        		let tep_03 = [faceArr['f'][6],faceArr['f'][3],faceArr['f'][0]];
-        		let tep_04 = [faceArr['u'][0],faceArr['u'][3],faceArr['u'][6]];
+                faceArr['f'][2] = tep_01[0];
+                faceArr['f'][5] = tep_01[1];
+                faceArr['f'][8] = tep_01[2];
+                faceArr['u'][2] = tep_02[0];
+                faceArr['u'][5] = tep_02[1];
+                faceArr['u'][8] = tep_02[2];
+                faceArr['b'][0] = tep_03[0];
+                faceArr['b'][3] = tep_03[1];
+                faceArr['b'][6] = tep_03[2];
+                faceArr['d'][2] = tep_04[0];
+                faceArr['d'][5] = tep_04[1];
+                faceArr['d'][8] = tep_04[2];
+            };
+            if(whichFace == "l"){
+                let tep_01 = [faceArr['b'][8],faceArr['b'][5],faceArr['b'][2]];
+                let tep_02 = [faceArr['d'][0],faceArr['d'][3],faceArr['d'][6]];
+                let tep_03 = [faceArr['f'][6],faceArr['f'][3],faceArr['f'][0]];
+                let tep_04 = [faceArr['u'][0],faceArr['u'][3],faceArr['u'][6]];
 
-        		faceArr['f'][0] = tep_01[0];
-        		faceArr['f'][3] = tep_01[1];
-        		faceArr['f'][6] = tep_01[2];
-        		faceArr['u'][0] = tep_02[0];
-        		faceArr['u'][3] = tep_02[1];
-        		faceArr['u'][6] = tep_02[2];
-        		faceArr['b'][2] = tep_03[0];
-        		faceArr['b'][5] = tep_03[1];
-        		faceArr['b'][8] = tep_03[2];
-        		faceArr['d'][0] = tep_04[0];
-        		faceArr['d'][3] = tep_04[1];
-        		faceArr['d'][6] = tep_04[2];
-        	};
-        	if(whichFace == "b"){
-        		let tep_01 = faceArr['d'].slice(6).reverse().concat(faceArr['u'].slice(3));
-        		let tep_02 = [faceArr['r'][8],faceArr['r'][5],faceArr['r'][2]];
-        		let tep_03 = [faceArr['l'][6],faceArr['l'][3],faceArr['l'][0]];
-        		let tep_04 = faceArr['d'].slice(0,6).concat(faceArr['u'].slice(0,3).reverse());
+                faceArr['f'][0] = tep_01[0];
+                faceArr['f'][3] = tep_01[1];
+                faceArr['f'][6] = tep_01[2];
+                faceArr['u'][0] = tep_02[0];
+                faceArr['u'][3] = tep_02[1];
+                faceArr['u'][6] = tep_02[2];
+                faceArr['b'][2] = tep_03[0];
+                faceArr['b'][5] = tep_03[1];
+                faceArr['b'][8] = tep_03[2];
+                faceArr['d'][0] = tep_04[0];
+                faceArr['d'][3] = tep_04[1];
+                faceArr['d'][6] = tep_04[2];
+            };
+            if(whichFace == "b"){
+                let tep_01 = faceArr['d'].slice(6).reverse().concat(faceArr['u'].slice(3));
+                let tep_02 = [faceArr['r'][8],faceArr['r'][5],faceArr['r'][2]];
+                let tep_03 = [faceArr['l'][6],faceArr['l'][3],faceArr['l'][0]];
+                let tep_04 = faceArr['d'].slice(0,6).concat(faceArr['u'].slice(0,3).reverse());
 
-        		faceArr['u'] = tep_01;
-        		faceArr['l'][0] = tep_02[0];
-        		faceArr['l'][3] = tep_02[1];
-        		faceArr['l'][6] = tep_02[2];
-        		faceArr['r'][2] = tep_03[0];
-        		faceArr['r'][5] = tep_03[1];
-        		faceArr['r'][8] = tep_03[2];
-        		faceArr['d'] = tep_04;
-        	};
-        	if(whichFace == "d"){
-    		   let tep_01 = faceArr['f'].slice(0,6).concat(faceArr['b'].slice(6));
-    		   let tep_02 = faceArr['l'].slice(0,6).concat(faceArr['r'].slice(6));
-    		   let tep_03 = faceArr['r'].slice(0,6).concat(faceArr['l'].slice(6));
-    		   let tep_04 = faceArr['b'].slice(0,6).concat(faceArr['f'].slice(6));
-    		   faceArr['f'] = tep_01;
-    		   faceArr['l'] = tep_02;
-    		   faceArr['r'] = tep_03;
-    		   faceArr['b'] = tep_04;
-        	};
+                faceArr['u'] = tep_01;
+                faceArr['l'][0] = tep_02[0];
+                faceArr['l'][3] = tep_02[1];
+                faceArr['l'][6] = tep_02[2];
+                faceArr['r'][2] = tep_03[0];
+                faceArr['r'][5] = tep_03[1];
+                faceArr['r'][8] = tep_03[2];
+                faceArr['d'] = tep_04;
+            };
+            if(whichFace == "d"){
+               let tep_01 = faceArr['f'].slice(0,6).concat(faceArr['b'].slice(6));
+               let tep_02 = faceArr['l'].slice(0,6).concat(faceArr['r'].slice(6));
+               let tep_03 = faceArr['r'].slice(0,6).concat(faceArr['l'].slice(6));
+               let tep_04 = faceArr['b'].slice(0,6).concat(faceArr['f'].slice(6));
+               faceArr['f'] = tep_01;
+               faceArr['l'] = tep_02;
+               faceArr['r'] = tep_03;
+               faceArr['b'] = tep_04;
+            };
             let tep_05 = faceArr[whichFace].reverse();
-        	faceArr[whichFace] = tep_05;
+            faceArr[whichFace] = tep_05;
         } else if(Math.abs(deg) == 90 && dir) { //顺时针旋转90度
 
             if(whichFace == "f"){
@@ -460,9 +460,9 @@ window.onload = function(){
 
     // 根据给定的空间位置，设置内联样式
     function cubePositionStyle (i) {
-    	return  "top:"+cubePosition[i-1][0]+"px; "+
-		    	"left:"+cubePosition[i-1][1]+"px ;"+
-		    	"transform:translateZ("+cubePosition[i-1][2]+"px)";
+        return  "top:"+cubePosition[i-1][0]+"px; "+
+                "left:"+cubePosition[i-1][1]+"px ;"+
+                "transform:translateZ("+cubePosition[i-1][2]+"px)";
     };
     // 渲染每个cube的六个小面
     function sixFace(i) {
@@ -480,30 +480,47 @@ window.onload = function(){
 
     // 渲染cubes
     function renderCube (init, whichFace) {
-    	var onOff = true;
-    	get("#big_box").innerHTML="";
-		for (let i = 1; i <= cubeNum; i++) {
-			if (init) {
-				get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
-			} else {
-				if (i == defaultBigSixFace[whichFace][0] || i == defaultBigSixFace[whichFace][1] || i == defaultBigSixFace[whichFace][2] || i == defaultBigSixFace[whichFace][3] || i == defaultBigSixFace[whichFace][4] || i == defaultBigSixFace[whichFace][5] || i == defaultBigSixFace[whichFace][6] || i == defaultBigSixFace[whichFace][7] || i == defaultBigSixFace[whichFace][8] ) {
-					if (onOff) {
-						get("#big_box").innerHTML += '<div class="litteWrap"></div>';
-						get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
-						onOff = false;
-					} else {
-						get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
-					}
-				} else {
-					get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
-				}
-			};
-    	};
+        var onOff = true;
+        get("#big_box").innerHTML="";
+        for (let i = 1; i <= cubeNum; i++) {
+            if (init) {
+                get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+            } else {
+                if (i == defaultBigSixFace[whichFace][0] || i == defaultBigSixFace[whichFace][1] || i == defaultBigSixFace[whichFace][2] || i == defaultBigSixFace[whichFace][3] || i == defaultBigSixFace[whichFace][4] || i == defaultBigSixFace[whichFace][5] || i == defaultBigSixFace[whichFace][6] || i == defaultBigSixFace[whichFace][7] || i == defaultBigSixFace[whichFace][8] ) {
+                    if (onOff) {
+                        get("#big_box").innerHTML += '<div class="litteWrap"></div>';
+                        get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+                        onOff = false;
+                    } else {
+                        get(".litteWrap").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+                    }
+                } else {
+                    get("#big_box").innerHTML += '<div index="'+i+'" id="box_'+i+'" class="box" style="'+cubePositionStyle (i)+'">'+sixFace(i)+'</div>';
+                }
+            };
+        };
     };
 
 
     // 旋转，同时更新cube的面的颜色,同时更新html布局
     function rotateCubeFace(whichFace, deg, dir){
+        
+        dir = (dir === 1) ? true : false;
+
+        if(dir){
+            if((whichFace === 'u' || whichFace === 'l' || whichFace === 'b')){
+                deg = -deg
+            }else{
+                deg = deg
+            }
+        }else{
+            if(whichFace === 'u' || whichFace === 'l' || whichFace === 'b'){
+                deg = deg
+            }else{
+                deg = -deg
+            }
+        }
+
 
         let axis = "";
         switch(whichFace){
@@ -570,184 +587,706 @@ window.onload = function(){
 
     };
 // ////////////////////////////////////////////////////////////
+// 寻找底层边块中间色块
     let dirArr = ['d','u','l','f','r','b'];
     var autoStep = [];
     var tempCube = [];
 
-    function searchCube(searchFace){
-        function caseJ(i,j,arr,arr2){
-            switch(j){
-              case 1:
-               if(fakeBigSixFace[arr[0]][arr2[0]] === fakeBigSixFace[searchFace][4]){
-                 tempCube = [dirArr[i],j,arr[0]];
-               }
-              break;
-              case 3:
-               if(fakeBigSixFace[arr[1]][arr2[1]] === fakeBigSixFace[searchFace][4]){
-                 tempCube = [dirArr[i],j,arr[1]];
-               }
-              break;
-              case 5:
-               if(fakeBigSixFace[arr[2]][arr2[2]] === fakeBigSixFace[searchFace][4]){
-                 tempCube = [dirArr[i],j,arr[2]];
-               }
-              break;
-              case 7:
-               if(fakeBigSixFace[arr[3]][arr2[3]] === fakeBigSixFace[searchFace][4] ){
-                 tempCube = [dirArr[i],j,arr[3]];
-               }
-              break;
-            }
-        }
-
+    function searchDownMiddleCube(searchFace){
 
         for(let i = 0; i < 6;i ++){
             for(let j = 1; j < 8; j+=2) {
                 if(fakeBigSixFace[dirArr[i]][j] === fakeBigSixFace[dirArr[0]][4]){
-                    console.log(dirArr[i],j);
-                    // switch(dirArr[i]){
-                    //    case 'u':
-                    //        caseJ(i,j,['b','l','r','f'],[1,1,1,1]);//侧面色块所在的位置
-                    //        break;
-                    //    case 'd':
-                    //        caseJ(i,j,['f','l','r','b'],[7,7,7,7]);
-                    //        break;
-                    //    case 'f':
-                    //        caseJ(i,j,['u','l','r','d'],[7,5,3,1]);
-                    //        break;
-                    //    case 'b':
-                    //        caseJ(i,j,['u','r','l','d'],[1,5,3,7]);
-                    //        break;
-                    //    case 'l':
-                    //        caseJ(i,j,['u','b','f','d'],[3,5,3,3]);
-                    //        break;
-                    //    case 'r':
-                    //        caseJ(i,j,['u','f','b','d'],[5,5,3,5]);
-                    //        break; 
-                    // }
+                    // console.log(dirArr[i],j);
+                    switch(dirArr[i]){
+                       case 'u':
+                           caseJ(i,j,['b','l','r','f'],[1,1,1,1]);//侧面色块所在的位置
+                           break;
+                       case 'd':
+                           caseJ(i,j,['f','l','r','b'],[7,7,7,7]);
+                           break;
+                       case 'f':
+                           caseJ(i,j,['u','l','r','d'],[7,5,3,1]);
+                           break;
+                       case 'b':
+                           caseJ(i,j,['u','r','l','d'],[1,5,3,7]);
+                           break;
+                       case 'l':
+                           caseJ(i,j,['u','b','f','d'],[3,5,3,3]);
+                           break;
+                       case 'r':
+                           caseJ(i,j,['u','f','b','d'],[5,5,3,5]);
+                           break; 
+                    }
                 }
             }
         }
 
         findStep(searchFace);
-    }
 
-
-
-    function findStep(sideface){
-        console.log(tempCube)
-        switch(tempCube[0]){
-            case 'u':
-                switch(tempCube[1]){
-                    case 1:
-                        pushAndChange(['f', 180, true], autoStep)
-                    break;
-                    case 3:
-                        pushAndChange(['u', -90, true], autoStep)
-                        pushAndChange(['b', -180, true], autoStep)
-                    break;
-                    case 5:
-                    pushAndChange(['f', 180, true], autoStep)
-                    break;
-                    case 7:
-                    pushAndChange(['f', 180, true], autoStep)
-                    break;
-                }
+        function caseJ(i,j,arr,arr2){
+            switch(j){
+                case 1:
+                    if(fakeBigSixFace[arr[0]][arr2[0]] === fakeBigSixFace[searchFace][4]){
+                        tempCube = [dirArr[i],arr[0]];
+                    }
                 break;
-            // case 'd':
-            //     switch(){
-            //         case 1:
-            //         case 3:
-            //         case 5:
-            //         case 7:
-            //     }
-            //     break;
-            case 'f':
-                switch(tempCube[1]){
-                    case 1:
-                    pushAndChange(['r', -90, false], autoStep)
-                    pushAndChange(['u', -180, true], autoStep)
-                    pushAndChange(['r', 90, true], autoStep)
-                    pushAndChange(['l', 180, false], autoStep)
-                    break;
-                    case 3:
-                    pushAndChange(['r', -90, false], autoStep)
-                    pushAndChange(['u', -180, true], autoStep)
-                    pushAndChange(['r', 90, true], autoStep)
-                    pushAndChange(['l', 180, false], autoStep)
-                    break;
-                    case 5:
-                    pushAndChange(['r',  90, true], autoStep)
-                    pushAndChange(['u', -180, true], autoStep)
-                    pushAndChange(['r',-90, false], autoStep)
-                    pushAndChange(['l', 180, false], autoStep)
-                    break;
-                    case 7:
-                    pushAndChange(['r', -90, false], autoStep)
-                    pushAndChange(['u', -180, true], autoStep)
-                    pushAndChange(['r', 90, true], autoStep)
-                    pushAndChange(['l', 180, false], autoStep)
-                    break;
-                }
+                case 3:
+                    if(fakeBigSixFace[arr[1]][arr2[1]] === fakeBigSixFace[searchFace][4]){
+                        tempCube = [dirArr[i],arr[1]];
+                    }
                 break;
-            case 'b':
-                switch(tempCube[1]){
-                    case 1:
-                            pushAndChange(['r', 90, true], autoStep)
-                        break;
-                    case 3:
-                            pushAndChange(['r', 90, true], autoStep)
-                        break;
-                    case 5:
-                            pushAndChange(['r', 90, true], autoStep)
-                        break;
-                    case 7:
-                            pushAndChange(['r', 90, true], autoStep)
-                        break;
-                }
+                case 5:
+                    if(fakeBigSixFace[arr[2]][arr2[2]] === fakeBigSixFace[searchFace][4]){
+                        tempCube = [dirArr[i],arr[2]];
+                    }
                 break;
-            // case 'l':
-            //     switch(){
-            //         case 1:
-            //         case 3:
-            //         case 5:
-            //         case 7:
-            //     }
-            //     break;
-            // case 'r':
-            //     switch(){
-            //         case 1:
-            //         case 3:
-            //         case 5:
-            //         case 7:
-            //     }
-            //     break;
+                case 7:
+                    if(fakeBigSixFace[arr[3]][arr2[3]] === fakeBigSixFace[searchFace][4] ){
+                        tempCube = [dirArr[i],arr[3]];
+                    }
+                break;
+            }
         }
 
-        
+        function findStep(sideface){
+            // console.log(tempCube)
+            switch(tempCube[0]){
+                case 'u':
+                    switch(tempCube[1]){//判断所查颜色所在的面
+                        case 'b':
+                            switch(sideface){//判断所查颜色中心色块的位置
+                                case 'f':
+                                    pushAndChange(['u', 180, 1], autoStep);
+                                    pushAndChange(['f', 180, 1], autoStep);
+                                   break;
+                                case 'b':
+                                    pushAndChange(['b', 180, 1], autoStep);
+                                   break;
+                                case 'l':
+                                    pushAndChange(['u', 90, 0], autoStep);
+                                    pushAndChange(['l', 180, 1], autoStep);
+                                   break;
+                                case 'r':
+                                    pushAndChange(['u', 90, 1], autoStep);
+                                    pushAndChange(['r', 180, 1], autoStep);
+                                   break; 
+                            }
+                        break;
+                        case 'l':
+                            switch(sideface){
+                                case 'f':
+                                    pushAndChange(['u', 90, 0], autoStep);
+                                    pushAndChange(['f', 180, 1], autoStep);
+                                    break;
+                                case 'b':
+                                    pushAndChange(['u', 90, 1], autoStep);
+                                    pushAndChange(['b', 180, 1], autoStep);
+                                    break;
+                                case 'l':
+                                    pushAndChange(['l', 180, 1], autoStep);
+                                    break;
+                                case 'r':
+                                    pushAndChange(['u', 180, 1], autoStep);
+                                    pushAndChange(['r', 180, 1], autoStep);
+                                    break; 
+                            }
+                            
+                        break;
+                        case 'r':
+                            switch(sideface){
+                                case 'f':
+                                    pushAndChange(['u', -90, 1], autoStep);
+                                    pushAndChange(['f', 180, 1], autoStep);
+                                    break;
+                                case 'b':
+                                    pushAndChange(['u', 90, 0], autoStep);
+                                    pushAndChange(['b', -180, 1], autoStep);
+                                    break;
+                                case 'l':
+                                    pushAndChange(['u', -180, 1], autoStep);
+                                    pushAndChange(['l', -180, 1], autoStep);
+                                    break;
+                                case 'r':
+                                    pushAndChange(['r', 180, 1], autoStep);
+                                    break; 
+                            }
+                        break;
+                        case 'f':
+                            switch(sideface){
+                                case 'f':
+                                    pushAndChange(['f', 180, 1], autoStep);
+                                    break;
+                                case 'b':
+                                    pushAndChange(['u', 180, 1], autoStep);
+                                    pushAndChange(['b', 180, 1], autoStep);
+                                    break;
+                                case 'l':
+                                    pushAndChange(['u', 90, 0], autoStep);
+                                    pushAndChange(['l', 180, 1], autoStep);
+                                    break;
+                                case 'r':
+                                    pushAndChange(['u', 90, 1], autoStep);
+                                    pushAndChange(['r', 180, 1], autoStep);
+                                    break; 
+                            }
+                        break;
+                    }
+                    break;
+            // /////////////////////////////////////////
+                case 'd':
+                            switch(tempCube[1]){
+                                case 'b':
+                                    switch(sideface){//判断所查颜色中心色块的位置
+                                        case 'f':
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                            pushAndChange(['u', 180, 1], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                           
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                                case 'l':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                        
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                            pushAndChange(['u', 180, 1], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }    
+                                break;
+                                case 'r':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                            pushAndChange(['u', 180, 1], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                        
+                                        break; 
+                                    }
+                                break;
+                                case 'f':
+                                    switch(sideface){
+                                        case 'f':
+                                            
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                            pushAndChange(['u', 180, 1], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                            }
+                            break;
+            // ////////////////////////////////////////
+                case 'f':
+                            switch(tempCube[1]){//侧面所在的面
+                                case 'u':
+                                    switch(sideface){//判断所查颜色中心色块的位置
+                                        case 'f':
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                        break; 
+                                    }
+                                break;
+                                case 'l':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['u', 180, 1], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }   
+                                break;
+                                case 'r':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 180, 0], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                        break; 
+                                    }
+                                break;
+                                case 'd':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['u', 180, 0], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                        break; 
+                                    }
+                                break;
+                            }
+                            break;
+            // ////////////////////////////////////
+                case 'b':
+                            switch(tempCube[1]){//侧面所在的面
+                                case 'u':
+                                    switch(sideface){//判断所查颜色中心色块的位置
+                                        case 'f':
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                                case 'l':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 180, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                   }
+                                break;
+                                case 'r':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['r', 90, 0], autoStep);
+                                            pushAndChange(['u', 180, 0], autoStep);
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['r', 90, 1], autoStep);
+                                        break; 
+                                   }
+                                break;
+                                case 'd':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['f', 180, 1], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['b', 180, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['u', 180, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                            }
+                            break;
+            // ////////////////////////////////////////
+                case 'l':
+                            switch(tempCube[1]){//侧面所在的面
+                                case 'u':
+                                    switch(sideface){//判断所查颜色中心色块的位置
+                                        case 'f':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                                case 'b':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 0], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['b', 90, 0], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }  
+                                break;
+                                case 'f':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                            pushAndChange(['l', 180, 0], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                                case 'd':
+                                    switch(sideface){
+                                        case 'f':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                        break;
+                                        case 'b':
+                                            pushAndChange(['l', 90, 1], autoStep);
+                                            pushAndChange(['b', 90, 1], autoStep);
+                                        break;
+                                        case 'l':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 1], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['l', 180, 1], autoStep);
+                                        break;
+                                        case 'r':
+                                            pushAndChange(['l', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 1], autoStep);
+                                            pushAndChange(['u', 90, 0], autoStep);
+                                            pushAndChange(['f', 90, 0], autoStep);
+                                            pushAndChange(['r', 180, 1], autoStep);
+                                        break; 
+                                    }
+                                break;
+                            }
+                            break;
+            // ///////////////////////////////////////////
+                case 'r':
+                            switch(tempCube[1]){//侧面所在的面
+                                    case 'u':
+                                        switch(sideface){//判断所查颜色中心色块的位置
+                                            case 'f':
+                                                pushAndChange(['r', 90, 0], autoStep);
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['r', 90, 1], autoStep);
+                                            break;
+                                            case 'b':
+                                                pushAndChange(['r', 90, 1], autoStep);
+                                                pushAndChange(['b', 90, 0], autoStep);
+                                                pushAndChange(['r', 90, 0], autoStep);
+                                            break;
+                                            case 'l':
+                                                pushAndChange(['r', 90, 0], autoStep);
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['u', 90, 1], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                                pushAndChange(['r', 90, 1], autoStep);
+                                                pushAndChange(['l', 180, 1], autoStep);
+                                            break;
+                                            case 'r':
+                                                pushAndChange(['r', 90, 0], autoStep);
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['u', 90, 0], autoStep);
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['r', 180, 0], autoStep);
+                                            break; 
+                                        }
+                                    break;
+                                    case 'b':
+                                        switch(sideface){
+                                            case 'f':
+                                                pushAndChange(['r', 180, 1], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                                pushAndChange(['r', 180, 0], autoStep);
+                                            break;
+                                            case 'b':
+                                                pushAndChange(['b', 90, 0], autoStep);
+                                            break;
+                                            case 'l':
+                                                pushAndChange(['b', 90, 1], autoStep);
+                                                pushAndChange(['u', 90, 0], autoStep);
+                                                pushAndChange(['b', 90, 0], autoStep);
+                                                pushAndChange(['l', 180, 1], autoStep);
+                                            break;
+                                            case 'r':
+                                                pushAndChange(['b', 90, 1], autoStep);
+                                                pushAndChange(['u', 90, 1], autoStep);
+                                                pushAndChange(['b', 90, 0], autoStep);
+                                                pushAndChange(['r', 180, 1], autoStep);
+                                            break; 
+                                        }  
+                                    break;
+                                    case 'f':
+                                        switch(sideface){
+                                            case 'f':
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                            break;
+                                            case 'b':
+                                                pushAndChange(['r', 180, 1], autoStep);
+                                                pushAndChange(['b', 90, 0], autoStep);
+                                                pushAndChange(['r', 180, 0], autoStep);
+                                            break;
+                                            case 'l':
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['u', 90, 1], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                                pushAndChange(['l', 180, 1], autoStep);
+                                            break;
+                                            case 'r':
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['u', 90, 0], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                                pushAndChange(['r', 180, 1], autoStep);
+                                            break; 
+                                        }
+                                    break;
+                                    case 'd':
+                                        switch(sideface){
+                                            case 'f':
+                                                pushAndChange(['r', 90, 1], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                            break;
+                                            case 'b':
+                                                pushAndChange(['r', 90, 0], autoStep);
+                                                pushAndChange(['b', 90, 0], autoStep);
+                                            break;
+                                            case 'l':
+                                                pushAndChange(['r', 90, 1], autoStep);
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['u', 90, 1], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                                pushAndChange(['l', 180, 1], autoStep);
+                                            break;
+                                            case 'r':
+                                                pushAndChange(['r', 90, 1], autoStep);
+                                                pushAndChange(['f', 90, 0], autoStep);
+                                                pushAndChange(['u', 90, 0], autoStep);
+                                                pushAndChange(['f', 90, 1], autoStep);
+                                                pushAndChange(['r', 180, 1], autoStep);
+                                            break; 
+                                        }
+                                    break;
+                                }
+                            break;
+            }
+        }    
     }
 
-
+// ////////////////////////////////////////////////////////////
+// 寻找底层角色块
     function auto(){
 
-        searchCube('b');//参数是表示侧面的颜色（以中心色块为标准的）
-        // searchCube('f');
-        // searchCube('r');
-        // searchCube('l');
+        searchDownMiddleCube('b');//参数是表示侧面的颜色（以中心色块为标准的）
+        searchDownMiddleCube('f');
+        searchDownMiddleCube('l');
+        searchDownMiddleCube('r');
         
                 
 
-        // stepBystep(autoStep,1000)
+        stepBystep(autoStep,1000)
     }
-
-
-
-
-
-
-
-
-
 
 
 // /////////////////////////////////////////////////////
@@ -819,18 +1358,39 @@ window.onload = function(){
     function random(){
         
 
-        pushAndChange(['u', 180, false], randomArr)
-        pushAndChange(['r', 90, true], randomArr)
-        pushAndChange(['l', 90, false], randomArr)
-        pushAndChange(['d', 90, true], randomArr)
-        pushAndChange(['b', 90, false], randomArr)
-        pushAndChange(['f', -180, false], randomArr)
-        pushAndChange(['l', 90, false], randomArr)
-        pushAndChange(['r', 180, true], randomArr)
-        pushAndChange(['b', -180, true], randomArr)
-        pushAndChange(['d', 90, true], randomArr)
-        pushAndChange(['l', 90, false], randomArr)
-        pushAndChange(['d', 180, true], randomArr)
+        // pushAndChange(['u', 180, 0], randomArr)
+        // pushAndChange(['r', 90, 1], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+        // pushAndChange(['d', 90, 1], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+        // pushAndChange(['d', 180, 1], randomArr)
+        // pushAndChange(['r', 180, 1], randomArr)
+        // pushAndChange(['b', 180, 1], randomArr)
+        // pushAndChange(['d', 90, 1], randomArr)
+        // pushAndChange(['b', 90, 0], randomArr)
+        // pushAndChange(['f', 180, 0], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+
+        let steps = [
+                        ['u', 180, 0],
+                        ['r', 90, 1],
+                        ['l', 90, 0],
+                        ['d', 90, 1],
+                        ['l', 90, 0],
+                        ['d', 180, 1],
+                        ['r', 180, 1],
+                        ['b', 180, 1],
+                        ['d', 90, 1],
+                        ['b', 90, 0],
+                        ['f', 180, 0],
+                        ['l', 90, 0]
+                    ]
+
+
+        for (let i = 0; i < 12; i++) {
+            let randomNum = Math.floor(Math.random()*12);
+            pushAndChange(steps[randomNum], randomArr)
+        }
 
         stepBystep(randomArr,10)
 
@@ -863,83 +1423,95 @@ window.onload = function(){
 
     // 顺时针旋转180度
     get('.btn1').onclick = function(){
-        rotateCubeFace('u', -180, true);
+        rotateCubeFace('u', 180, 1);
     };
     get('.btn2').onclick = function(){
-        rotateCubeFace('l', -180, true);
-    };
-    get('.btn3').onclick = function(){
-        rotateCubeFace('f', 180, true);
-    };
-    get('.btn4').onclick = function(){
-        rotateCubeFace('r', 180, true);
-    };
-    get('.btn5').onclick = function(){
-        rotateCubeFace('d', 180, true);
+        rotateCubeFace('l', 180, 1);
     };
     get('.btn6').onclick = function(){
-        rotateCubeFace('b', -180, true);
+        rotateCubeFace('b', 180, 1);
     };
+
+    // //////////
+
+    get('.btn3').onclick = function(){
+        rotateCubeFace('f', 180, 1);
+    };
+    get('.btn4').onclick = function(){
+        rotateCubeFace('r', 180, 1);
+    };
+    get('.btn5').onclick = function(){
+        rotateCubeFace('d', 180, 1);
+    };
+
 
     // 逆时针旋转180度
-    get('.btn01').onclick = function(){
-        rotateCubeFace('u', 180, false);
-    };
-    get('.btn02').onclick = function(){
-        rotateCubeFace('l', 180, false);
-    };
     get('.btn03').onclick = function(){
-        rotateCubeFace('f', -180, false);
+        rotateCubeFace('f', 180, 0);
     };
     get('.btn04').onclick = function(){
-        rotateCubeFace('r', -180, false);
+        rotateCubeFace('r', 180, 0);
     };
     get('.btn05').onclick = function(){
-        rotateCubeFace('d', -180, false);
+        rotateCubeFace('d', 180, 0);
     };
+
+    // ///////////////////
+    get('.btn01').onclick = function(){
+        rotateCubeFace('u', 180, 0);
+    };
+    get('.btn02').onclick = function(){
+        rotateCubeFace('l', 180, 0);
+    };
+
     get('.btn06').onclick = function(){
-        rotateCubeFace('b', 180, false);
+        rotateCubeFace('b', 180, 0);
     };
-    // 逆时针旋转90度按钮
+
+    // 顺时针旋转90度按钮
     get('.btn7').onclick = function(){
-        rotateCubeFace('u', -90, true);
+        rotateCubeFace('u', 90, 1);
     };
     get('.btn8').onclick = function(){
-        rotateCubeFace('l', -90, true);
+        rotateCubeFace('l', 90, 1);
     };
+
+    get('.btn12').onclick = function(){
+        rotateCubeFace('b', 90, 1);
+    };
+////////////////////////////////
     get('.btn9').onclick = function(){
-        rotateCubeFace('f', 90, true);
+        rotateCubeFace('f', 90, 1);
     };
     get('.btn10').onclick = function(){
-        rotateCubeFace('r', 90, true);
+        rotateCubeFace('r', 90, 1);
     };
     get('.btn11').onclick = function(){
-        rotateCubeFace('d', 90, true);
-    };
-    get('.btn12').onclick = function(){
-        rotateCubeFace('b', -90, true);
+        rotateCubeFace('d', 90, 1);
     };
 
     // 逆时针旋转90度按钮
-    get('.btn13').onclick = function(){
-        rotateCubeFace('u', 90, false);
-    };
-    get('.btn14').onclick = function(){
-        rotateCubeFace('l', 90, false);
-    };
+
     get('.btn15').onclick = function(){
-        rotateCubeFace('f', -90, false);
+        rotateCubeFace('f', 90, 0);
     };
     get('.btn16').onclick = function(){
-        rotateCubeFace('r', -90, false);
+        rotateCubeFace('r', 90, 0);
     };
     get('.btn17').onclick = function(){
-        rotateCubeFace('d', -90, false);
-    };
-    get('.btn18').onclick = function(){
-        rotateCubeFace('b', 90, false);
+        rotateCubeFace('d', 90, 0);
     };
 
+
+    get('.btn13').onclick = function(){
+        rotateCubeFace('u', 90, 0);
+    };
+    get('.btn14').onclick = function(){
+        rotateCubeFace('l', 90, 0);
+    };
+    get('.btn18').onclick = function(){
+        rotateCubeFace('b', 90, 0);
+    };
 
 
 
