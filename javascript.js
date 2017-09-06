@@ -1283,7 +1283,7 @@ window.onload = function(){
                 if (j != 4) {
                     if(fakeBigSixFace[dirArr[i]][j] === fakeBigSixFace[dirArr[0]][4]){
 
-                        console.log(dirArr[i], j);
+                        // console.log(dirArr[i], j);
 
                         switch(dirArr[i]){
                            case 'u':
@@ -1342,7 +1342,7 @@ window.onload = function(){
 
         findCornerStep(searchFace_01,searchFace_02);
 
-        console.log(tempCornerCube)
+        // console.log(tempCornerCube)
 
         function findCornerStep(sideface_01,sideface_02){
             // console.log(tempCube)
@@ -1627,7 +1627,6 @@ window.onload = function(){
                                     pushAndChange(['r', 90, 0], autoStep);
                                 break;
                                 case 'b':
-                                    console.log(11111111)
                                     pushAndChange(['l', 90, 1], autoStep);
                                     pushAndChange(['u', 180, 1], autoStep);
                                     pushAndChange(['l', 90, 0], autoStep);
@@ -2117,9 +2116,385 @@ window.onload = function(){
         }  
     }
 
+// ////////////////////////////////////////////////////////////
 
+    function searchSecondFloorCube(searchFace_01,searchFace_02){
+        let secondFloor = [];
 
+        function searchMain(){
+            for (let i = 1; i < 9; i += 2) {
 
+                if(fakeBigSixFace['u'][i] == fakeBigSixFace[searchFace_01][4]) {
+
+                    switch(i){
+                        case 1:
+                            if(fakeBigSixFace['b'][1] == fakeBigSixFace[searchFace_02][4]){
+                                secondFloor = ['u', i];
+                            }
+                        break;
+                        case 3:
+                            if(fakeBigSixFace['l'][1] == fakeBigSixFace[searchFace_02][4]){
+                                secondFloor = ['u', i];
+                            }
+                        break;
+                        case 5:
+                            if(fakeBigSixFace['r'][1] == fakeBigSixFace[searchFace_02][4]){
+                                secondFloor = ['u', i];
+                            }
+                        break;
+                        case 7:
+                            if(fakeBigSixFace['f'][1] == fakeBigSixFace[searchFace_02][4]){
+                                secondFloor = ['u', i];
+                            }
+                        break;
+                    }
+                }
+                if (i != 7){
+                    if(fakeBigSixFace['f'][i] == fakeBigSixFace[searchFace_01][4]){
+                        switch(i){
+                            case 1:
+                                if(fakeBigSixFace['u'][7] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['f', i];
+                                }
+                            break;
+                            case 3:
+                                if(fakeBigSixFace['l'][5] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['f', i];
+                                }
+                            break;
+                            case 5:
+                                if(fakeBigSixFace['r'][3] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['f', i];
+                                }
+                            break;
+                        }
+                    }
+                    if(fakeBigSixFace['b'][i] == fakeBigSixFace[searchFace_01][4]){
+                        switch(i){
+                            case 1:
+                                if(fakeBigSixFace['u'][1] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['b', i];
+                                }
+                            break;
+                            case 3:
+                                if(fakeBigSixFace['r'][5] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['b', i];
+                                }
+                            break;
+                            case 5:
+                                if(fakeBigSixFace['l'][3] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['b', i];
+                                }
+                            break;
+                        }
+                    }
+                    if(fakeBigSixFace['l'][i] == fakeBigSixFace[searchFace_01][4]){
+                        switch(i){
+                            case 1:
+                                if(fakeBigSixFace['u'][3] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['l', i];
+                                }
+                            break;
+                            case 3:
+                                if(fakeBigSixFace['b'][5] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['l', i];
+                                }
+                            break;
+                            case 5:
+                                if(fakeBigSixFace['f'][3] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['l', i];
+                                }
+                            break;
+                        }
+                    }
+                    if(fakeBigSixFace['r'][i] == fakeBigSixFace[searchFace_01][4]){
+                        switch(i){
+                            case 1:
+                                if(fakeBigSixFace['u'][5] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['r', i];
+                                }
+                            break;
+                            case 3:
+                                if(fakeBigSixFace['f'][5] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['r', i];
+                                }
+                            break;
+                            case 5:
+                                if(fakeBigSixFace['b'][3] == fakeBigSixFace[searchFace_02][4]){
+                                    secondFloor = ['r', i];
+                                }
+                            break;
+                        }
+                    }
+                } 
+            }
+            if(secondFloor[0] == 'u'){
+                upRotate(searchFace_01, searchFace_02,secondFloor[1]);
+            }
+
+        }
+
+        searchMain();
+
+        switch(secondFloor[0]){
+            case 'f':
+                switch(secondFloor[1]){
+                    case 3:
+                        normalRotate(searchFace_01, searchFace_02, 1);
+                        searchMain();
+                    break;
+                    case 5:
+                        normalRotate(searchFace_01, searchFace_02, 0);
+                        searchMain();
+                    break;
+                }
+            break;
+            // case 'l':
+            //     switch(){
+            //         case 3:
+            //             normalRotate(searchFace_01, searchFace_02, dir);
+            //             searchMain();
+            //         break;
+            //         case 5:
+            //             normalRotate(searchFace_01, searchFace_02, dir);
+            //             searchMain();
+            //         break;
+            //     }
+            // break;
+            case 'b':
+                switch(secondFloor[1]){
+                    case 3:
+                        normalRotate(searchFace_01, searchFace_02, 1);
+                        searchMain();
+                    break;
+                    case 5:
+                        normalRotate(searchFace_01, searchFace_02, 0);
+                        searchMain();
+                    break;
+                }
+            break;
+            // case 'r':
+            //     switch(){
+            //         case 1:
+            //             normalRotate(searchFace_01, searchFace_02, dir);
+            //             searchMain();
+            //         break;
+            //         case 3:
+            //             normalRotate(searchFace_01, searchFace_02, dir);
+            //             searchMain();
+            //         break;
+            //         case 5:
+            //             normalRotate(searchFace_01, searchFace_02, dir);
+            //             searchMain();
+            //         break;
+            //     }
+            // break;
+        }
+
+        function normalRotate(face_01, face_02, dir){ // DIR ::: RIGHT 1  LEFT 0
+            let dirF = (dir === 1) ? 0 : 1;
+            pushAndChange([face_01, 90, dirF], autoStep);
+            pushAndChange(['u', 90, dir], autoStep);
+            pushAndChange([face_01, 90, dir], autoStep);
+            pushAndChange(['u', 90, dir], autoStep);
+            pushAndChange([face_02, 90, dir], autoStep);
+            pushAndChange(['u', 90, dirF ], autoStep);
+            pushAndChange([face_02, 90, dirF], autoStep);
+        } 
+
+        function upRotate(face_01,face_02,num){
+            switch(num){
+                case 1:
+                    switch(face_01){
+                        case 'f':
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                        case 'l':
+                            pushAndChange(['u', 90, 1], autoStep);
+                            switch(face_02){
+                                case 'f':   
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'b':
+                            pushAndChange(['u', 180, 1], autoStep);
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'r':
+                            pushAndChange(['u', 90, 0], autoStep);
+                            switch(face_02){
+                                case 'f':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                    }
+                break;
+                case 3:
+                    switch(face_01){
+                        case 'f':
+                            pushAndChange(['u', 90, 1], autoStep);
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                        case 'l':
+                            pushAndChange(['u', 180, 1], autoStep);
+                            switch(face_02){
+                                case 'f':   
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'b':
+                            pushAndChange(['u', 90, 0], autoStep);
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'r':
+                            switch(face_02){
+                                case 'f':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                    }
+                break;
+                case 5:
+                    switch(face_01){
+                        case 'f':
+                            pushAndChange(['u', 90, 0], autoStep);
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                        case 'l':
+                            switch(face_02){
+                                case 'f':   
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'b':
+                            pushAndChange(['u', 90, 1], autoStep);
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'r':
+                            pushAndChange(['u', 180, 1], autoStep);
+                            switch(face_02){
+                                case 'f':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                    }
+                break;
+                case 7:
+                    switch(face_01){
+                        case 'f':
+                            pushAndChange(['u', 180, 1], autoStep);
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                        case 'l':
+                            pushAndChange(['u', 90, 0], autoStep);
+                            switch(face_02){
+                                case 'f':   
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'b':
+                            switch(face_02){
+                                case 'l':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                                case 'r':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                            }
+                        break;
+                        case 'r':
+                            pushAndChange(['u', 90, 1], autoStep);
+                            switch(face_02){
+                                case 'f':
+                                    normalRotate(face_01, face_02, 0)
+                                break;
+                                case 'b':
+                                    normalRotate(face_01, face_02, 1)
+                                break;
+                            }
+                        break;
+                    }
+                break;
+            }
+        }
+    }
 
 
 
@@ -2138,6 +2513,17 @@ window.onload = function(){
         searchCornerCube('f','r')
         searchCornerCube('b','l')
         searchCornerCube('r','b')
+        ///////////////////////////
+
+        searchSecondFloorCube('l','f')
+        searchSecondFloorCube('b','l')
+        searchSecondFloorCube('r','b')
+        searchSecondFloorCube('f','r')
+
+        // searchSecondFloorCube('l','f')
+        // searchSecondFloorCube('l','b')
+        // searchSecondFloorCube('b','r')
+        // searchSecondFloorCube('r','f')
                 
 
         stepBystep(autoStep,1000)
@@ -2199,39 +2585,39 @@ window.onload = function(){
     function random(){
         
 
-        // pushAndChange(['u', 180, 0], randomArr)
-        // pushAndChange(['r', 90, 1], randomArr)
-        // pushAndChange(['l', 90, 0], randomArr)
-        // pushAndChange(['d', 180, 1], randomArr)
-        // pushAndChange(['r', 180, 1], randomArr)
-        // pushAndChange(['b', 180, 1], randomArr)
-        // pushAndChange(['d', 90, 1], randomArr)
-        // pushAndChange(['l', 90, 0], randomArr)
-        // pushAndChange(['d', 90, 1], randomArr)
-        // pushAndChange(['b', 90, 0], randomArr)
-        // pushAndChange(['f', 180, 0], randomArr)
-        // pushAndChange(['l', 90, 0], randomArr)
+        pushAndChange(['u', 180, 0], randomArr)
+        pushAndChange(['r', 90, 1], randomArr)
+        pushAndChange(['l', 90, 0], randomArr)
+        pushAndChange(['d', 180, 1], randomArr)
+        pushAndChange(['r', 180, 1], randomArr)
+        pushAndChange(['b', 180, 1], randomArr)
+        pushAndChange(['d', 90, 1], randomArr)
+        pushAndChange(['l', 90, 0], randomArr)
+        pushAndChange(['d', 90, 1], randomArr)
+        pushAndChange(['b', 90, 0], randomArr)
+        pushAndChange(['f', 180, 0], randomArr)
+        pushAndChange(['l', 90, 0], randomArr)
 
-        let steps = [
-                        ['u', 180, 0],
-                        ['r', 90, 1],
-                        ['l', 90, 0],
-                        ['d', 90, 1],
-                        ['l', 90, 0],
-                        ['d', 180, 1],
-                        ['r', 180, 1],
-                        ['b', 180, 1],
-                        ['d', 90, 1],
-                        ['b', 90, 0],
-                        ['f', 180, 0],
-                        ['l', 90, 0]
-                    ]
+        // let steps = [
+        //                 ['u', 180, 0],
+        //                 ['r', 90, 1],
+        //                 ['l', 90, 0],
+        //                 ['d', 90, 1],
+        //                 ['l', 90, 0],
+        //                 ['d', 180, 1],
+        //                 ['r', 180, 1],
+        //                 ['b', 180, 1],
+        //                 ['d', 90, 1],
+        //                 ['b', 90, 0],
+        //                 ['f', 180, 0],
+        //                 ['l', 90, 0]
+        //             ]
 
 
-        for (let i = 0; i < 12; i++) {
-            let randomNum = Math.floor(Math.random()*12);
-            pushAndChange(steps[randomNum], randomArr)
-        }
+        // for (let i = 0; i < 12; i++) {
+        //     let randomNum = Math.floor(Math.random()*12);
+        //     pushAndChange(steps[randomNum], randomArr)
+        // }
 
         stepBystep(randomArr,10)
 
