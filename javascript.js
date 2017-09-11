@@ -589,6 +589,7 @@ window.onload = function(){
 // ////////////////////////////////////////////////////////////
 // 寻找底层边块中间色块
     let dirArr = ['d','u','l','f','r','b'];
+    let NumTurn = [[0, 'f'], [2, 'r'], [8, 'b'], [6, 'l']];
     var autoStep = [];
     var tempCube = [];
     var tempCornerCube = [];
@@ -1283,8 +1284,6 @@ window.onload = function(){
                 if (j != 4) {
                     if(fakeBigSixFace[dirArr[i]][j] === fakeBigSixFace[dirArr[0]][4]){
 
-                        // console.log(dirArr[i], j);
-
                         switch(dirArr[i]){
                            case 'u':
                                caseTJ(i,j,[['l', 0, 'b', 2],['b', 0, 'r', 2],['f', 0, 'l', 2],['r', 0, 'f', 2]]);//侧面色块所在的位置
@@ -1339,157 +1338,104 @@ window.onload = function(){
             } 
         }
 
+        if (tempCornerCube[0] == 'u') {
+            switch(tempCornerCube[1][0]){//判断所查颜色所在的面
+                case 'b':
+                    var a = 2;
+                    while(isDownCornerOK(NumTurn[a][0])){
+                        pushAndChange(['u', 90, 1], autoStep);
+                        a --;
+                        if (a < 0) { a = 3;} 
+                    }
+                    pushAndChange([NumTurn[a][1], 90, 1], autoStep);
+                    pushAndChange(['u', 180, 1], autoStep);
+                    pushAndChange([NumTurn[a][1], 90, 0], autoStep);
+                    searchCornerCube(searchFace_01,searchFace_02);
+                    console.log(tempCornerCube)
+                break;
+                case 'l':
+                    var b = 3;
+                    while(isDownCornerOK(NumTurn[b][0])){
+                        pushAndChange(['u', 90, 1], autoStep);
+                        b --;
+                        if (b < 0) { b = 3;} 
+                    }
+                    pushAndChange([NumTurn[b][1], 90, 1], autoStep);
+                    pushAndChange(['u', 180, 1], autoStep);
+                    pushAndChange([NumTurn[b][1], 90, 0], autoStep);
+                    searchCornerCube(searchFace_01,searchFace_02);
+                    console.log(tempCornerCube)
+                break;
+                case 'r':
+                    var c = 1;
+                    while(isDownCornerOK(NumTurn[c][0])){
+                        pushAndChange(['u', 90, 1], autoStep);
+                        c --;
+                        if (c < 0) { c = 3;} 
+                    }
+                    pushAndChange([NumTurn[c][1], 90, 1], autoStep);
+                    pushAndChange(['u', 180, 1], autoStep);
+                    pushAndChange([NumTurn[c][1], 90, 0], autoStep);
+                    searchCornerCube(searchFace_01,searchFace_02);
+                    console.log(tempCornerCube)
+                break;
+                case 'f':
+                    var d = 0;
+                    while(isDownCornerOK(NumTurn[d][0])){
+                        pushAndChange(['u', 90, 1], autoStep);
+                        d --;
+                        if (d < 0) { d = 3;} 
+                    }
+                    pushAndChange([NumTurn[d][1], 90, 1], autoStep);
+                    pushAndChange(['u', 180, 1], autoStep);
+                    pushAndChange([NumTurn[d][1], 90, 0], autoStep);
+                    searchCornerCube(searchFace_01,searchFace_02);
+                    console.log(tempCornerCube)
+                break;
+            }
+        } else {
+            findCornerStep(searchFace_01,searchFace_02);
+        }
 
-        findCornerStep(searchFace_01,searchFace_02);
+        function isDownCornerOK(n){
+            if (fakeBigSixFace['d'][n] == fakeBigSixFace['d'][4]) {
+                switch(n){
+                    case 0:
+                        if(fakeBigSixFace['l'][8] == fakeBigSixFace['l'][4] && fakeBigSixFace['f'][6] == fakeBigSixFace['f'][4]){
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    break;
+                    case 2:
+                        if(fakeBigSixFace['f'][8] == fakeBigSixFace['f'][4] && fakeBigSixFace['r'][6] == fakeBigSixFace['r'][4]){
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    break;
+                    case 6:
+                        if(fakeBigSixFace['b'][8] == fakeBigSixFace['b'][4] && fakeBigSixFace['l'][6] == fakeBigSixFace['l'][4]){
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    break;
+                    case 8:
+                        if(fakeBigSixFace['r'][8] == fakeBigSixFace['r'][4] && fakeBigSixFace['b'][6] == fakeBigSixFace['b'][4]){
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    break;
+                }
+            } 
+        }
 
-        // console.log(tempCornerCube)
 
         function findCornerStep(sideface_01,sideface_02){
-            // console.log(tempCube)
+            // console.log(tempCornerCube)
             switch(tempCornerCube[0]){
-                case 'u':
-                    switch(tempCornerCube[1][0]){//判断所查颜色所在的面
-                        case 'b':
-                            switch(sideface_01){//判断所查颜色中心色块的位置
-                                case 'f':
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['r', 180, 1], autoStep);
-                                    pushAndChange(['u', 90, 0], autoStep);
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                   break;
-                                case 'b':
-                                    pushAndChange(['b', 90, 1], autoStep); 
-                                    pushAndChange(['u', 180, 1], autoStep); 
-                                    pushAndChange(['b', 180, 1], autoStep); 
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['b', 90, 0], autoStep);  
-                                   break;
-                                case 'l':
-                                    pushAndChange(['b', 90, 1], autoStep); 
-                                    pushAndChange(['u', 180, 1], autoStep); 
-                                    pushAndChange(['b', 90, 0], autoStep); 
-                                    pushAndChange(['l', 90, 0], autoStep); 
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['l', 90, 0], autoStep);  
-                                   break;
-                                case 'r':
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    pushAndChange(['b', 90, 1], autoStep);
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['b', 90, 0], autoStep);
-                                   break; 
-                            }
-                        break;
-                        case 'l':
-                            switch(sideface_01){
-                                case 'f':
-                                    pushAndChange(['l', 90, 1], autoStep);
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['l', 90, 0], autoStep);
-                                    pushAndChange(['f', 90, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['f', 90, 1], autoStep);
-                                    break;
-                                case 'b':
-                                    pushAndChange(['l', 90, 1], autoStep); 
-                                    pushAndChange(['u', 90, 0], autoStep); 
-                                    pushAndChange(['l', 90, 0], autoStep); 
-                                    pushAndChange(['b', 90, 0], autoStep); 
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['b', 90, 1], autoStep);
-                                    break;
-                                case 'l':
-                                    pushAndChange(['l', 90, 1], autoStep); 
-                                    pushAndChange(['u', 90, 0], autoStep); 
-                                    pushAndChange(['l', 180, 0], autoStep); 
-                                    pushAndChange(['u', 90, 1], autoStep); 
-                                    pushAndChange(['l', 90, 1], autoStep);
-
-                                    break;
-                                case 'r':
-                                    pushAndChange(['l', 90, 1], autoStep); 
-                                    pushAndChange(['u', 90, 1], autoStep); 
-                                    pushAndChange(['l', 90, 0], autoStep);
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    break; 
-                            }
-                        break;
-                        case 'r':
-                            switch(sideface_01){
-                                case 'f':
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    pushAndChange(['u', 90, 0], autoStep);
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                    pushAndChange(['f', 90, 0], autoStep);
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['f', 90, 1], autoStep);
-                                    break;
-                                case 'b':
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    pushAndChange(['u', 180, 0], autoStep);
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                    pushAndChange(['b', 90, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['b', 90, 1], autoStep);
-                                    break;
-                                case 'l':
-                                    pushAndChange(['f', 90, 0], autoStep);
-                                    pushAndChange(['u', 180, 0], autoStep);
-                                    pushAndChange(['f', 180, 1], autoStep);
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['f', 90, 0], autoStep);
-                                    break;
-                                case 'r':
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    pushAndChange(['u', 90, 0], autoStep);
-                                    pushAndChange(['r', 180, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    break; 
-                            }
-                        break;
-                        case 'f':
-                            switch(sideface_01){
-                                case 'f':
-                                    pushAndChange(['f', 90, 1], autoStep);
-                                    pushAndChange(['u', 90, 0], autoStep);
-                                    pushAndChange(['f', 180, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['f', 90, 1], autoStep);
-                                    break;
-                                case 'b':
-                                    pushAndChange(['l', 90, 0], autoStep);
-                                    pushAndChange(['u', 180, 1 ], autoStep);
-                                    pushAndChange(['l', 180, 1], autoStep);
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['l', 90, 0], autoStep);
-                                    break;
-                                case 'l':
-                                    pushAndChange(['f', 90, 1], autoStep);
-                                    pushAndChange(['u', 90, 0], autoStep);
-                                    pushAndChange(['f', 90, 0], autoStep);
-                                    pushAndChange(['l', 90, 0], autoStep);
-                                    pushAndChange(['u', 180, 0], autoStep);
-                                    pushAndChange(['l', 90, 1], autoStep);
-                                    break;
-                                case 'r':
-                                    pushAndChange(['f', 90, 1], autoStep);
-                                    pushAndChange(['u', 180, 1], autoStep);
-                                    pushAndChange(['f', 90, 0], autoStep);
-                                    pushAndChange(['r', 90, 0], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['r', 90, 1], autoStep);
-                                    break; 
-                            }
-                        break;
-                    }
-                break;
-            // /////////////////////////////////////////
                 case 'd':
                     switch(tempCornerCube[1][0]){
                         case 'b':
@@ -2121,7 +2067,7 @@ window.onload = function(){
     function searchSecondFloorCube(searchFace_01,searchFace_02){
         let secondFloor = [];
 
-        function searchMain(){
+        function searchMain(searchFace_01,searchFace_02){
             for (let i = 1; i < 9; i += 2) {
 
                 if(fakeBigSixFace['u'][i] == fakeBigSixFace[searchFace_01][4]) {
@@ -2234,64 +2180,24 @@ window.onload = function(){
 
         }
 
-        searchMain();
+        searchMain(searchFace_01,searchFace_02);
 
-        switch(secondFloor[0]){
-            case 'f':
-                switch(secondFloor[1]){
-                    case 3:
-                        normalRotate(searchFace_01, searchFace_02, 1);
-                        searchMain();
-                    break;
-                    case 5:
-                        normalRotate(searchFace_01, searchFace_02, 0);
-                        searchMain();
-                    break;
-                }
-            break;
-            // case 'l':
-            //     switch(){
-            //         case 3:
-            //             normalRotate(searchFace_01, searchFace_02, dir);
-            //             searchMain();
-            //         break;
-            //         case 5:
-            //             normalRotate(searchFace_01, searchFace_02, dir);
-            //             searchMain();
-            //         break;
-            //     }
-            // break;
-            case 'b':
-                switch(secondFloor[1]){
-                    case 3:
-                        normalRotate(searchFace_01, searchFace_02, 1);
-                        searchMain();
-                    break;
-                    case 5:
-                        normalRotate(searchFace_01, searchFace_02, 0);
-                        searchMain();
-                    break;
-                }
-            break;
-            // case 'r':
-            //     switch(){
-            //         case 1:
-            //             normalRotate(searchFace_01, searchFace_02, dir);
-            //             searchMain();
-            //         break;
-            //         case 3:
-            //             normalRotate(searchFace_01, searchFace_02, dir);
-            //             searchMain();
-            //         break;
-            //         case 5:
-            //             normalRotate(searchFace_01, searchFace_02, dir);
-            //             searchMain();
-            //         break;
-            //     }
-            // break;
+
+        if(secondFloor[0] != 'u'){
+            if(secondFloor[1] == 1){
+                searchMain(searchFace_02,searchFace_01);
+            }else if(secondFloor[1] == 3){
+                normalRotate(searchFace_01, searchFace_02, 1);
+                searchMain(searchFace_01,searchFace_02);
+            }else if(secondFloor[1] == 5){
+                normalRotate(searchFace_01, searchFace_02, 0);
+                searchMain(searchFace_01,searchFace_02);
+            }
+            
         }
 
-        function normalRotate(face_01, face_02, dir){ // DIR ::: RIGHT 1  LEFT 0
+
+        function normalRotate(face_01, face_02, dir){ // DIR : RIGHT 1  LEFT 0
             let dirF = (dir === 1) ? 0 : 1;
             pushAndChange([face_01, 90, dirF], autoStep);
             pushAndChange(['u', 90, dir], autoStep);
@@ -2514,19 +2420,20 @@ window.onload = function(){
         searchCornerCube('b','l')
         searchCornerCube('r','b')
         ///////////////////////////
+        // searchSecondFloorCube('l','f')    
+        // searchSecondFloorCube('b','l')
+        // searchSecondFloorCube('r','b')
+        // searchSecondFloorCube('f','r')
+        // //////////////////////////
+        
 
-        searchSecondFloorCube('l','f')
-        searchSecondFloorCube('b','l')
-        searchSecondFloorCube('r','b')
-        searchSecondFloorCube('f','r')
-
-        // searchSecondFloorCube('l','f')
-        // searchSecondFloorCube('l','b')
-        // searchSecondFloorCube('b','r')
-        // searchSecondFloorCube('r','f')
+        
+        
+        
+        
                 
 
-        stepBystep(autoStep,1000)
+        stepByStep(autoStep,1000)
     }
 
 
@@ -2564,17 +2471,42 @@ window.onload = function(){
 
 
 // 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+    var timerStepByStep;
+    var indexStepByStep = 1;
+    var stop = false;
 
-    function stepBystep(autoStep,t){
+
+    get('.btnZ').onclick = function(){
+        if(!stop){
+            get('.btnZ').innerHTML= '继续';
+            clearInterval(timerStepByStep);
+            stop = true;
+        }else{
+            get('.btnZ').innerHTML= '暂停';
+            timerStepByStep = setInterval(function(){
+                if(indexStepByStep === autoStep.length){
+                    clearInterval(timerStepByStep);
+                    autoStep = [];
+                }else{
+                    rotateCubeFace.apply(null,autoStep[indexStepByStep]);
+                    indexStepByStep ++;    
+                }
+            },1000);
+            stop = false;
+        }
+        
+    };
+    
+    function stepByStep(autoStep,t){
         rotateCubeFace.apply(null,autoStep[0]);
-        var index = 1;
-        clearInterval(timer);
-        var timer = setInterval(function(){
-            if(index === autoStep.length){
-                clearInterval(timer);
+        clearInterval(timerStepByStep);
+        timerStepByStep = setInterval(function(){
+            if(indexStepByStep === autoStep.length){
+                clearInterval(timerStepByStep);
+                autoStep = [];
             }else{
-                rotateCubeFace.apply(null,autoStep[index]);
-                index ++;    
+                rotateCubeFace.apply(null,autoStep[indexStepByStep]);
+                indexStepByStep ++;    
             }
         },t);
     };
@@ -2587,16 +2519,17 @@ window.onload = function(){
 
         pushAndChange(['u', 180, 0], randomArr)
         pushAndChange(['r', 90, 1], randomArr)
-        pushAndChange(['l', 90, 0], randomArr)
-        pushAndChange(['d', 180, 1], randomArr)
-        pushAndChange(['r', 180, 1], randomArr)
-        pushAndChange(['b', 180, 1], randomArr)
         pushAndChange(['d', 90, 1], randomArr)
         pushAndChange(['l', 90, 0], randomArr)
         pushAndChange(['d', 90, 1], randomArr)
         pushAndChange(['b', 90, 0], randomArr)
         pushAndChange(['f', 180, 0], randomArr)
         pushAndChange(['l', 90, 0], randomArr)
+        pushAndChange(['l', 90, 0], randomArr)
+        pushAndChange(['d', 180, 1], randomArr)
+        pushAndChange(['r', 180, 1], randomArr)
+        pushAndChange(['b', 180, 1], randomArr)
+
 
         // let steps = [
         //                 ['u', 180, 0],
@@ -2619,18 +2552,20 @@ window.onload = function(){
         //     pushAndChange(steps[randomNum], randomArr)
         // }
 
-        stepBystep(randomArr,10)
+        stepByStep(randomArr,10)
 
     }
 
     get('.btn19').onclick = function(){
         auto();
-        autoStep = [];
+        // 
     };
     get('.btn20').onclick = function(){
         random();
         randomArr = []
     };
+
+
 
 // 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
 
