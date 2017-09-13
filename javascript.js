@@ -632,21 +632,25 @@ window.onload = function(){
                     if(fakeBigSixFace[arr[0]][arr2[0]] === fakeBigSixFace[searchFace][4]){
                         tempCube = [dirArr[i],arr[0]];
                     }
+                    // console.log(tempCube)
                 break;
                 case 3:
                     if(fakeBigSixFace[arr[1]][arr2[1]] === fakeBigSixFace[searchFace][4]){
                         tempCube = [dirArr[i],arr[1]];
                     }
+                    // console.log(tempCube)
                 break;
                 case 5:
                     if(fakeBigSixFace[arr[2]][arr2[2]] === fakeBigSixFace[searchFace][4]){
                         tempCube = [dirArr[i],arr[2]];
                     }
+                    // console.log(tempCube)
                 break;
                 case 7:
                     if(fakeBigSixFace[arr[3]][arr2[3]] === fakeBigSixFace[searchFace][4] ){
                         tempCube = [dirArr[i],arr[3]];
                     }
+                    // console.log(tempCube)
                 break;
             }
         }
@@ -1165,13 +1169,13 @@ window.onload = function(){
                     }
                 break;
             // ///////////////////////////////////////////
-                case 'r':
+                case 'r'://底层颜色
                     switch(tempCube[1]){//侧面所在的面
                             case 'u':
-                                switch(sideface){//判断所查颜色中心色块的位置
+                                switch(sideface){//判断所查颜色侧面中心色块的位置
                                     case 'f':
                                         pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['f', 90, 0], autoStep);
+                                        pushAndChange(['f', 90, 1], autoStep);
                                         pushAndChange(['r', 90, 1], autoStep);
                                     break;
                                     case 'b':
@@ -1338,6 +1342,9 @@ window.onload = function(){
             } 
         }
 
+        // console.log(tempCornerCube)
+
+
         if (tempCornerCube[0] == 'u') {
             switch(tempCornerCube[1][0]){//判断所查颜色所在的面
                 case 'b':
@@ -1351,7 +1358,7 @@ window.onload = function(){
                     pushAndChange(['u', 180, 1], autoStep);
                     pushAndChange([NumTurn[a][1], 90, 0], autoStep);
                     searchCornerCube(searchFace_01,searchFace_02);
-                    console.log(tempCornerCube)
+                    // console.log(tempCornerCube)
                 break;
                 case 'l':
                     var b = 3;
@@ -1364,7 +1371,7 @@ window.onload = function(){
                     pushAndChange(['u', 180, 1], autoStep);
                     pushAndChange([NumTurn[b][1], 90, 0], autoStep);
                     searchCornerCube(searchFace_01,searchFace_02);
-                    console.log(tempCornerCube)
+                    // console.log(tempCornerCube)
                 break;
                 case 'r':
                     var c = 1;
@@ -1377,7 +1384,7 @@ window.onload = function(){
                     pushAndChange(['u', 180, 1], autoStep);
                     pushAndChange([NumTurn[c][1], 90, 0], autoStep);
                     searchCornerCube(searchFace_01,searchFace_02);
-                    console.log(tempCornerCube)
+                    // console.log(tempCornerCube)
                 break;
                 case 'f':
                     var d = 0;
@@ -1434,7 +1441,9 @@ window.onload = function(){
 
 
         function findCornerStep(sideface_01,sideface_02){
-            // console.log(tempCornerCube)
+            if(sideface_01 == 'l' && sideface_02 =='f'){
+                // console.log(tempCornerCube)
+            }
             switch(tempCornerCube[0]){
                 case 'd':
                     switch(tempCornerCube[1][0]){
@@ -1859,7 +1868,7 @@ window.onload = function(){
                                 case 'r':
                                     pushAndChange(['r', 90, 0], autoStep);
                                     pushAndChange(['u', 90, 1], autoStep);
-                                    pushAndChange(['r', 90, 0], autoStep);
+                                    pushAndChange(['r', 90, 1], autoStep);
                                 break; 
                             }  
                         break;
@@ -1992,25 +2001,18 @@ window.onload = function(){
                                 switch(sideface_01){
                                     case 'f':
                                         pushAndChange(['r', 90, 1], autoStep);
-                                        pushAndChange(['l', 90, 0], autoStep);
                                         pushAndChange(['u', 90, 1], autoStep);
                                         pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['l', 90, 1], autoStep);
                                     break;
                                     case 'b':
-                                        pushAndChange(['r', 90, 1], autoStep);
-                                        pushAndChange(['u', 90, 1], autoStep);
-                                        pushAndChange(['r', 180, 0], autoStep);
-                                        pushAndChange(['u', 180, 0], autoStep);
-                                        pushAndChange(['r', 90, 1], autoStep);
+                                        pushAndChange(['b', 90, 0], autoStep);
+                                        pushAndChange(['u', 180, 1], autoStep);
+                                        pushAndChange(['b', 90, 1], autoStep);
                                     break;
                                     case 'l':
-                                        pushAndChange(['r', 90, 1], autoStep);
+                                        pushAndChange(['l', 90, 0], autoStep);
                                         pushAndChange(['u', 90, 1], autoStep);
-                                        pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['b', 90, 0], autoStep);
-                                        pushAndChange(['u', 90, 1], autoStep);
-                                        pushAndChange(['b', 90, 1], autoStep);
+                                        pushAndChange(['l', 90, 1], autoStep);
                                     break;
                                     case 'r':
                                         pushAndChange(['u', 90, 1], autoStep);
@@ -2023,33 +2025,33 @@ window.onload = function(){
                             case 'd':
                                 switch(sideface_01){
                                     case 'f':
-                                        pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['u', 90, 0], autoStep);
                                         pushAndChange(['r', 90, 1], autoStep);
-                                        pushAndChange(['f', 90, 1], autoStep);
-                                        pushAndChange(['u', 90, 0], autoStep);
+                                        pushAndChange(['u', 180, 0], autoStep);
+                                        pushAndChange(['r', 90, 0], autoStep);
                                         pushAndChange(['f', 90, 0], autoStep);
+                                        pushAndChange(['u', 180, 0], autoStep);
+                                        pushAndChange(['f', 90, 1], autoStep);
                                     break;
                                     case 'b':
-                                        pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['u', 180, 1], autoStep);
                                         pushAndChange(['r', 90, 1], autoStep);
-                                        pushAndChange(['b', 90, 1], autoStep);
-                                        pushAndChange(['u', 180, 1], autoStep);
+                                        pushAndChange(['u', 90, 1], autoStep);
+                                        pushAndChange(['r', 90, 0], autoStep);
                                         pushAndChange(['b', 90, 0], autoStep);
+                                        pushAndChange(['u', 90, 1], autoStep);
+                                        pushAndChange(['b', 90, 1], autoStep);
                                     break;
                                     case 'l':
-                                        pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['l', 90, 1], autoStep);
-                                        pushAndChange(['u', 90, 0], autoStep);
                                         pushAndChange(['r', 90, 1], autoStep);
                                         pushAndChange(['l', 90, 0], autoStep);
+                                        pushAndChange(['u', 90, 1], autoStep);
+                                        pushAndChange(['r', 90, 0], autoStep);
+                                        pushAndChange(['l', 90, 1], autoStep);
                                     break;
                                     case 'r':
-                                        pushAndChange(['r', 90, 0], autoStep);
-                                        pushAndChange(['u', 90, 0], autoStep);
-                                        pushAndChange(['r', 180, 1], autoStep);
-                                        pushAndChange(['u', 180, 1], autoStep);
+                                        pushAndChange(['r', 90, 1], autoStep);
+                                        pushAndChange(['u', 90, 1], autoStep);
+                                        pushAndChange(['r', 180, 0], autoStep);
+                                        pushAndChange(['u', 180, 0], autoStep);
                                         pushAndChange(['r', 90, 0], autoStep);
                                     break; 
                                 }
@@ -2502,11 +2504,62 @@ window.onload = function(){
         }
 
 
+        //顶层为 十字的时候
+        if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//028
+            if(fakeBigSixFace['r'][2] === fakeBigSixFace['u'][4]){
+                face_dir = ['r', 1];
+            }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['u'][4]){
+                face_dir = ['b', 0];
+            }
+            return true;
+        }
+
+
+
         while(isTopFirstOk() < 5){
+            // if( isOk(1) && isOk(4) && isOk(7)){//028
+            //     normalFirst_02('l')
+            // }else if( isOk(3) && isOk(4) && isOk(5)){
+            //     normalFirst_02('f')
+            // }else if( isOk(3) && isOk(4) && isOk(5)){
+            //     normalFirst_02('f')
+            // }else if( isOk(3) && isOk(4) && isOk(5)){
+            //     normalFirst_02('f')
+            // }
+
             normalFirst_01('r')
             normalFirst_02('f')
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+// ////////////////////////////////////////////////////////////
+    function isOk (upIndex) { //判断顶层小面是否为顶层颜色
+        if(fakeBigSixFace['u'][upIndex] === fakeBigSixFace['u'][4]){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
@@ -2535,13 +2588,7 @@ window.onload = function(){
         }
 
         function isSmallFishOk(){
-            function isOk (upIndex) {
-                if(fakeBigSixFace['u'][upIndex] === fakeBigSixFace['u'][4]){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
+
 
             if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//028
                 if(fakeBigSixFace['r'][2] === fakeBigSixFace['u'][4]){
@@ -2578,37 +2625,136 @@ window.onload = function(){
 
 
     }
+// ////////////////////////////////////////////////////////////
+
+    function topFloorThird () {
+        function thirdRotate (face) {
+            let face_01,face_02;
+            switch(face){
+                 case 'f':
+                     face_01 = 'l';
+                     face_02 = 'r';
+                 break;
+                 case 'r':
+                     face_01 = 'f';
+                     face_02 = 'b';
+                 break;
+                 case 'l':
+                     face_01 = 'b';
+                     face_02 = 'f';
+                 break;
+                 case 'b':
+                    face_01 = 'r';
+                    face_02 = 'l';
+                 break;
+            }
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange([face_01, 180, 1], autoStep);
+            pushAndChange([face, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange([face_01, 180, 1], autoStep);
+            pushAndChange([face, 180, 1], autoStep);
+        }
+
+        if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2]){
+            thirdRotate ('r');
+        }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+            thirdRotate ('b');
+        }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+            thirdRotate ('f');
+        }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2]){
+            thirdRotate ('l');
+        }else{
+            thirdRotate ('l');
+            if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2]){
+                thirdRotate ('r');
+            }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+                thirdRotate ('b');
+            }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                thirdRotate ('f');
+            }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2]){
+                thirdRotate ('l');
+            }
+        }
+
+    }
+
+// ////////////////////////////////////////////////////////////
+    function topFloorLast () {
+        topFaceRotate ('f', 1)
+        topFloorSecond()
+
+        topFaceRotate ('f', 0)
+        topFloorSecond()
+
+
+    }
+
+// ////////////////////////////////////////////////////////////
+    function isTopFloorOk (){
+        if(fakeBigSixFace['f'][0] === fakeBigSixFace['r'][4]){
+            pushAndChange(['u', 90, 0], autoStep);
+        }else if(fakeBigSixFace['f'][0] === fakeBigSixFace['b'][4]){
+            pushAndChange(['u', 180, 0], autoStep);
+        }else if(fakeBigSixFace['f'][0] === fakeBigSixFace['l'][4]){
+            pushAndChange(['u', 90, 1], autoStep);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 寻找底层角色块
-    function auto(){
+    function auto(test){
 
         searchDownMiddleCube('b');//参数是表示侧面的颜色（以中心色块为标准的）
         searchDownMiddleCube('f');
         searchDownMiddleCube('l');
         searchDownMiddleCube('r');
-        ////////////////////////////
+        //////////////////////////
         searchCornerCube('l','f')
         searchCornerCube('f','r')
         searchCornerCube('b','l')
         searchCornerCube('r','b')
-        ///////////////////////////
+        // ///////////////////////////
         searchSecondFloorCube('l','f')    
         searchSecondFloorCube('b','l')
         searchSecondFloorCube('r','b')
         searchSecondFloorCube('f','r')
         // //////////////////////////
-        topFloorFirst();
+        // topFloorFirst();
         // //////////////////////////
-        topFloorSecond();
+        // topFloorSecond();
+        // //////////////////////////
+        // topFloorThird ()
+        // // //////////////////////////
+        // topFloorLast ()
+        // // //////////////
+        // isTopFloorOk ()
+        // ////////////////////////// 
+        
+        
+        if(!test){
+            stepByStep(autoStep,20)
+        }    
 
         
-        
-        
-        
-                
-
-        stepByStep(autoStep,100)
     }
 
 
@@ -2687,6 +2833,7 @@ window.onload = function(){
 
 // 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
     let randomArr = [];
+    let randomArrTemp = [];
     function random(){
         
 
@@ -2720,17 +2867,124 @@ window.onload = function(){
         //             ]
 
 
+
+
+
         // for (let i = 0; i < 12; i++) {
         //     let randomNum = Math.floor(Math.random()*12);
-        //     pushAndChange(steps[randomNum], randomArr)
+        //     pushAndChange(steps[randomNum], randomArr);
+        //     randomArrTemp.push(steps[randomNum]);
         // }
 
+
+        // var testArr = [
+        //     ["l",90,0],["f",180,0],["l",90,0],["u",180,0],["r",90,1],["r",90,1],["u",180,0],["f",180,0],["l",90,0],["l",90,0],["d",90,1],["r",180,1]       
+        // ]
+
+        // for (let i = 0; i < 12; i++) {
+        //     pushAndChange(testArr[i], randomArr)
+        // }
+
+
+
+
+
+
+        
         stepByStep(randomArr,10)
 
     }
 
+
+
+
+// 、、、、、、test底下两层是否ok
+
+    function test(){
+        let result = 0;
+        for (let i = 0; i < 9; i ++) {
+            if(fakeBigSixFace['d'][i] == fakeBigSixFace['d'][4]){
+                result ++;
+            }
+
+            if( i > 2){
+                if(fakeBigSixFace['f'][i] == fakeBigSixFace['f'][4] && fakeBigSixFace['r'][i] == fakeBigSixFace['r'][4] && fakeBigSixFace['b'][i] == fakeBigSixFace['b'][4] &&fakeBigSixFace['l'][i] == fakeBigSixFace['l'][4]){
+                    result ++;
+                }
+            }
+        }
+        return result;// === 15 ? true : false;
+    }
+
+
+
+
+
+
+
+    get('.testRun').onclick = function(){
+        let testNums = 0;
+        
+        random();
+        auto(true);
+        console.log(test())
+        if ( test() != 15 ){
+            get('.bianliang').innerHTML += '<br>' 
+            for (let i = 0; i < 12; i++) {
+                get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
+            }
+        };
+
+        let tt = autoStep.length * 20 + 1000;
+
+        setTimeout(function(){      
+            stepByStep(autoStep,20);
+        },400);
+
+     
+
+        let timer = setInterval(function(){
+            
+            random();
+            auto(true);
+            console.log(test())
+            if ( test() != 15 ){
+                get('.bianliang').innerHTML += '<br>'
+                for (let i = 0; i < 12; i++) {
+                    get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
+                }
+            };
+
+            tt = autoStep.length * 20 + 1000;
+
+            setTimeout(function(){                
+                stepByStep(autoStep,20)
+            },400);
+
+
+
+            if(testNums > 10){
+                clearInterval(timer);
+            }
+
+            testNums ++;
+
+        },tt + 2000);
+    };
+
+
+
+
+
+
+
+
+
+
+
+
     get('.btn19').onclick = function(){
-        auto();
+        auto(false);
         // 
     };
     get('.btn20').onclick = function(){
@@ -2847,19 +3101,6 @@ window.onload = function(){
     get('.btn18').onclick = function(){
         rotateCubeFace('b', 90, 0);
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
