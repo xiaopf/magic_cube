@@ -2442,32 +2442,34 @@ window.onload = function(){
 // ////////////////////////////////////////////////////////////
 
     function topFloorFirst(){
+
+        // // 自己经常用的通用公式
+        // function normalFirst_01(face){
+        //     let face_left;
+        //     switch(face){
+        //         case 'f':
+        //             face_left = 'l';
+        //         break;
+        //         case 'r':
+        //             face_left = 'f';
+        //         break;
+        //         case 'b':
+        //             face_left = 'r';
+        //         break;
+        //         case 'l':
+        //             face_left = 'b';
+        //         break;
+        //     }
+        //     pushAndChange([face, 90, 0], autoStep);
+        //     pushAndChange(['u', 90, 0], autoStep);
+        //     pushAndChange([face_left, 90, 0], autoStep);
+        //     pushAndChange(['u', 90, 1], autoStep);
+        //     pushAndChange([face_left, 90, 1], autoStep);
+        //     pushAndChange([face, 90, 1], autoStep);
+        // }
+
+        //  F (R U R' U') F'
         function normalFirst_01(face){
-            let face_left;
-            switch(face){
-                case 'f':
-                    face_left = 'l';
-                break;
-                case 'r':
-                    face_left = 'f';
-                break;
-                case 'b':
-                    face_left = 'r';
-                break;
-                case 'l':
-                    face_left = 'b';
-                break;
-            }
-            pushAndChange([face, 90, 0], autoStep);
-            pushAndChange(['u', 90, 0], autoStep);
-            pushAndChange([face_left, 90, 0], autoStep);
-            pushAndChange(['u', 90, 1], autoStep);
-            pushAndChange([face_left, 90, 1], autoStep);
-            pushAndChange([face, 90, 1], autoStep);
-        }
-
-
-        function normalFirst_02(face){
             let face_right;
             switch(face){
                 case 'f':
@@ -2492,139 +2494,574 @@ window.onload = function(){
         }
 
 
-
-        function isTopFirstOk(){
-            var nums = 0;
-            for (let i = 0; i < 9; i ++) {
-                if(fakeBigSixFace['u'][i] === fakeBigSixFace['u'][4]){
-                    nums ++;
-                }
+        //  (R U R' U') (R' F R F')
+        function normalFirst_02(face){
+            let face_right;
+            switch(face){
+                case 'f':
+                    face_right = 'r';
+                break;
+                case 'r':
+                    face_right = 'b';
+                break;
+                case 'b':
+                    face_right = 'l';
+                break;
+                case 'l':
+                    face_right = 'f';
+                break;
             }
-            return nums;
+            pushAndChange([face_right, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_right, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_right, 90, 0], autoStep);
+            pushAndChange([face, 90, 1], autoStep);       
+            pushAndChange([face_right, 90, 1], autoStep);
+            pushAndChange([face, 90, 0], autoStep);
         }
+        // (r U R' U') (r' F R F')
+        function normalFirst_03(face){
+            let face_left,face_down;
+            switch(face){
+                case 'f':
+                    face_left = 'r' ;
+                    face_down = 'b' ;
+                break;
+                case 'r':
+                    face_left = 'b' ;
+                    face_down = 'l' ;
+                break;
+                case 'b':
+                    face_left = 'l' ;
+                    face_down = 'f' ;
+                break;
+                case 'l':
+                    face_left = 'f' ;
+                    face_down = 'r' ;
+                break;
+            }
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange([face_left, 90, 1], autoStep);
+            pushAndChange([face_down, 90, 0], autoStep);
+            pushAndChange([face_left, 90, 0], autoStep);
+            pushAndChange([face, 90, 0], autoStep);
+            pushAndChange([face_left, 90, 1], autoStep);
+            pushAndChange([face_down, 90, 1], autoStep);
+            pushAndChange([face_left, 90, 0], autoStep);
+        }
+        // (R2 D') (R U'U') (R' D) (R U'U' R)
+        function normalFirst_04(face){
+            let face_right;
+            switch(face){
+                case 'f':
+                    face_right = 'r' ;
+                break;
+                case 'r':
+                    face_right = 'b' ;
+                break;
+                case 'b':
+                    face_right = 'l' ;
+                break;
+                case 'l':
+                    face_right = 'f' ;
+                break;
+            }
+            pushAndChange([face_right, 180, 1], autoStep);
+            pushAndChange(['d', 90, 0], autoStep);
+            pushAndChange([face_right, 90, 1], autoStep);
+            pushAndChange(['u', 180, 0], autoStep);
+            pushAndChange([face_right, 90, 0], autoStep);
+            pushAndChange(['d', 90, 1], autoStep);
+            pushAndChange([face_right, 90, 1], autoStep);
+            pushAndChange(['u', 180, 0], autoStep);
+            pushAndChange([face_right, 90, 1], autoStep);
+        }
+        // (R U U R' U') (R U R' U') (R U' R')
+        function normalFirst_05(face){
+
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange(['u', 180, 1], autoStep);
+            pushAndChange([face, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+
+        }
+
+        // R U'U' (R2' U') (R2 U') R2' U2 R
+        function normalFirst_06(face){
+
+            pushAndChange([face, 90, 1], autoStep);
+            pushAndChange(['u', 180, 0], autoStep);
+            pushAndChange([face, 180, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face, 180, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face, 180, 0], autoStep);
+            pushAndChange(['u', 180, 1], autoStep);
+            pushAndChange([face, 90, 1], autoStep);
+
+        }
+
+        // //F' (L' U' L U)2 F;
+
+        function normalFirst_07(face_01,face_02){
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+        }
+
+        // // F (R U R' U')2 F'
+        function normalFirst_08(face_01,face_02){
+
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+
+
+        }
+
+        // f(R U R' U')2 f'
+
+        function normalFirst_09(face_01,face_02){//r,b
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+        }
+
+
+        // f (R U R' U') f'
+
+        function normalFirst_10(face_01,face_02){//b,l
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+        }
+
+        // f' (L' U' L U) f
+
+        function normalFirst_11(face_01,face_02){//b,r
+
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+
+        }
+
+        //  (R U'U') (R2' F R F') U2 (R' F R F')
+
+        function normalFirst_12(face_01,face_02){//r,f
+
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 180, 0], autoStep);
+            pushAndChange([face_01, 180, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 180, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        //判断顶层小面是否为顶层颜色
+        function isOk (upIndex) { 
+            if(fakeBigSixFace['u'][upIndex] === fakeBigSixFace['u'][4]){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function isSideYes (face,upIndex) { 
+            if(fakeBigSixFace[face][upIndex] === fakeBigSixFace['u'][4]){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
+
+
+
+
+        // 小鱼 → 顶层ok
+        function topFaceRotate (face, dir) {  //zheng 1 ni 0
+            let dirF = (dir === 1) ? 0 : 1;
+            pushAndChange([face, 90, dir], autoStep);
+            pushAndChange(['u', 90, dir], autoStep);
+            pushAndChange([face, 90, dirF], autoStep);
+            pushAndChange(['u', 90, dir], autoStep);
+            pushAndChange([face, 90, dir], autoStep);
+            pushAndChange(['u', 180, dirF], autoStep);
+            pushAndChange([face, 90, dirF], autoStep);
+        }
+
+// //////////////////////////////////////
+
+
+//  小鱼的7个OLL公式
 
 
         //顶层为 十字的时候
-        if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//028
+
+        if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//0268
+
+            if(isSideYes('f',0) && isSideYes('b',0) && isSideYes('f',2) && isSideYes('b',2)){
+                normalFirst_05('r')
+            }else if(isSideYes('l',0) && isSideYes('r',0) && isSideYes('l',2) && isSideYes('r',2)){
+                normalFirst_05('b')
+            }
+
+            else if(isSideYes('f',0) && isSideYes('l',0) && isSideYes('f',2) && isSideYes('r',2)){
+                normalFirst_06('b')
+            }else if(isSideYes('l',0) && isSideYes('b',0) && isSideYes('l',2) && isSideYes('f',2)){
+                normalFirst_06('r')
+            }else if(isSideYes('b',0) && isSideYes('r',0) && isSideYes('b',2) && isSideYes('l',2)){
+                normalFirst_06('f')
+            }else if(isSideYes('r',0) && isSideYes('f',0) && isSideYes('r',2) && isSideYes('b',2)){
+                normalFirst_06('l')
+            }
+
+        }
+
+        //顶层为 小鱼的时候
+
+        else if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//028
             if(fakeBigSixFace['r'][2] === fakeBigSixFace['u'][4]){
-                face_dir = ['r', 1];
+                topFaceRotate ('r', 1) 
             }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['u'][4]){
-                face_dir = ['b', 0];
+                topFaceRotate ('b', 0) 
             }
-            return true;
+        }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//268
+            if(fakeBigSixFace['f'][2] === fakeBigSixFace['u'][4]){
+                topFaceRotate ('f', 1) 
+            }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['u'][4]){
+                topFaceRotate ('r', 0) 
+            }
+        }else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//068
+            if(fakeBigSixFace['l'][2] === fakeBigSixFace['u'][4]){
+                topFaceRotate ('l', 1) 
+            }else if(fakeBigSixFace['f'][0] === fakeBigSixFace['u'][4]){
+                topFaceRotate ('f', 0) 
+            }
+        }else if(!isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//026
+            if(fakeBigSixFace['b'][2] === fakeBigSixFace['u'][4]){
+                topFaceRotate ('b', 1) 
+            }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['u'][4]){
+                topFaceRotate ('l', 0) 
+            }
+        }
+
+        //顶层为 缺两个角(相邻)
+        else if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && isOk(8)){//02
+            if(fakeBigSixFace['r'][2] === fakeBigSixFace['u'][4]){
+                normalFirst_03 ('b') 
+            }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['u'][4]){
+                normalFirst_04 ('b') 
+            }
+        }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//28
+            if(fakeBigSixFace['f'][2] === fakeBigSixFace['u'][4]){
+                normalFirst_03 ('r') 
+            }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['u'][4]){
+                normalFirst_04 ('r') 
+            }
+        }else if(isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//86
+            if(fakeBigSixFace['l'][2] === fakeBigSixFace['u'][4]){
+                normalFirst_03 ('f') 
+            }else if(fakeBigSixFace['f'][0] === fakeBigSixFace['u'][4]){
+                normalFirst_04 ('f') 
+            }
+        }else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//06
+            if(fakeBigSixFace['b'][2] === fakeBigSixFace['u'][4]){
+                normalFirst_03 ('l') 
+            }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['u'][4]){
+                normalFirst_04 ('l') 
+            }
+        }
+
+        //顶层为 缺两个角(对角)
+
+        else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//08
+            pushAndChange(['f', 90, 0], autoStep);
+            pushAndChange(['l', 90, 1], autoStep);
+            pushAndChange(['f', 90, 1], autoStep);
+            pushAndChange(['r', 90, 0], autoStep);
+            pushAndChange(['f', 90, 0], autoStep);
+            pushAndChange(['l', 90, 0], autoStep);
+            pushAndChange(['f', 90, 1], autoStep);
+            pushAndChange(['r', 90, 1], autoStep);
+        }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//26
+            pushAndChange(['r', 90, 0], autoStep);
+            pushAndChange(['f', 90, 1], autoStep);
+            pushAndChange(['r', 90, 1], autoStep);
+            pushAndChange(['b', 90, 0], autoStep);
+            pushAndChange(['r', 90, 0], autoStep);
+            pushAndChange(['f', 90, 0], autoStep);
+            pushAndChange(['r', 90, 1], autoStep);
+            pushAndChange(['b', 90, 1], autoStep);
         }
 
 
+//  第2组 最简单不用背的7个公式
 
-        while(isTopFirstOk() < 5){
-            // if( isOk(1) && isOk(4) && isOk(7)){//028
-            //     normalFirst_02('l')
-            // }else if( isOk(3) && isOk(4) && isOk(5)){
-            //     normalFirst_02('f')
-            // }else if( isOk(3) && isOk(4) && isOk(5)){
-            //     normalFirst_02('f')
-            // }else if( isOk(3) && isOk(4) && isOk(5)){
-            //     normalFirst_02('f')
-            // }
 
-            normalFirst_01('r')
-            normalFirst_02('f')
+        //最简单不用背的7个公式(T形)
+        else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//T朝l
+            if(isSideYes('l',0) && isSideYes('l',2)){
+                normalFirst_01 ('f') 
+            }else{
+                normalFirst_02 ('f') 
+            }
+        }else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && isOk(6) && isOk(7) && isOk(8)){//06
+            if(isSideYes('b',0) && isSideYes('b',2)){
+                normalFirst_01 ('l') 
+            }else{
+                normalFirst_02 ('l') 
+            }
+        }else if(isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//06
+            if(isSideYes('r',0) && isSideYes('r',2)){
+                normalFirst_01 ('b') 
+            }else{
+                normalFirst_02 ('b') 
+            }
+        }else if(isOk(0) && isOk(1) && isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//06
+            if(isSideYes('f',0) && isSideYes('f',2)){
+                normalFirst_01 ('r') 
+            }else{
+                normalFirst_02 ('r') 
+            }
+        }
+
+        //最简单不用背的7个公式(小拐弯)
+        else if(!isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//13
+            if(isSideYes('b',0) && isSideYes('b',2)){
+                normalFirst_07('r','f')
+            }else{
+                normalFirst_08('r','f')
+            }
+        }else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//15
+            if(isSideYes('r',0) && isSideYes('r',2)){
+                normalFirst_07('f','l')
+            }else{
+                normalFirst_08('f','l')
+            }
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//57
+            if(isSideYes('f',0) && isSideYes('f',2)){
+                normalFirst_07('l','b')
+            }else{
+                normalFirst_08('l','b')
+            }
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//37
+            if(isSideYes('l',0) && isSideYes('l',2)){
+                normalFirst_07('b','r')
+            }else{
+                normalFirst_08('b','r')
+            }
+        }
+
+        //最简单不用背的7个公式(一字)
+        else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//竖着
+            if(isSideYes('b',0) && isSideYes('b',2)){
+                normalFirst_09('r','b')
+            }else{
+                normalFirst_09('l','f')
+            }
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//横着
+            if(isSideYes('l',0) && isSideYes('l',2)){
+                normalFirst_09('b','r')
+            }else{
+                normalFirst_09('f','l')
+            }
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-// ////////////////////////////////////////////////////////////
-    function isOk (upIndex) { //判断顶层小面是否为顶层颜色
-        if(fakeBigSixFace['u'][upIndex] === fakeBigSixFace['u'][4]){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
-    function topFaceRotate (face, dir) {  //zheng 1 ni 0
-        let dirF = (dir === 1) ? 0 : 1;
-        pushAndChange([face, 90, dir], autoStep);
-        pushAndChange(['u', 90, dir], autoStep);
-        pushAndChange([face, 90, dirF], autoStep);
-        pushAndChange(['u', 90, dir], autoStep);
-        pushAndChange([face, 90, dir], autoStep);
-        pushAndChange(['u', 180, dirF], autoStep);
-        pushAndChange([face, 90, dirF], autoStep);
-    }
-
-
-    function topFloorSecond(){
-
-        let face_dir = [];
-
-        while(!isSmallFishOk()){
-            topFaceRotate ('r', 0)
-        }
-        
-        if(isSmallFishOk()){
-           topFaceRotate (face_dir[0], face_dir[1]) 
+        //最简单不用背的7个公式(缺 L 的   f (R U R' U') f'  )
+        else if(!isOk(0) && !isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//0136
+            normalFirst_10('b','l')
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && isOk(7) && isOk(8)){//
+            normalFirst_10('r','b')
+        }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//
+            normalFirst_10('f','r')
+        }else if(isOk(0) && isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//
+            normalFirst_10('l','f')
         }
 
-        function isSmallFishOk(){
+        //最简单不用背的7个公式(缺 L 的   f' (L' U' L U) f  )
+        else if(isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//1258
+            normalFirst_11('b','r')
+        }else if(isOk(0) && isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//5678
+            normalFirst_11('r','f')
+        }else if(!isOk(0) && isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//0367
+            normalFirst_11('f','l')
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && isOk(6) && isOk(7) && isOk(8)){//0123
+            normalFirst_11('l','b')
+        }
 
 
-            if( !isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//028
-                if(fakeBigSixFace['r'][2] === fakeBigSixFace['u'][4]){
-                    face_dir = ['r', 1];
-                }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['u'][4]){
-                    face_dir = ['b', 0];
-                }
-                return true;
-            }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//268
-                if(fakeBigSixFace['f'][2] === fakeBigSixFace['u'][4]){
-                    face_dir = ['f', 1];
-                }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['u'][4]){
-                    face_dir = ['r', 0];
-                }
-                return true;
-            }else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//068
-                if(fakeBigSixFace['l'][2] === fakeBigSixFace['u'][4]){
-                    face_dir = ['l', 1];
-                }else if(fakeBigSixFace['f'][0] === fakeBigSixFace['u'][4]){
-                    face_dir = ['f', 0];
-                }
-                return true;
-            }else if(!isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//026
-                if(fakeBigSixFace['b'][2] === fakeBigSixFace['u'][4]){
-                    face_dir = ['b', 1];
-                }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['u'][4]){
-                    face_dir = ['l', 0];
-                }
-                return true;
+//  第3组 和十字公式和小鱼公式有关的8个简单公式
+
+        // 仅有中间一个点的
+
+        else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//
+
+            if(isSideYes('l',0) && isSideYes('l',2) && isSideYes('r',0) && isSideYes('r',2)){ //第二种 左右
+                normalFirst_12('r','f')
+            }else if(isSideYes('f',0) && isSideYes('f',2) && isSideYes('b',0) && isSideYes('b',2)){ //第二种 上下
+                normalFirst_12('b','r')
             }
 
-            return false;
+
+            else if(isSideYes('l',0) && isSideYes('l',2) && !isSideYes('r',0) && !isSideYes('r',2)){
+                normalFirst_01('f')
+                normalFirst_10('b','l')
+            }else if(isSideYes('b',0) && isSideYes('b',2) && !isSideYes('f',0) && !isSideYes('f',2)){
+                normalFirst_01('l')
+                normalFirst_10('r','b')
+            }else if(isSideYes('r',0) && isSideYes('r',2) && !isSideYes('l',0) && !isSideYes('l',2)){
+                normalFirst_01('b')
+                normalFirst_10('f','r')
+            }else if(isSideYes('f',0) && isSideYes('f',2) && !isSideYes('b',0) && !isSideYes('b',2)){
+                normalFirst_01('r')
+                normalFirst_10('l','f')
+            }
         }
 
 
+        // 中心加上一个角块 （两种情况）
+
+        else if(isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//04
+            if(isSideYes('f',0) && isSideYes('r',0)){
+                normalFirst_10('b','l');
+                pushAndChange(['u', 90, 1], autoStep);  
+                normalFirst_01('f');
+            }else{
+                normalFirst_10('l','f');
+                pushAndChange(['u', 90, 0], autoStep);  
+                normalFirst_01('r');
+            }
+        }else if(!isOk(0) && !isOk(1) && isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//24
+            if(isSideYes('l',0) && isSideYes('f',0)){
+                normalFirst_10('r','b');
+                pushAndChange(['u', 90, 1], autoStep);
+                normalFirst_01('l');
+            }else{
+                normalFirst_10('b','l');
+                pushAndChange(['u', 90, 0], autoStep);
+                normalFirst_01('f');
+            }
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//84
+            if(isSideYes('b',0) && isSideYes('l',0)){
+                normalFirst_10('f','r');
+                pushAndChange(['u', 90, 1], autoStep);
+                normalFirst_01('b');
+            }else{
+                normalFirst_10('r','b');
+                pushAndChange(['u', 90, 0], autoStep);
+                normalFirst_01('l');
+            }
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//64
+            if(isSideYes('r',0) && isSideYes('b',0)){
+                normalFirst_10('l','f');
+                pushAndChange(['u', 90, 1], autoStep);
+                normalFirst_01('r');
+            }else{
+                normalFirst_10('f','r');    
+                pushAndChange(['u', 90, 0], autoStep);
+                normalFirst_01('b');
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
 // ////////////////////////////////////////////////////////////
 
     function topFloorThird () {
@@ -2737,9 +3174,9 @@ window.onload = function(){
         searchSecondFloorCube('b','l')
         searchSecondFloorCube('r','b')
         searchSecondFloorCube('f','r')
-        // //////////////////////////
+        //////////////////////////
         // topFloorFirst();
-        // //////////////////////////
+        //////////////////////////
         // topFloorSecond();
         // //////////////////////////
         // topFloorThird ()
@@ -2747,7 +3184,7 @@ window.onload = function(){
         // topFloorLast ()
         // // //////////////
         // isTopFloorOk ()
-        // ////////////////////////// 
+        ////////////////////////// 
         
         
         if(!test){
@@ -2836,45 +3273,60 @@ window.onload = function(){
     let randomArrTemp = [];
     function random(){
         
+// top 为 T
+        // pushAndChange(['u', 180, 0], randomArr)
+        // pushAndChange(['r', 90, 1], randomArr)
+        // pushAndChange(['d', 90, 1], randomArr)
+        // pushAndChange(['f', 180, 0], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+        // pushAndChange(['d', 180, 1], randomArr)
+        // pushAndChange(['r', 180, 1], randomArr)
+        // pushAndChange(['b', 180, 1], randomArr)
+        // pushAndChange(['d', 90, 1], randomArr)
+        // pushAndChange(['b', 90, 0], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
 
-        pushAndChange(['u', 180, 0], randomArr)
-        pushAndChange(['r', 90, 1], randomArr)
-        pushAndChange(['d', 90, 1], randomArr)
-        pushAndChange(['l', 90, 0], randomArr)
-        pushAndChange(['d', 90, 1], randomArr)
-        pushAndChange(['b', 90, 0], randomArr)
-        pushAndChange(['f', 180, 0], randomArr)
-        pushAndChange(['l', 90, 0], randomArr)
-        pushAndChange(['l', 90, 0], randomArr)
-        pushAndChange(['d', 180, 1], randomArr)
-        pushAndChange(['r', 180, 1], randomArr)
-        pushAndChange(['b', 180, 1], randomArr)
-
-
-        // let steps = [
-        //                 ['u', 180, 0],
-        //                 ['r', 90, 1],
-        //                 ['l', 90, 0],
-        //                 ['d', 90, 1],
-        //                 ['l', 90, 0],
-        //                 ['d', 180, 1],
-        //                 ['r', 180, 1],
-        //                 ['b', 180, 1],
-        //                 ['d', 90, 1],
-        //                 ['b', 90, 0],
-        //                 ['f', 180, 0],
-        //                 ['l', 90, 0]
-        //             ]
+        // pushAndChange(['u', 180, 0], randomArr)
+        // pushAndChange(['r', 90, 1], randomArr)
+        // pushAndChange(['d', 90, 1], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+        // pushAndChange(['d', 180, 1], randomArr)
+        // pushAndChange(['r', 180, 1], randomArr)
+        // pushAndChange(['b', 180, 1], randomArr)
+        // pushAndChange(['f', 180, 0], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
+        // pushAndChange(['d', 90, 1], randomArr)
+        // pushAndChange(['b', 90, 0], randomArr)
+        // pushAndChange(['l', 90, 0], randomArr)
 
 
 
 
+        let steps = [
+                        ['u', 180, 0],
+                        ['r', 90, 1],
+                        ['l', 90, 0],
+                        ['d', 90, 1],
+                        ['l', 90, 0],
+                        ['d', 180, 1],
+                        ['r', 180, 1],
+                        ['b', 180, 1],
+                        ['d', 90, 1],
+                        ['b', 90, 0],
+                        ['f', 180, 0],
+                        ['l', 90, 0]
+                    ]
 
-        // for (let i = 0; i < 12; i++) {
-        //     let randomNum = Math.floor(Math.random()*12);
-        //     pushAndChange(steps[randomNum], randomArr);
-        //     randomArrTemp.push(steps[randomNum]);
-        // }
+
+
+
+
+        for (let i = 0; i < 12; i++) {
+            let randomNum = Math.floor(Math.random()*12);
+            pushAndChange(steps[randomNum], randomArr);
+            randomArrTemp.push(steps[randomNum]);
+        }
 
 
         // var testArr = [
