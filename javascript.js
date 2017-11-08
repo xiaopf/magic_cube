@@ -995,7 +995,7 @@ window.onload = function(){
                                 case 'r':
                                     pushAndChange(['l', 90, 1], autoStep);
                                     pushAndChange(['u', 180, 0], autoStep);
-                                    pushAndChange(['l', 90, 0], autoStep);
+                                    pushAndChange(['l', 90, 0], autoStep);//???????????????????????????
                                     pushAndChange(['r', 180, 1], autoStep);
                                 break; 
                            }
@@ -1040,7 +1040,6 @@ window.onload = function(){
                                     pushAndChange(['l', 90, 1], autoStep);
                                     pushAndChange(['u', 90, 1], autoStep);
                                     pushAndChange(['l', 90, 0], autoStep);
-                                    pushAndChange(['b', 90, 1], autoStep);
                                     pushAndChange(['b', 180, 1], autoStep);
                                 break;
                                 case 'l':
@@ -1195,7 +1194,7 @@ window.onload = function(){
                                         pushAndChange(['r', 90, 0], autoStep);
                                         pushAndChange(['f', 90, 0], autoStep);
                                         pushAndChange(['u', 90, 0], autoStep);
-                                        pushAndChange(['f', 90, 0], autoStep);
+                                        pushAndChange(['f', 90, 1], autoStep);
                                         pushAndChange(['r', 180, 0], autoStep);
                                     break; 
                                 }
@@ -2440,6 +2439,51 @@ window.onload = function(){
     }
 
 // ////////////////////////////////////////////////////////////
+    //判断顶层小面是否为顶层颜色
+    function isOk (upIndex) { 
+        if(fakeBigSixFace['u'][upIndex] === fakeBigSixFace['u'][4]){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function isSideYes (face,upIndex) { 
+        if(fakeBigSixFace[face][upIndex] === fakeBigSixFace['u'][4]){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // function isSideSame (face,upIndex) { 
+    //     if(fakeBigSixFace[face][upIndex] === fakeBigSixFace['u'][4]){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+
+
+
+// 小鱼 → 顶层ok
+function topFaceRotate (face, dir) {  //zheng 1 ni 0
+    let dirF = (dir === 1) ? 0 : 1;
+    pushAndChange([face, 90, dir], autoStep);
+    pushAndChange(['u', 90, dir], autoStep);
+    pushAndChange([face, 90, dirF], autoStep);
+    pushAndChange(['u', 90, dir], autoStep);
+    pushAndChange([face, 90, dir], autoStep);
+    pushAndChange(['u', 180, dirF], autoStep);
+    pushAndChange([face, 90, dirF], autoStep);
+}
+
+
+
+
+
+
 
     function topFloorFirst(){
 
@@ -2551,7 +2595,7 @@ window.onload = function(){
             pushAndChange([face_left, 90, 0], autoStep);
         }
         // (R2 D') (R U'U') (R' D) (R U'U' R)
-        function normalFirst_04(face){
+        function normalFirst_04(face){  //l , f
             let face_right;
             switch(face){
                 case 'f':
@@ -2741,7 +2785,7 @@ window.onload = function(){
             pushAndChange([face_02, 90, 1], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
             pushAndChange([face_02, 90, 1], autoStep);
-            pushAndChange([face_03, 90, 0], autoStep);
+            pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_02, 180, 1], autoStep);
             pushAndChange([face_01, 90, 0], autoStep);
 
@@ -2892,7 +2936,7 @@ window.onload = function(){
             pushAndChange([face_01, 90, 0], autoStep);
             pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_01, 90, 1], autoStep);
-            pushAndChange([face_03, 90, 1], autoStep);
+            pushAndChange([face_03, 90, 0], autoStep);
 
         }
 
@@ -3090,19 +3134,20 @@ window.onload = function(){
             
         }
 
-        // (R'U'R U') (R'U R U) (l U'R'U)
+        // (r U R' U) (R' F R F') R U2 r'
 
 
-        function normalFirst_35(face_01,face_02,face_03){//f,r, b
+        function normalFirst_35(face_01,face_02,face_03){//f , r, b
 
             pushAndChange([face_01, 90, 1], autoStep);
             pushAndChange([face_02, 90, 1], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
             pushAndChange([face_02, 90, 1], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
-            pushAndChange(['b', 90, 1], autoStep);
+            pushAndChange(['d', 90, 1], autoStep);
+
             pushAndChange([face_03, 90, 1], autoStep);
-            pushAndChange(['b', 90, 0], autoStep);
+            pushAndChange(['d', 90, 0], autoStep);
             pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_02, 180, 1], autoStep);
             pushAndChange([face_01, 90, 0], autoStep);
@@ -3110,37 +3155,275 @@ window.onload = function(){
         }
 
 
+        // (R U)(B' U')(R' U R B R')
 
+        function normalFirst_36(face_01,face_02){//r,b
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //判断顶层小面是否为顶层颜色
-        function isOk (upIndex) { 
-            if(fakeBigSixFace['u'][upIndex] === fakeBigSixFace['u'][4]){
-                return true;
-            }else{
-                return false;
-            }
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            
         }
 
-        function isSideYes (face,upIndex) { 
-            if(fakeBigSixFace[face][upIndex] === fakeBigSixFace['u'][4]){
-                return true;
-            }else{
-                return false;
-            }
+        // (R' U' F) (U R U') (R' F' R)
+
+        function normalFirst_37(face_01,face_02){//l,b
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+        }
+
+
+        //  R' F (R U R'U') F' (U R)
+
+        function normalFirst_38(face_01,face_02){//r,f
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+        }
+
+        // L F' (L' U' L U) F (U' L')
+
+        function normalFirst_39(face_01,face_02){//l,f
+
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+
+        }
+
+       //(r U2 R' U' R U' r') (R' U2 R U R' U R)
+       function normalFirst_40(face_01,face_02,face_03,face_04){//l,f,r,b
+
+           pushAndChange([face_01, 90, 1], autoStep);
+           pushAndChange([face_02, 180, 1], autoStep);
+           pushAndChange([face_03, 90, 0], autoStep);
+           pushAndChange([face_02, 90, 0], autoStep);
+           pushAndChange([face_03, 90, 1], autoStep);
+           pushAndChange([face_02, 90, 0], autoStep);
+           pushAndChange([face_01, 90, 0], autoStep);
+
+           topFaceRotate (face_04, 1);
+
+           // pushAndChange([face_04, 90, 1], autoStep);
+           // pushAndChange(['u', 90, 1], autoStep);
+           // pushAndChange([face_04, 90, 0], autoStep);
+           // pushAndChange(['u', 90, 1], autoStep);
+           // pushAndChange([face_04, 90, 1], autoStep);
+           // pushAndChange(['u', 180, 0], autoStep);
+           // pushAndChange([face_04, 90, 0], autoStep);
+
+
+       }
+
+
+
+       // (R' U' R U' R' U2 R) F (R U R' U') F'
+       function normalFirst_41(face_01,face_02){//l,b
+
+           pushAndChange([face_01, 90, 0], autoStep);
+           pushAndChange(['u', 90, 0], autoStep);
+           pushAndChange([face_01, 90, 1], autoStep);
+           pushAndChange(['u', 90, 0], autoStep);
+           pushAndChange([face_01, 90, 0], autoStep);
+           pushAndChange(['u', 180, 1], autoStep);
+           pushAndChange([face_01, 90, 1], autoStep);
+           pushAndChange([face_02, 90, 1], autoStep);
+           pushAndChange([face_01, 90, 1], autoStep);
+           pushAndChange(['u', 90, 1], autoStep);
+           pushAndChange([face_01, 90, 0], autoStep);
+           pushAndChange(['u', 90, 0], autoStep);
+           pushAndChange([face_02, 90, 0], autoStep);
+
+       }
+
+       // (r' U2 R U R' U r) (R U2 R' U' R U' R')
+       function normalFirst_42(face_01,face_02,face_03,face_04){//l,b,r,f
+
+           pushAndChange([face_01, 90, 0], autoStep);
+           pushAndChange([face_02, 180, 1], autoStep);
+           pushAndChange([face_03, 90, 1], autoStep);
+           pushAndChange([face_02, 90, 1], autoStep);
+           pushAndChange([face_03, 90, 0], autoStep);
+           pushAndChange([face_02, 90, 1], autoStep);
+           pushAndChange([face_01, 90, 1], autoStep);
+
+           topFaceRotate (face_04, 0);
+           
+
+       }
+
+
+        // (R U R' U R U2 R') F (R U R' U') F'
+        function normalFirst_43(face_01,face_02){//l,b
+
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 180, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+
+        }
+
+
+        // (R' U' R U') (R' U) y' (R' U R B)
+        function normalFirst_44(face_01,face_02){//r,f
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+
+        }
+        // (r U r') (U R U' R')2 (r U' r')
+        function normalFirst_45(face_01,face_02){//b,l,f
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_03, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_03, 90, 0], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_03, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_03, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+
+
+        }
+        // R' F (U R U') (R2' F') (R2 U R' U' R)
+        function normalFirst_46(face_01,face_02){//f,l
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 180, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 180, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+        }
+        // (r' R U) (R U R'U') (r2 R2') (U R U' r')  略
+
+        
+
+        // F (U R U') (R2 F') (R U R U' R')
+        function normalFirst_47(face_01,face_02){//f,r
+
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 180, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+
+        }
+
+
+        // (r U r') (R U R' U') (r U' r')
+        function normalFirst_48(face_01,face_02,face_03){//r,b,l
+
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_03, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_03, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+
+
+        }
+
+        // (l' U' l) (L' U' L U) (l' U l)
+        function normalFirst_49(face_01,face_02,face_03){//l,b,r
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_03, 90, 0], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_03, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+
+
+        }
+        // R' F (R U R' F' R) y' (R U' R')
+        function normalFirst_50(face_01,face_02){//r,f
+
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange(['u', 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
+
         }
 
 
@@ -3148,17 +3431,20 @@ window.onload = function(){
 
 
 
-        // 小鱼 → 顶层ok
-        function topFaceRotate (face, dir) {  //zheng 1 ni 0
-            let dirF = (dir === 1) ? 0 : 1;
-            pushAndChange([face, 90, dir], autoStep);
-            pushAndChange(['u', 90, dir], autoStep);
-            pushAndChange([face, 90, dirF], autoStep);
-            pushAndChange(['u', 90, dir], autoStep);
-            pushAndChange([face, 90, dir], autoStep);
-            pushAndChange(['u', 180, dirF], autoStep);
-            pushAndChange([face, 90, dirF], autoStep);
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // //////////////////////////////////////
 
@@ -3221,25 +3507,25 @@ window.onload = function(){
             if(fakeBigSixFace['r'][2] === fakeBigSixFace['u'][4]){
                 normalFirst_03 ('b') 
             }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['u'][4]){
-                normalFirst_04 ('b') 
+                normalFirst_04 ('f') 
             }
         }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//28
             if(fakeBigSixFace['f'][2] === fakeBigSixFace['u'][4]){
                 normalFirst_03 ('r') 
             }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['u'][4]){
-                normalFirst_04 ('r') 
+                normalFirst_04 ('l') 
             }
         }else if(isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//86
             if(fakeBigSixFace['l'][2] === fakeBigSixFace['u'][4]){
                 normalFirst_03 ('f') 
             }else if(fakeBigSixFace['f'][0] === fakeBigSixFace['u'][4]){
-                normalFirst_04 ('f') 
+                normalFirst_04 ('b') 
             }
         }else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//06
             if(fakeBigSixFace['b'][2] === fakeBigSixFace['u'][4]){
                 normalFirst_03 ('l') 
             }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['u'][4]){
-                normalFirst_04 ('l') 
+                normalFirst_04 ('r') 
             }
         }
 
@@ -3370,42 +3656,134 @@ window.onload = function(){
 
         }
 
-        //最简单不用背的7个公式(一字)
+        //最简单不用背的7个公式(一字) 合并复杂的3种
         else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//竖着
-            if(isSideYes('b',0) && isSideYes('b',2)){
+            if(!isSideYes('f',0) && !isSideYes('f',1) && !isSideYes('f',2) && isSideYes('r',0) && isSideYes('r',1) && !isSideYes('r',2)){//
                 normalFirst_09('r','b')
-            }else{
+            }else if(!isSideYes('b',0) && !isSideYes('b',1) && !isSideYes('b',2) && isSideYes('l',0) && isSideYes('l',1) && !isSideYes('l',2)){
                 normalFirst_09('l','f')
             }
+
+            else if(isSideYes('f',0) && !isSideYes('f',1) && !isSideYes('f',2) && isSideYes('r',0) && isSideYes('r',1) && isSideYes('r',2)){
+                normalFirst_44('r','f')
+            }else if(isSideYes('b',0) && !isSideYes('b',1) && !isSideYes('b',2) && isSideYes('b',0) && isSideYes('b',1) && isSideYes('b',2)){
+                normalFirst_44('l','b')
+            }
+
+
+
+            else if(isSideYes('f',0) && !isSideYes('f',1) && isSideYes('f',2) && !isSideYes('r',0) && isSideYes('r',1) && !isSideYes('r',2)){
+                normalFirst_45('b','l','f')
+            }
+
+            else if(!isSideYes('f',0) && !isSideYes('f',1) && !isSideYes('f',2) && isSideYes('r',0) && isSideYes('r',1) && isSideYes('r',2)){
+                normalFirst_46('f','l')
+            }
+
+
         }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//横着
-            if(isSideYes('l',0) && isSideYes('l',2)){
+            if(!isSideYes('l',0) && !isSideYes('l',1) && !isSideYes('l',2) && isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2)){//
                 normalFirst_09('b','r')
-            }else{
+            }else if(!isSideYes('r',0) && !isSideYes('r',1) && !isSideYes('r',2) && isSideYes('b',0) && isSideYes('b',1) && !isSideYes('b',2)){
                 normalFirst_09('f','l')
             }
+
+
+            else if(isSideYes('l',0) && !isSideYes('l',1) && !isSideYes('l',2) && isSideYes('f',0) && isSideYes('f',1) && isSideYes('f',2)){
+                normalFirst_44('f','l')
+            }else if(isSideYes('r',0) && !isSideYes('r',1) && !isSideYes('r',2) && isSideYes('l',0) && isSideYes('l',1) && isSideYes('l',2)){
+                normalFirst_44('b','r')
+            }
+
+
+
+            else if(isSideYes('l',0) && !isSideYes('l',1) && isSideYes('l',2) && !isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2)){
+                normalFirst_45('r','b','l')
+            }
+
+            else if(!isSideYes('l',0) && !isSideYes('l',1) && !isSideYes('l',2) && isSideYes('f',0) && isSideYes('f',1) && isSideYes('f',2)){
+                normalFirst_46('l','b')
+            }
         }
+
+
+
+
+
 
 
         //最简单不用背的7个公式(缺 L 的   f (R U R' U') f'  )
         else if(!isOk(0) && !isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//0136
-            normalFirst_10('b','l')
-        }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && isOk(7) && isOk(8)){//
-            normalFirst_10('r','b')
-        }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//
-            normalFirst_10('f','r')
-        }else if(isOk(0) && isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//
-            normalFirst_10('l','f')
+            
+            if(!isSideYes('f',0)){
+                normalFirst_10('b','l')
+            }else{
+                normalFirst_36('r','b')
+            }
+
+
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && isOk(7) && isOk(8)){//0125
+                 
+            if(!isSideYes('l',0)){
+                normalFirst_10('r','b')
+            }else{
+                normalFirst_36('f','r')
+                console.log(111)
+            }
+
+        }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//2578
+            
+            if(!isSideYes('l',0)){
+                normalFirst_10('f','r')
+            }else{
+                normalFirst_36('l','f')
+            }
+
+        }else if(isOk(0) && isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//3678
+            
+            if(!isSideYes('b',0)){
+                normalFirst_10('l','f')
+            }else{
+                normalFirst_36('b','l')
+            }
+
         }
+
+
 
         //最简单不用背的7个公式(缺 L 的   f' (L' U' L U) f  )
         else if(isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//1258
-            normalFirst_11('b','r')
+            
+            if(!isSideYes('f',2)){
+                normalFirst_11('b','r')
+            }else{
+                normalFirst_37('l','b')
+            }
+
         }else if(isOk(0) && isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//5678
-            normalFirst_11('r','f')
+            
+            if(!isSideYes('l',2)){
+                normalFirst_11('r','f')
+            }else{
+                normalFirst_37('b','r')
+            }
+
         }else if(!isOk(0) && isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//0367
-            normalFirst_11('f','l')
+            
+            if(!isSideYes('b',2)){
+                normalFirst_11('f','l')
+            }else{
+                normalFirst_37('r','f')
+            }
+
         }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && isOk(6) && isOk(7) && isOk(8)){//0123
-            normalFirst_11('l','b')
+            
+            if(!isSideYes('r',2)){
+                normalFirst_11('l','b')
+            }else{
+                normalFirst_37('f','l')
+            }
+
         }
 
 
@@ -3511,7 +3889,7 @@ window.onload = function(){
         }
 
 
-        // 四个色块组成的闪电（情况一）  ？？？？？？？？？？？？？
+        // 四个色块组成的闪电（情况一）
 
         else if(!isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//136
         
@@ -3546,7 +3924,7 @@ window.onload = function(){
         }
 
 
-        // 四个色块组成的闪电（情况二）？？？？？？？？？？？
+        // 四个色块组成的闪电（情况二）
 
         else if(isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//037
             
@@ -3554,6 +3932,7 @@ window.onload = function(){
                   normalFirst_16('l','b','r');
             }else{
                 normalFirst_35('f','r', 'b')
+
             }
         }else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//123
             
@@ -3569,7 +3948,7 @@ window.onload = function(){
             }else{
                 normalFirst_35('b','l', 'f')
             }
-        }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//378
+        }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//567
             
             if(isSideYes('r',0) && isSideYes('b',0) && isSideYes('b',1)){
                   normalFirst_16('f','l','b');
@@ -3819,40 +4198,170 @@ window.onload = function(){
         // 闪电 合并到上面
 
 
+// 第6组 8个公式
+        
+        // 缺L合并到上面
+
+        //大闪电 两种情况 正
+        else if(isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//0358
+            if(!isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2)){
+                normalFirst_38('r','f')
+            }else{
+                normalFirst_38('l','b')
+            }
+        }else if(!isOk(0) && isOk(1) && isOk(2) && !isOk(3) && !isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//1267
+            if(!isSideYes('l',0) && isSideYes('l',1) && !isSideYes('l',2)){
+                normalFirst_38('f','l')
+            }else{
+                normalFirst_38('b','r')
+            }
+        }
+
+        //大闪电 两种情况 反
+        else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//3625
+            if(!isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2)){
+                normalFirst_39('l','f')
+            }else{
+                normalFirst_39('r','b')
+            }
+        }else if(isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//0178
+            if(!isSideYes('l',0) && isSideYes('l',1) && !isSideYes('l',2)){
+                normalFirst_39('b','l')
+            }else{
+                normalFirst_39('f','r')
+            }
+        }
+
+        //小闪电 + 角色块   情况1
+        else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && isOk(6) && !isOk(7) && isOk(8)){//1568
+            if(!isSideYes('r',0) && !isSideYes('r',1) && isSideYes('r',2)){
+                normalFirst_40('l','f','r','b')
+            }else{
+                normalFirst_41('l','b')
+            }
+        }else if(isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//0567
+            if(!isSideYes('f',0) && !isSideYes('f',1) && isSideYes('f',2)){
+                normalFirst_40('b','l','f','r')
+            }else{
+                normalFirst_41('b','r')
+            }
+        }else if(isOk(0) && !isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//0237
+            if(!isSideYes('l',0) && !isSideYes('l',1) && isSideYes('l',2)){
+                normalFirst_40('r','b','l','f')
+            }else{
+                normalFirst_41('r','f')
+            }
+        }else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//1238
+            if(!isSideYes('b',0) && !isSideYes('b',1) && isSideYes('b',2)){
+                normalFirst_40('f','r','b','l')
+            }else{
+                normalFirst_41('f','l')
+            }
+        }
+
+        //小闪电 + 角色块   情况2
+        else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//3625
+            if(!isSideYes('f',0) && !isSideYes('f',1) && !isSideYes('f',2)){
+                normalFirst_42('l','b','r','f')
+            }else{
+                normalFirst_43('l','b')
+            }
+        }else if(isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//0178
+            if(!isSideYes('l',0) && !isSideYes('l',1) && !isSideYes('l',2)){
+                normalFirst_42('b','r','f','l')
+            }else{
+                normalFirst_43('b','r')
+            }
+        }else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//3625
+            if(!isSideYes('b',0) && !isSideYes('b',1) && !isSideYes('b',2)){
+                normalFirst_42('r','f','l','b')
+            }else{
+                normalFirst_43('r','f')
+            }
+        }else if(isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//0178
+            if(!isSideYes('r',0) && !isSideYes('r',1) && !isSideYes('r',2)){
+                normalFirst_42('f','l','b','r')
+            }else{
+                normalFirst_43('f','l')
+            }
+        }
 
 
+// 第7组 8个公式
+
+        // 三种一字的合并到上面
 
 
+        // 四个角色块
+        else if(isOk(0) && !isOk(1) && isOk(2) && !isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && isOk(8)){//0268
+            pushAndChange(['l', 90, 0], autoStep);
+            pushAndChange(['r', 90, 1], autoStep);
+            pushAndChange(['b', 90, 1], autoStep);
+            pushAndChange(['r', 90, 1], autoStep);
+            pushAndChange(['b', 90, 1], autoStep);
+            pushAndChange(['r', 90, 0], autoStep);
+            pushAndChange(['b', 90, 0], autoStep);
+            pushAndChange(['l', 180, 0], autoStep);
+            pushAndChange(['r', 180, 0], autoStep);
+            pushAndChange(['f', 90, 1], autoStep);
+            pushAndChange(['r', 90, 1], autoStep);
+            pushAndChange(['f', 90, 0], autoStep);
+            pushAndChange(['l', 90, 0], autoStep);
+        }
 
+        //  L形状 四种  情况1
+        else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//356
+            if(!isSideYes('f',0) && isSideYes('f',1) && isSideYes('f',2)){
+                normalFirst_47('f','r')
+            }else{
+                normalFirst_48('r','b','l')
+            }
+        }else if(isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//017
+            if(!isSideYes('l',0) && isSideYes('l',1) && isSideYes('l',2)){
+                normalFirst_47('l','f')
+            }else{
+                normalFirst_48('f','r','b')
+            }
+        }else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//235
+            if(!isSideYes('b',0) && isSideYes('b',1) && isSideYes('b',2)){
+                normalFirst_47('b','l')
+            }else{
+                normalFirst_48('l','f','r')
+            }
+        }else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//178
+            if(!isSideYes('r',0) && isSideYes('r',1) && isSideYes('r',2)){
+                normalFirst_47('r','b')
+            }else{
+                normalFirst_48('b','l','f')
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //L形状 四种  情况2
+        else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//358
+            if(!isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2)){
+                normalFirst_49('l','b','r')
+            }else{
+                normalFirst_50('r','f')
+            }
+        }else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//167
+            if(!isSideYes('l',0) && isSideYes('l',1) && !isSideYes('l',2)){
+                normalFirst_49('b','r','f')
+            }else{
+                normalFirst_50('f','l')
+            }
+        }else if(isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//035
+            if(!isSideYes('b',0) && isSideYes('b',1) && !isSideYes('b',2)){
+                normalFirst_49('r','f','l')
+            }else{
+                normalFirst_50('l','b')
+            }
+        }else if(!isOk(0) && isOk(1) && isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//127
+             if(!isSideYes('r',0) && isSideYes('r',1) && !isSideYes('r',2)){
+                 normalFirst_49('f','l','b')
+             }else{
+                 normalFirst_50('b','r')
+             }
+        }
 
 
 
@@ -3862,7 +4371,7 @@ window.onload = function(){
 
 // ////////////////////////////////////////////////////////////
 
-    function topFloorThird () {
+    function topFloorSecond () {
         function thirdRotate (face) {
             let face_01,face_02;
             switch(face){
@@ -3894,16 +4403,99 @@ window.onload = function(){
             pushAndChange([face, 180, 1], autoStep);
         }
 
-        if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2]){
-            thirdRotate ('r');
-        }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
-            thirdRotate ('b');
-        }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
-            thirdRotate ('f');
-        }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2]){
-            thirdRotate ('l');
-        }else{
-            thirdRotate ('l');
+
+        // function isThirdFloorTure(dir){
+
+        //       switch(dir){
+        //         case 'f':
+        //             if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][1] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+        //                 return 'f';
+        //             }
+        //         break;
+
+        //         case 'l':
+        //             if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][1] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+        //                 return 'l';
+        //             }
+        //         break;
+
+        //         case 'b':
+        //             if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][1] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+        //                 return 'b';
+        //             }
+        //         break;
+
+        //         case 'r':
+        //             if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][1] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+        //                 return 'r'
+        //             }
+        //         break;
+
+        //         default:
+        //             return false;
+        //         break;
+
+        //       }
+        // }
+
+
+        function isThirdFloorTure(dir){
+
+              switch(dir){
+                case 'f':
+                    if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                        return 'f';
+                    }
+                break;
+
+                case 'l':
+                    if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+                        return 'l';
+                    }
+                break;
+
+                case 'b':
+                    if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                        return 'b';
+                    }
+                break;
+
+                case 'r':
+                    if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                        return 'r'
+                    }
+                break;
+
+                default:
+                    return false;
+                break;
+
+              }
+        }
+
+
+
+
+        if(isThirdFloorTure('f')){
+
+            return isThirdFloorTure('f');
+        
+        }else if(isThirdFloorTure('l')){
+        
+            return isThirdFloorTure('l');
+        
+        }else if(isThirdFloorTure('b')){
+        
+            return isThirdFloorTure('b');
+        
+        }else if(isThirdFloorTure('r')){
+        
+            return isThirdFloorTure('r');
+        
+        }
+
+
+
             if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2]){
                 thirdRotate ('r');
             }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
@@ -3912,19 +4504,96 @@ window.onload = function(){
                 thirdRotate ('f');
             }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2]){
                 thirdRotate ('l');
+            }else{
+                thirdRotate ('l');
+                if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2]){
+                    thirdRotate ('r');
+                }else if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+                    thirdRotate ('b');
+                }else if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                    thirdRotate ('f');
+                }else if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2]){
+                    thirdRotate ('l');
+                }
             }
-        }
+
+
+
+
+
 
     }
 
 // ////////////////////////////////////////////////////////////
     function topFloorLast () {
-        topFaceRotate ('f', 1)
-        topFloorSecond()
+        var face_c,face_reverse,dir,r_dir;
 
-        topFaceRotate ('f', 0)
-        topFloorSecond()
+        switch(topFloorSecond()){
+            case 'f':
+                
+                if(fakeBigSixFace['l'][1] == fakeBigSixFace['b'][0]){
+                    face_c = 'l';
+                    face_reverse = 'b';
+                    dir = 1;
+                    r_dir = 0;
+                }else{
+                    face_c = 'r';
+                    face_reverse = 'b';
+                    dir = 0;
+                    r_dir = 1;
+                }
+            break;
 
+            case 'l':
+                
+                if(fakeBigSixFace['b'][1] == fakeBigSixFace['r'][0]){
+                    face_c = 'b';
+                    face_reverse = 'r';
+                    dir = 1;
+                    r_dir = 0;
+                }else{
+                    face_c = 'f';
+                    face_reverse = 'r';
+                    dir = 0;
+                    r_dir = 1;
+                }
+            break;
+
+            case 'b':
+                
+                if(fakeBigSixFace['r'][1] == fakeBigSixFace['f'][0]){
+                    face_c = 'r';
+                    face_reverse = 'f';
+                    dir = 1;
+                    r_dir = 0;
+                }else{
+                    face_c = 'l';
+                    face_reverse = 'f';
+                    dir = 0;
+                    r_dir = 1;
+                }
+            break;
+
+            case 'r':
+                
+                if(fakeBigSixFace['f'][1] == fakeBigSixFace['l'][0]){
+                    face_c = 'f';
+                    face_reverse = 'l';
+                    dir = 1;
+                    r_dir = 0;
+                }else{
+                    face_c = 'b';
+                    face_reverse = 'l';
+                    dir = 0;
+                    r_dir = 1;
+                }
+            break;
+        }
+        
+
+        topFaceRotate (face_c, dir)
+
+        topFaceRotate (face_reverse, r_dir)
 
     }
 
@@ -3967,27 +4636,28 @@ window.onload = function(){
         searchCornerCube('f','r')
         searchCornerCube('b','l')
         searchCornerCube('r','b')
-        // ///////////////////////////
-        searchSecondFloorCube('l','f')    
+        // // ///////////////////////////
+        searchSecondFloorCube('l','f')
         searchSecondFloorCube('b','l')
         searchSecondFloorCube('r','b')
         searchSecondFloorCube('f','r')
-        //////////////////////////
-        // topFloorFirst();
-        //////////////////////////
-        // topFloorSecond();
-        // //////////////////////////
-        // topFloorThird ()
+        // ////////////////////////
+        topFloorFirst();
+        ////////////////////////
         
+        topFloorSecond();
+
         // // //////////////////////////
-        // topFloorLast ()
-        // // //////////////
-        // isTopFloorOk ()
+        topFloorLast ()
+
+        
+        // // // //////////////
+        isTopFloorOk ()
         ////////////////////////// 
         
         
         if(!test){
-            stepByStep(autoStep,20)
+            stepByStep(autoStep,10)
         }    
 
         
@@ -4086,46 +4756,46 @@ window.onload = function(){
         // pushAndChange(['b', 90, 0], randomArr)
         // pushAndChange(['l', 90, 0], randomArr)
 
-        pushAndChange(['u', 180, 0], randomArr)
-        pushAndChange(['l', 90, 0], randomArr)
-        pushAndChange(['l', 90, 0], randomArr)
-        pushAndChange(['b', 180, 1], randomArr)
-        pushAndChange(['b', 90, 0], randomArr)
-        pushAndChange(['d', 90, 1], randomArr)
-        pushAndChange(['d', 180, 1], randomArr)
-       pushAndChange(['r', 90, 1], randomArr)
+    //     pushAndChange(['u', 180, 0], randomArr)
+    //     pushAndChange(['l', 90, 0], randomArr)
+    //     pushAndChange(['l', 90, 0], randomArr)
+      
 
-        pushAndChange(['l', 90, 0], randomArr)
+    // pushAndChange(['d', 90, 1], randomArr)
+    //       pushAndChange(['d', 180, 1], randomArr)
+    //     pushAndChange(['d', 90, 1], randomArr)
 
- 
-        pushAndChange(['d', 90, 1], randomArr)
+    //      pushAndChange(['r', 180, 1], randomArr)
 
-         pushAndChange(['r', 180, 1], randomArr)
+    //       pushAndChange(['b', 180, 1], randomArr)
+    //       pushAndChange(['b', 90, 0], randomArr)
+       
+    //      pushAndChange(['r', 90, 1], randomArr)
 
+    //       pushAndChange(['l', 90, 0], randomArr)
 
-
-        pushAndChange(['f', 180, 0], randomArr)
-
-
+    //     pushAndChange(['f', 180, 0], randomArr)
 
 
 
 
 
-        // let steps = [
-        //                 ['u', 180, 0],
-        //                 ['r', 90, 1],
-        //                 ['l', 90, 0],
-        //                 ['d', 90, 1],
-        //                 ['l', 90, 0],
-        //                 ['d', 180, 1],
-        //                 ['r', 180, 1],
-        //                 ['b', 180, 1],
-        //                 ['d', 90, 1],
-        //                 ['b', 90, 0],
-        //                 ['f', 180, 0],
-        //                 ['l', 90, 0]
-        //             ]
+
+
+        let steps = [
+                        ['u', 180, 0],
+                        ['r', 90, 1],
+                        ['l', 90, 0],
+                        ['d', 90, 1],
+                        ['l', 90, 0],
+                        ['d', 180, 1],
+                        ['r', 180, 1],
+                        ['b', 180, 1],
+                        ['d', 90, 1],
+                        ['b', 90, 0],
+                        ['f', 180, 0],
+                        ['l', 90, 0]
+                    ]
 
 
 
@@ -4137,17 +4807,22 @@ window.onload = function(){
         //     randomArrTemp.push(steps[randomNum]);
         // }
 
-
-        // var testArr = [
-        //     ["l",90,0],["f",180,0],["l",90,0],["u",180,0],["r",90,1],["r",90,1],["u",180,0],["f",180,0],["l",90,0],["l",90,0],["d",90,1],["r",180,1]       
-        // ]
-
         // for (let i = 0; i < 12; i++) {
-        //     pushAndChange(testArr[i], randomArr)
+        //     get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
         // }
 
 
+        var testArr = [
+           
+            ["b",180,1],["u",180,0],["b",90,0],["r",180,1],["u",180,0],["u",180,0],["d",180,1],["r",180,1],["d",90,1],["d",180,1],["d",90,1],["l",90,0]     
+        ]
 
+        for (let i = 0; i < 12; i++) {
+            pushAndChange(testArr[i], randomArr)
+        }
+
+
+        
 
 
 
