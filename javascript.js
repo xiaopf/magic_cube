@@ -1281,7 +1281,7 @@ window.onload = function(){
 
 // ////////////////////////////////////////////////////////////
 
-    function searchCornerCube(searchFace_01,searchFace_02){
+    function searchCornerCube(searchFace_01,searchFace_02){//l f
         for(let i = 0; i < 6;i ++){
             for(let j = 0; j < 9; j+=2) {
                 if (j != 4) {
@@ -1459,6 +1459,7 @@ window.onload = function(){
                                    
                                 break;
                                 case 'l':
+            console.log(11) 
                                     pushAndChange(['l', 90, 1], autoStep);
                                     pushAndChange(['u', 90, 1], autoStep);
                                     pushAndChange(['l', 90, 0], autoStep);
@@ -1495,6 +1496,7 @@ window.onload = function(){
                                     pushAndChange(['b', 90, 1], autoStep);
                                 break;
                                 case 'l':
+            console.log(11) 
                                 
                                 break;
                                 case 'r':
@@ -1526,6 +1528,7 @@ window.onload = function(){
                                     pushAndChange(['b', 90, 1], autoStep);
                                 break;
                                 case 'l':
+            console.log(11) 
                                     pushAndChange(['r', 90, 0], autoStep);
                                     pushAndChange(['l', 90, 0], autoStep);
                                     pushAndChange(['u', 180, 0], autoStep);
@@ -1550,6 +1553,7 @@ window.onload = function(){
                                     pushAndChange(['l', 90, 0], autoStep);
                                 break;
                                 case 'l':
+            console.log(11) 
                                     pushAndChange(['r', 90, 1], autoStep);
                                     pushAndChange(['u', 180, 1], autoStep);
                                     pushAndChange(['r', 90, 0], autoStep);
@@ -1772,6 +1776,14 @@ window.onload = function(){
                                     pushAndChange(['l', 90, 0], autoStep);
                                     pushAndChange(['u', 180, 0], autoStep);
                                     pushAndChange(['l', 90, 1], autoStep);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    // pushAndChange(['u', 90, 0], autoStep);
+                                    // pushAndChange(['l', 90, 0], autoStep);
+                                    // pushAndChange(['u', 90, 1], autoStep);
+                                    // pushAndChange(['l', 90, 1], autoStep);
+
+
                                 break;
                                 case 'r':
                                     pushAndChange(['u', 90, 0], autoStep);
@@ -1885,9 +1897,13 @@ window.onload = function(){
                                 break;
                                 case 'l':
                                     pushAndChange(['f', 90, 1], autoStep);
-                                    pushAndChange(['u', 90, 1], autoStep);
+                                    pushAndChange(['u', 90, 0], autoStep)
                                     pushAndChange(['f', 90, 0], autoStep);
-                                    pushAndChange(['l', 180, 1], autoStep);
+                                    pushAndChange(['u', 90, 1], autoStep)
+                                    pushAndChange(['f', 90, 1], autoStep);
+                                    pushAndChange(['u', 90, 0], autoStep)
+                                    pushAndChange(['f', 90, 0], autoStep);
+                                    // alert(11111222);
                                 break;
                                 case 'r':
                                     pushAndChange(['f', 90, 1], autoStep);
@@ -4372,6 +4388,8 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 // ////////////////////////////////////////////////////////////
 
     function topFloorSecond () {
+
+
         function thirdRotate (face) {
             let face_01,face_02;
             switch(face){
@@ -4404,39 +4422,79 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         }
 
 
-        // function isThirdFloorTure(dir){
 
-        //       switch(dir){
-        //         case 'f':
-        //             if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][1] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
-        //                 return 'f';
-        //             }
-        //         break;
+        function topFloorLast (thirdDir) {
+            var face_c,face_reverse,dir,r_dir;
 
-        //         case 'l':
-        //             if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][1] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
-        //                 return 'l';
-        //             }
-        //         break;
+            switch(thirdDir){
+                case 'f':
+                    
+                    if(fakeBigSixFace['l'][1] == fakeBigSixFace['b'][0]){
+                        face_c = 'l';
+                        face_reverse = 'b';
+                        dir = 1;
+                        r_dir = 0;
+                    }else{
+                        face_c = 'r';
+                        face_reverse = 'b';
+                        dir = 0;
+                        r_dir = 1;
+                    }
+                break;
 
-        //         case 'b':
-        //             if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][1] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
-        //                 return 'b';
-        //             }
-        //         break;
+                case 'l':
+                    
+                    if(fakeBigSixFace['b'][1] == fakeBigSixFace['r'][0]){
+                        face_c = 'b';
+                        face_reverse = 'r';
+                        dir = 1;
+                        r_dir = 0;
+                    }else{
+                        face_c = 'f';
+                        face_reverse = 'r';
+                        dir = 0;
+                        r_dir = 1;
+                    }
+                break;
 
-        //         case 'r':
-        //             if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][1] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
-        //                 return 'r'
-        //             }
-        //         break;
+                case 'b':
+                    
+                    if(fakeBigSixFace['r'][1] == fakeBigSixFace['f'][0]){
+                        face_c = 'r';
+                        face_reverse = 'f';
+                        dir = 1;
+                        r_dir = 0;
+                    }else{
+                        face_c = 'l';
+                        face_reverse = 'f';
+                        dir = 0;
+                        r_dir = 1;
+                    }
+                break;
 
-        //         default:
-        //             return false;
-        //         break;
+                case 'r':
+                    
+                    if(fakeBigSixFace['f'][1] == fakeBigSixFace['l'][0]){
+                        face_c = 'f';
+                        face_reverse = 'l';
+                        dir = 1;
+                        r_dir = 0;
+                    }else{
+                        face_c = 'b';
+                        face_reverse = 'l';
+                        dir = 0;
+                        r_dir = 1;
+                    }
+                break;
+            }
+            
 
-        //       }
-        // }
+            topFaceRotate (face_c, dir)
+
+            topFaceRotate (face_reverse, r_dir)
+
+        }
+
 
 
         function isThirdFloorTure(dir){
@@ -4473,26 +4531,90 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
               }
         }
 
+        function isThirdFloorRealTure(dir){
+
+              switch(dir){
+                case 'f':
+                    if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][1] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                        return 'f';
+                    }
+                break;
+
+                case 'l':
+                    if(fakeBigSixFace['l'][0] === fakeBigSixFace['l'][1] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+                        return 'l';
+                    }
+                break;
+
+                case 'b':
+                    if(fakeBigSixFace['b'][0] === fakeBigSixFace['b'][1] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                        return 'b';
+                    }
+                break;
+
+                case 'r':
+                    if(fakeBigSixFace['r'][0] === fakeBigSixFace['r'][1] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2]){
+                        return 'r'
+                    }
+                break;
+
+                default:
+                    return false;
+                break;
+
+              }
+        }
 
 
 
-        if(isThirdFloorTure('f')){
+        if(isThirdFloorRealTure('f')){
 
-            return isThirdFloorTure('f');
+            topFloorLast (isThirdFloorRealTure('f'))
+            return false;
+        
+        }else if(isThirdFloorRealTure('l')){
+        
+            topFloorLast (isThirdFloorRealTure('l'))
+            return false;
+        
+        }else if(isThirdFloorRealTure('b')){
+        
+            topFloorLast (isThirdFloorRealTure('b'))
+            return false;
+        
+        }else if(isThirdFloorRealTure('r')){
+        
+            topFloorLast (isThirdFloorRealTure('r'))
+            return false;
+        
+        }
+
+
+        else if(isThirdFloorTure('f')){
+
+            topFloorLast (isThirdFloorTure('f'))
+            return false;
         
         }else if(isThirdFloorTure('l')){
         
-            return isThirdFloorTure('l');
+            topFloorLast (isThirdFloorTure('l'))
+            return false;
         
         }else if(isThirdFloorTure('b')){
         
-            return isThirdFloorTure('b');
+            topFloorLast (isThirdFloorTure('b'))
+            return false;
         
         }else if(isThirdFloorTure('r')){
         
-            return isThirdFloorTure('r');
+            topFloorLast (isThirdFloorTure('r'))
+            return false;
         
         }
+
+
+
+
 
 
 
@@ -4525,77 +4647,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
     }
 
 // ////////////////////////////////////////////////////////////
-    function topFloorLast () {
-        var face_c,face_reverse,dir,r_dir;
 
-        switch(topFloorSecond()){
-            case 'f':
-                
-                if(fakeBigSixFace['l'][1] == fakeBigSixFace['b'][0]){
-                    face_c = 'l';
-                    face_reverse = 'b';
-                    dir = 1;
-                    r_dir = 0;
-                }else{
-                    face_c = 'r';
-                    face_reverse = 'b';
-                    dir = 0;
-                    r_dir = 1;
-                }
-            break;
-
-            case 'l':
-                
-                if(fakeBigSixFace['b'][1] == fakeBigSixFace['r'][0]){
-                    face_c = 'b';
-                    face_reverse = 'r';
-                    dir = 1;
-                    r_dir = 0;
-                }else{
-                    face_c = 'f';
-                    face_reverse = 'r';
-                    dir = 0;
-                    r_dir = 1;
-                }
-            break;
-
-            case 'b':
-                
-                if(fakeBigSixFace['r'][1] == fakeBigSixFace['f'][0]){
-                    face_c = 'r';
-                    face_reverse = 'f';
-                    dir = 1;
-                    r_dir = 0;
-                }else{
-                    face_c = 'l';
-                    face_reverse = 'f';
-                    dir = 0;
-                    r_dir = 1;
-                }
-            break;
-
-            case 'r':
-                
-                if(fakeBigSixFace['f'][1] == fakeBigSixFace['l'][0]){
-                    face_c = 'f';
-                    face_reverse = 'l';
-                    dir = 1;
-                    r_dir = 0;
-                }else{
-                    face_c = 'b';
-                    face_reverse = 'l';
-                    dir = 0;
-                    r_dir = 1;
-                }
-            break;
-        }
-        
-
-        topFaceRotate (face_c, dir)
-
-        topFaceRotate (face_reverse, r_dir)
-
-    }
 
 // ////////////////////////////////////////////////////////////
     function isTopFloorOk (){
@@ -4609,7 +4661,13 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
     }
 
 
-
+   function isSideAllOk() {
+       if(fakeBigSixFace['f'][0] === fakeBigSixFace['f'][1] && fakeBigSixFace['f'][0] === fakeBigSixFace['f'][2]  && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][1] && fakeBigSixFace['l'][0] === fakeBigSixFace['l'][2] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][1] && fakeBigSixFace['b'][0] === fakeBigSixFace['b'][2] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][1] && fakeBigSixFace['r'][0] === fakeBigSixFace['r'][2]){
+            return false;
+       }else{
+            return true;
+       }
+   }
 
 
 
@@ -4640,17 +4698,21 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         searchSecondFloorCube('l','f')
         searchSecondFloorCube('b','l')
         searchSecondFloorCube('r','b')
-        searchSecondFloorCube('f','r')
+        // searchSecondFloorCube('f','r')
         // ////////////////////////
-        topFloorFirst();
-        ////////////////////////
+        // topFloorFirst();
+        // ////////////////////////
+        // var topCount = 0;
+        // while(isSideAllOk()){
+        //     topCount ++;
+        //     if(topCount > 4){
+        //         break;
+        //     }
+        //     topFloorSecond();
+        // }
         
-        topFloorSecond();
 
-        // // //////////////////////////
-        topFloorLast ()
 
-        
         // // // //////////////
         isTopFloorOk ()
         ////////////////////////// 
@@ -4756,6 +4818,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         // pushAndChange(['b', 90, 0], randomArr)
         // pushAndChange(['l', 90, 0], randomArr)
 
+
     //     pushAndChange(['u', 180, 0], randomArr)
     //     pushAndChange(['l', 90, 0], randomArr)
     //     pushAndChange(['l', 90, 0], randomArr)
@@ -4814,7 +4877,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
         var testArr = [
            
-            ["b",180,1],["u",180,0],["b",90,0],["r",180,1],["u",180,0],["u",180,0],["d",180,1],["r",180,1],["d",90,1],["d",180,1],["d",90,1],["l",90,0]     
+            ["f",180,0],["d",180,1],["b",180,1],["b",180,1],["l",90,0],["u",180,0],["d",90,1],["l",90,0],["f",180,0],["d",90,1],["r",90,1],["l",90,0]   
         ]
 
         for (let i = 0; i < 12; i++) {
@@ -4920,6 +4983,13 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
     get('.btn19').onclick = function(){
+
+        // for (let i = 0; i < autoStep.length; i++) {
+        //     get('.bianliang').innerHTML += '["'+autoStep[i][0]+'",'+autoStep[i][1]+','+autoStep[i][2]+'],'
+        // }
+        
+        console.log(autoStep)
+
         auto(false);
         // 
     };
