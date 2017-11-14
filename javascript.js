@@ -1,4 +1,5 @@
 window.onload = function(){
+
     let RANK = 3; // 定义魔方的阶数
     let cubeNum = RANK * RANK * RANK//计算立方体的个数
 
@@ -656,7 +657,7 @@ window.onload = function(){
         }
 
         function findStep(sideface){
-            // console.log(tempCube)
+            console.log(tempCube)
             switch(tempCube[0]){
                 case 'u':
                     switch(tempCube[1]){//判断所查颜色所在的面
@@ -728,7 +729,7 @@ window.onload = function(){
                                     pushAndChange(['b', 180, 1], autoStep);
                                     break;
                                 case 'l':
-                                    pushAndChange(['u', 90, 0], autoStep);
+                                    pushAndChange(['u', 90, 1], autoStep);
                                     pushAndChange(['l', 180, 1], autoStep);
                                     break;
                                 case 'r':
@@ -820,7 +821,7 @@ window.onload = function(){
                                 break;
                                 case 'l':
                                     pushAndChange(['f', 180, 1], autoStep);
-                                    pushAndChange(['u', 90, 0], autoStep);
+                                    pushAndChange(['u', 90, 1], autoStep);
                                     pushAndChange(['l', 180, 1], autoStep);
                                 break;
                                 case 'r':
@@ -894,21 +895,25 @@ window.onload = function(){
                                     pushAndChange(['u', 90, 1], autoStep);
                                     pushAndChange(['r', 90, 0], autoStep);
                                     pushAndChange(['f', 180, 1], autoStep);
+
                                 break;
                                 case 'b':
                                     pushAndChange(['r', 90, 1], autoStep);
                                     pushAndChange(['u', 90, 0], autoStep);
                                     pushAndChange(['r', 90, 0], autoStep);
                                     pushAndChange(['b', 180, 1], autoStep);
+
                                 break;
                                 case 'l':
                                     pushAndChange(['r', 90, 1], autoStep);
                                     pushAndChange(['u', 180, 0], autoStep);
                                     pushAndChange(['r', 90, 0], autoStep);
                                     pushAndChange(['l', 180, 1], autoStep);
+
                                 break;
                                 case 'r':
                                     pushAndChange(['r', 90, 0], autoStep);
+
                                 break; 
                             }
                         break;
@@ -1280,31 +1285,36 @@ window.onload = function(){
     }
 
 // ////////////////////////////////////////////////////////////
+    // let dirArr = ['d','u','l','f','r','b'];
 
     function searchCornerCube(searchFace_01,searchFace_02){//l f
+        // console.log(fakeBigSixFace);
         for(let i = 0; i < 6;i ++){
             for(let j = 0; j < 9; j+=2) {
                 if (j != 4) {
                     if(fakeBigSixFace[dirArr[i]][j] === fakeBigSixFace[dirArr[0]][4]){
+
+                        // console.log(dirArr[i]);//5 2
+
 
                         switch(dirArr[i]){
                            case 'u':
                                caseTJ(i,j,[['l', 0, 'b', 2],['b', 0, 'r', 2],['f', 0, 'l', 2],['r', 0, 'f', 2]]);//侧面色块所在的位置
                            break;
                            case 'd':
-                               caseTJ(i,j,[['l', 8, 'f', 6],['f', 8, 'r', 6],['b', 8, 'l', 6],['r', 8, 'b', 6]]);
+                               caseTJ(i,j,[['l', 8, 'f', 6],['f', 8, 'r', 6],['b', 8, 'l', 6],['r', 8, 'b', 6]]);///
                            break;
                            case 'f':
-                               caseTJ(i,j,[['l', 2, 'u', 6],['u', 8, 'r', 0],['d', 0, 'l', 6],['r', 6, 'd', 2]]);
+                               caseTJ(i,j,[['l', 2, 'u', 6],['u', 8, 'r', 0],['d', 0, 'l', 8],['r', 6, 'd', 2]]);///.. d0 l6 
                            break;
                            case 'b':
-                               caseTJ(i,j,[['r', 2, 'u', 2],['u', 0, 'l', 0],['d', 8, 'r', 8],['l', 6, 'd', 6]]);
+                               caseTJ(i,j,[['r', 2, 'u', 2],['u', 0, 'l', 0],['d', 8, 'r', 8],['l', 6, 'd', 6]]);////
                            break;
                            case 'l':
                                caseTJ(i,j,[['b', 2, 'u', 0],['u', 6, 'f', 0],['d', 6, 'b', 8],['f', 6, 'd', 0]]);
                            break;
                            case 'r':
-                               caseTJ(i,j,[['f', 2, 'u', 8],['u', 2, 'b', 0],['d', 2, 'f', 8],['b', 6, 'd', 8]]);
+                               caseTJ(i,j,[['f', 2, 'u', 8],['u', 2, 'b', 0],['d', 2, 'f', 8],['b', 6, 'd', 8]]);///
                            break; 
                         }
                     }
@@ -1313,6 +1323,9 @@ window.onload = function(){
         }
 
         function caseTJ(i,j,arr){
+            
+            console.log(i,j,arr);//????????? 3 6 
+
             switch(j){
                 case 0:
                     if(fakeBigSixFace[arr[0][0]][arr[0][1]] === fakeBigSixFace[searchFace_01][4] && 
@@ -1327,9 +1340,11 @@ window.onload = function(){
                     }
                 break;
                 case 6:
-                    if(fakeBigSixFace[arr[2][0]][arr[2][1]] === fakeBigSixFace[searchFace_01][4] && 
-                        fakeBigSixFace[arr[2][2]][arr[2][3]] === fakeBigSixFace[searchFace_02][4]){
+                    if(fakeBigSixFace[arr[2][0]][arr[2][1]] === fakeBigSixFace[searchFace_01][4] && //d 0  l4
+                        fakeBigSixFace[arr[2][2]][arr[2][3]] === fakeBigSixFace[searchFace_02][4]){ // 
                         tempCornerCube = [dirArr[i],arr[2]];
+
+                         console.log(tempCornerCube);
                     }
                 break;
                 case 8:
@@ -1341,7 +1356,7 @@ window.onload = function(){
             } 
         }
 
-        // console.log(tempCornerCube)
+        console.log(tempCornerCube)
 
 
         if (tempCornerCube[0] == 'u') {
@@ -1441,7 +1456,7 @@ window.onload = function(){
 
         function findCornerStep(sideface_01,sideface_02){
             if(sideface_01 == 'l' && sideface_02 =='f'){
-                // console.log(tempCornerCube)
+                console.log(tempCornerCube)
             }
             switch(tempCornerCube[0]){
                 case 'd':
@@ -1889,11 +1904,13 @@ window.onload = function(){
                                     pushAndChange(['l', 90, 0], autoStep);
                                     pushAndChange(['f', 90, 0], autoStep);
                                     pushAndChange(['f', 90, 0], autoStep);
+                                    console.log("11");
                                 break;
                                 case 'b':
                                     pushAndChange(['l', 180, 1], autoStep);
                                     pushAndChange(['b', 90, 1], autoStep);
                                     pushAndChange(['l', 180, 0], autoStep);
+                                    console.log("11");
                                 break;
                                 case 'l':
                                     pushAndChange(['f', 90, 1], autoStep);
@@ -1910,6 +1927,7 @@ window.onload = function(){
                                     pushAndChange(['u', 90, 0], autoStep);
                                     pushAndChange(['f', 90, 0], autoStep);
                                     pushAndChange(['r', 180, 1], autoStep);
+                                    console.log("11");
                                 break; 
                             }
                         break;
@@ -2650,7 +2668,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             pushAndChange(['u', 90, 0], autoStep);
             pushAndChange([face, 90, 1], autoStep);
             pushAndChange(['u', 90, 0], autoStep);
-            pushAndChange(['u', 90, 0], autoStep);
+            pushAndChange([face, 90, 0], autoStep);
 
         }
 
@@ -2768,13 +2786,13 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
         function normalFirst_13(face_01,face_02,face_03){//b,l,f
 
-            pushAndChange([face_01, 90, 0], autoStep);
+            pushAndChange([face_01, 90, 1], autoStep);
             pushAndChange([face_02, 180, 0], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
             pushAndChange([face_02, 90, 0], autoStep);
             pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_02, 90, 0], autoStep);
-            pushAndChange([face_01, 90, 1], autoStep);
+            pushAndChange([face_01, 90, 0], autoStep);
 
         }
 
@@ -2864,7 +2882,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             pushAndChange([face_01, 180, 1], autoStep);
             pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_01, 180, 0], autoStep);
-            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
             pushAndChange([face_01, 180, 0], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
             pushAndChange([face_01, 90, 1], autoStep);
@@ -2893,7 +2911,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             pushAndChange([face_02, 90, 1], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
             pushAndChange([face_02, 90, 1], autoStep);
-            pushAndChange([face_03, 90, 0], autoStep);
+            pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_02, 90, 0], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);
             pushAndChange([face_02, 90, 1], autoStep);
@@ -3040,12 +3058,12 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             pushAndChange(['u', 90, 1], autoStep);
             pushAndChange([face_01, 90, 0], autoStep);
             pushAndChange(['u', 90, 0], autoStep);
-            pushAndChange([face_02, 90, 0], autoStep);
+            pushAndChange([face_02, 90, 1], autoStep);
             pushAndChange([face_01, 90, 0], autoStep);
             pushAndChange([face_03, 90, 1], autoStep);
             pushAndChange([face_01, 90, 1], autoStep);
             pushAndChange([face_03, 90, 0], autoStep);    
-            pushAndChange([face_02, 90, 1], autoStep);
+            pushAndChange([face_02, 90, 0], autoStep);
 
         }
 
@@ -3548,23 +3566,46 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         //顶层为 缺两个角(对角)
 
         else if(!isOk(0) && isOk(1) && isOk(2) && isOk(3) && isOk(5) && isOk(6) && isOk(7) && !isOk(8)){//08
-            pushAndChange(['f', 90, 0], autoStep);
-            pushAndChange(['l', 90, 1], autoStep);
-            pushAndChange(['f', 90, 1], autoStep);
-            pushAndChange(['r', 90, 0], autoStep);
-            pushAndChange(['f', 90, 0], autoStep);
-            pushAndChange(['l', 90, 0], autoStep);
-            pushAndChange(['f', 90, 1], autoStep);
-            pushAndChange(['r', 90, 1], autoStep);
+            if(isSideYes('f',2)){
+                pushAndChange(['f', 90, 0], autoStep);
+                pushAndChange(['l', 90, 1], autoStep);
+                pushAndChange(['f', 90, 1], autoStep);
+                pushAndChange(['r', 90, 0], autoStep);
+                pushAndChange(['f', 90, 0], autoStep);
+                pushAndChange(['l', 90, 0], autoStep);
+                pushAndChange(['f', 90, 1], autoStep);
+                pushAndChange(['r', 90, 1], autoStep);
+            }else{
+                pushAndChange(['b', 90, 0], autoStep);
+                pushAndChange(['r', 90, 1], autoStep);
+                pushAndChange(['b', 90, 1], autoStep);
+                pushAndChange(['l', 90, 0], autoStep);
+                pushAndChange(['b', 90, 0], autoStep);
+                pushAndChange(['r', 90, 0], autoStep);
+                pushAndChange(['b', 90, 1], autoStep);
+                pushAndChange(['l', 90, 1], autoStep);
+            }
+
         }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//26
-            pushAndChange(['r', 90, 0], autoStep);
-            pushAndChange(['f', 90, 1], autoStep);
-            pushAndChange(['r', 90, 1], autoStep);
-            pushAndChange(['b', 90, 0], autoStep);
-            pushAndChange(['r', 90, 0], autoStep);
-            pushAndChange(['f', 90, 0], autoStep);
-            pushAndChange(['r', 90, 1], autoStep);
-            pushAndChange(['b', 90, 1], autoStep);
+            if(isSideYes('b',0)){
+                pushAndChange(['l', 90, 0], autoStep);
+                pushAndChange(['b', 90, 1], autoStep);
+                pushAndChange(['l', 90, 1], autoStep);
+                pushAndChange(['f', 90, 0], autoStep);
+                pushAndChange(['l', 90, 0], autoStep);
+                pushAndChange(['b', 90, 0], autoStep);
+                pushAndChange(['l', 90, 1], autoStep);
+                pushAndChange(['f', 90, 1], autoStep);
+            }else{
+                pushAndChange(['r', 90, 0], autoStep);
+                pushAndChange(['f', 90, 1], autoStep);
+                pushAndChange(['r', 90, 1], autoStep);
+                pushAndChange(['b', 90, 0], autoStep);
+                pushAndChange(['r', 90, 0], autoStep);
+                pushAndChange(['f', 90, 0], autoStep);
+                pushAndChange(['r', 90, 1], autoStep);
+                pushAndChange(['b', 90, 1], autoStep);
+            }
         }
 
 
@@ -3682,8 +3723,9 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
             else if(isSideYes('f',0) && !isSideYes('f',1) && !isSideYes('f',2) && isSideYes('r',0) && isSideYes('r',1) && isSideYes('r',2)){
                 normalFirst_44('r','f')
-            }else if(isSideYes('b',0) && !isSideYes('b',1) && !isSideYes('b',2) && isSideYes('b',0) && isSideYes('b',1) && isSideYes('b',2)){
+            }else if(isSideYes('b',0) && !isSideYes('b',1) && !isSideYes('b',2) && isSideYes('l',0) && isSideYes('l',1) && isSideYes('l',2)){
                 normalFirst_44('l','b')
+                // alert(11);
             }
 
 
@@ -3707,7 +3749,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
             else if(isSideYes('l',0) && !isSideYes('l',1) && !isSideYes('l',2) && isSideYes('f',0) && isSideYes('f',1) && isSideYes('f',2)){
                 normalFirst_44('f','l')
-            }else if(isSideYes('r',0) && !isSideYes('r',1) && !isSideYes('r',2) && isSideYes('l',0) && isSideYes('l',1) && isSideYes('l',2)){
+            }else if(isSideYes('r',0) && !isSideYes('r',1) && !isSideYes('r',2) && isSideYes('b',0) && isSideYes('b',1) && isSideYes('b',2)){
                 normalFirst_44('b','r')
             }
 
@@ -3731,7 +3773,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         //最简单不用背的7个公式(缺 L 的   f (R U R' U') f'  )
         else if(!isOk(0) && !isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && isOk(7) && isOk(8)){//0136
             
-            if(!isSideYes('f',0)){
+            if(isSideYes('f',0)){
                 normalFirst_10('b','l')
             }else{
                 normalFirst_36('r','b')
@@ -3740,16 +3782,16 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
         }else if(!isOk(0) && !isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && isOk(7) && isOk(8)){//0125
                  
-            if(!isSideYes('l',0)){
+            if(isSideYes('l',0)){
                 normalFirst_10('r','b')
             }else{
                 normalFirst_36('f','r')
-                console.log(111)
+
             }
 
         }else if(isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//2578
             
-            if(!isSideYes('l',0)){
+            if(isSideYes('l',0)){
                 normalFirst_10('f','r')
             }else{
                 normalFirst_36('l','f')
@@ -3757,7 +3799,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
         }else if(isOk(0) && isOk(1) && isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//3678
             
-            if(!isSideYes('b',0)){
+            if(isSideYes('b',0)){
                 normalFirst_10('l','f')
             }else{
                 normalFirst_36('b','l')
@@ -3842,7 +3884,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             }else{
                 normalFirst_10('f','r');
                 pushAndChange(['u', 90, 0], autoStep);  
-                normalFirst_01('r');
+                normalFirst_01('b');
             }
         }else if(!isOk(0) && !isOk(1) && isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//24
             if(isSideYes('l',0) && isSideYes('f',0)){
@@ -3852,7 +3894,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             }else{
                 normalFirst_10('l','f');
                 pushAndChange(['u', 90, 0], autoStep);
-                normalFirst_01('f');
+                normalFirst_01('r');
             }
         }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//84
             if(isSideYes('b',0) && isSideYes('l',0)){
@@ -3862,7 +3904,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             }else{
                 normalFirst_10('b','l');
                 pushAndChange(['u', 90, 0], autoStep);
-                normalFirst_01('l');
+                normalFirst_01('f');
             }
         }else if(!isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && !isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//64
             if(isSideYes('r',0) && isSideYes('b',0)){
@@ -3872,7 +3914,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             }else{
                 normalFirst_10('r','b');   
                 pushAndChange(['u', 90, 0], autoStep);
-                normalFirst_01('b');
+                normalFirst_01('l');
             }
         }
 
@@ -4072,7 +4114,6 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         // 4个色块,两个棱色块加上一个角色块
 
         else if(!isOk(0) && isOk(1) && !isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && isOk(8)){//138
-            
             if(isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2) && !isSideYes('r',0) && isSideYes('r',1) && !isSideYes('r',2)){
                 normalFirst_26('r','f');
             }else{
@@ -4080,7 +4121,6 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             }
 
         }else if(!isOk(0) && isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && isOk(6) && !isOk(7) && !isOk(8)){//156
-            
             if(isSideYes('l',0) && isSideYes('l',1) && !isSideYes('l',2) && !isSideYes('f',0) && isSideYes('f',1) && !isSideYes('f',2)){
                normalFirst_26('f','l');
             }else{
@@ -4088,19 +4128,18 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             }
 
         }else if(isOk(0) && !isOk(1) && !isOk(2) && !isOk(3) && isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//057
-            
             if(isSideYes('b',0) && isSideYes('b',1) && !isSideYes('b',2) && !isSideYes('l',0) && isSideYes('l',1) && !isSideYes('l',2)){
                normalFirst_26('l','b');
             }else{
                normalFirst_27('b','r');
             }
 
-        }else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && !isOk(7) && !isOk(8)){//237
-            
+        }else if(!isOk(0) && !isOk(1) && isOk(2) && isOk(3) && !isOk(5) && !isOk(6) && isOk(7) && !isOk(8)){//237
             if(isSideYes('r',0) && isSideYes('r',1) && !isSideYes('r',2) && !isSideYes('b',0) && isSideYes('b',1) && !isSideYes('b',2)){
                 normalFirst_26('b','r');
             }else{
                 normalFirst_27('r','f');
+                
             }
         }
 
@@ -4689,19 +4728,19 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         searchDownMiddleCube('f');
         searchDownMiddleCube('l');
         searchDownMiddleCube('r');
-        //////////////////////////
+        ////////////////////
         searchCornerCube('l','f')
         searchCornerCube('f','r')
         searchCornerCube('b','l')
         searchCornerCube('r','b')
-        // // ///////////////////////////
+        // ///////////////////////////
         searchSecondFloorCube('l','f')
         searchSecondFloorCube('b','l')
         searchSecondFloorCube('r','b')
-        // searchSecondFloorCube('f','r')
-        // ////////////////////////
+        searchSecondFloorCube('f','r')
+        ////////////////////
         // topFloorFirst();
-        // ////////////////////////
+        // // //////////////////////
         // var topCount = 0;
         // while(isSideAllOk()){
         //     topCount ++;
@@ -4714,8 +4753,8 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
         // // // //////////////
-        isTopFloorOk ()
-        ////////////////////////// 
+        // isTopFloorOk ()
+        // //////////////// 
         
         
         if(!test){
@@ -4877,7 +4916,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
         var testArr = [
            
-            ["f",180,0],["d",180,1],["b",180,1],["b",180,1],["l",90,0],["u",180,0],["d",90,1],["l",90,0],["f",180,0],["d",90,1],["r",90,1],["l",90,0]   
+            ["f",180,0],["l",90,0],["l",90,0],["b",180,1],["d",180,1],["d",180,1],["u",180,0],["l",90,0],["d",180,1],["f",180,0],["u",180,0],["r",180,1],   
         ]
 
         for (let i = 0; i < 12; i++) {
@@ -4962,7 +5001,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
 
-            if(testNums > 10){
+            if(testNums > 50){
                 clearInterval(timer);
             }
 
