@@ -93,18 +93,22 @@
 	height: 30px;
 	font-size: 16px;
 }
+.show_init,
 .cube_reset,
 .btn19,
 .btnZ,
 .last_step,
 .next_step,
 .steps_auto{
-	width: 95px;
+	width: 80px;
 	height: 40px;
 	font-size: 18px;
 	line-height: 40px;
 	text-align: center;
 	display: inline-block;
+}
+.show_init{
+	width: 76px;
 }
 .btnF,.btn20{
 	height: 60px!important;
