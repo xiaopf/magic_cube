@@ -93,13 +93,13 @@
 	height: 30px;
 	font-size: 16px;
 }
-
+.cube_reset,
 .btn19,
 .btnZ,
 .last_step,
 .next_step,
 .steps_auto{
-	width: 119px;
+	width: 95px;
 	height: 40px;
 	font-size: 18px;
 	line-height: 40px;

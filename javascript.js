@@ -4922,7 +4922,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
     function nextStepStep(autoStep,t){
         rotateCubeFace.apply(null,autoStep[0]);
         let tempStep = autoStep.shift();
-        saveShiftStep.push(tempStep);
+        saveShiftStep.unshift(tempStep);
     };
 
     function lastStepStep(Step,t){
@@ -5203,9 +5203,15 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         random();
         randomArr = []
     };
+    
+
+    get('.cube_reset').onclick = function(){
+        $('.confirm').trigger('click');
+        auto(false);
+    };
 
 
-
+    
 // 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
 
 
