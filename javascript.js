@@ -5210,6 +5210,11 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         auto(false);
     };
 
+    get('.show_init').onclick = function(){
+        $('.init_wrap').show();
+    };
+
+    
 
     
 // 、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
