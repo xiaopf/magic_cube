@@ -4,469 +4,191 @@
 	<meta charset="UTF-8">
 	<title>magic</title>
 </head>
-<style type="text/css">
-    *{
-    	margin: 0;padding: 0;
-    	outline: none;
-    }
-    .rotate_btns{
-    	width: 480px;
-    	height: 50px;
-    	position: absolute;
-    	left: 60%;
-    	top: 20px;
-    	font-size: 0;
-    }
-    .rotate_btns_00{
-    	width: 480px;
-    	height: 50px;
-    	position: absolute;
-    	left: 60%;
-    	top: 70px;
-    	font-size: 0;
-    }
-    .rotate_btns_01{
-    	width: 480px;
-    	height: 50px;
-    	position: absolute;
-    	left: 60%;
-    	top: 120px;
-    	font-size: 0;
-    }
-    .rotate_btns_02{
-    	width: 480px;
-    	height: 50px;
-    	position: absolute;
-    	left: 60%;
-    	top: 170px;
-    	font-size: 0;
-    }
-    .stepByStep{
-    	width: 480px;
-    	height: 50px;
-    	position: absolute;
-    	left: 60%;
-    	top: 220px;
-    	font-size: 0;
-    }
-
-    .btn19,
-    .last_step,
-    .next_step,
-    .steps_auto{
-    	width: 100px;
-    	height: 50px;
-    	font-size: 18px;
-    	line-height: 50px;
-    	text-align: center;
-    	display: inline-block;
-    }
-
-
-    .rotate_btns>button,
-    .rotate_btns_00>button,
-    .rotate_btns_01>button,
-    .rotate_btns_02>button{
-    	display: inline-block;
-    	vertical-align: top;
-    	width: 60px;
-    	height: 50px;
-    	font-size: 16px;
-    }
-    .big_box_range{
-    	width: 310px;
-    	height: 69px;
-    	position: absolute;
-    	left: 20%;
-    	top: 20px;
-    }
-    .big_box_range>div{
-    	width: 310px;
-    	height: 23px;
-    	font-size: 0px;
-    }
-    .big_box_range>div>input{
-    	display: inline-block;
-    	vertical-align: top;
-    	width: 180px;
-    	height: 23px;
-    	margin-right: 10px;
-    }
-    .big_box_range>div>span{
-    	display: inline-block;
-    	vertical-align: top;
-    	font-size: 14px;
-    	width: 40px;
-    	height: 23px;
-    }
-	.wrap{
-		font-size: 0;
-        width: 600px;
-        height: 600px;
-        margin: 150px 0 0 150px;
-        border: 1px solid black;
-        perspective:800px;
-        position: relative;
-        transform: scale(0.8);
-	}
-
-	.rotate{
-		transform:rotateZ(-180deg);
-	}
-
-
-	.litteWrap{
-		display: inline-block;
-		vertical-align: top;
-        width: 600px;
-        height: 600px;
-        position: absolute;
-        -webkit-transform-style: preserve-3d;
-        transform-origin: 300px 300px -300px;
-        transition-property: all;
-	}
-
-
-	.big_box{
-		display: inline-block;
-		vertical-align: top;
-        width: 600px;
-        height: 600px;
-        position: absolute;
-        -webkit-transform-style: preserve-3d;
-        transform-origin: center center -300px;
-        transition: all 1s;
-	}
-
-	.box{
-		display: inline-block;
-		vertical-align: top;
-        width: 200px;
-        height: 200px;
-        position: absolute;
-        -webkit-transform-style: preserve-3d;
-        transform-origin: center center -100px;
-        transition: all 1s;
-	}
-	.box>div{
-        width: 198px;
-        height: 198px;
-        border: 1px solid black;
-        position: absolute;
-	}
-	.face_01{
-		font-size: 50px;
-		text-align: center;
-		line-height: 198px;
-		left: 0px;
-		top: -200px;
-		transform-origin: bottom;
-		transform: rotateX(90deg);
-	}
-	.face_02{
-		font-size: 50px;
-		text-align: center;
-		line-height: 198px;
-		left: -200px;
-		top: 0px;
-		transform-origin: right;
-		transform: rotateY(-90deg);
-	}
-	.face_03{
-		font-size: 50px;
-		text-align: center;
-		line-height: 198px;
-		left: 0px;
-		top: 0px;
-	}
-	.face_04{
-		font-size: 50px;
-		text-align: center;
-		line-height: 198px;
-		left: 200px;
-		top: 0px;
-		transform-origin: left;
-		transform: rotateY(90deg);
-	}
-	.face_05{
-		font-size: 50px;
-		text-align: center;
-		line-height: 198px;
-		left: 0px;
-		top: 200px;
-		transform-origin: top;
-		transform: rotateX(-90deg);
-	}
-	.face_06{
-		font-size: 50px;
-		text-align: center;
-		line-height: 198px;
-		left: 0px;
-		top: 0px;
-		transform:translateZ(-200px) rotateX(180deg);
-	}
-
-	.init_wrap{
-		height: 100%;
-		width: 100%;
-		position: absolute;
-		left:0;
-		top:0;
-		z-index: 999;
-		background-color:rgba(0,0,0,0.9);
-
-	}
-	.init_wrap>div{
-		height: 198px;
-		width: 100%;
-	}
-	.init_wrap>div>div{
-		height: 198px;
-		width: 198px;
-		font-size: 0;
-	}
-
-	.middle_c{
-        text-align: center;
-        line-height: 64px;
-        font-size: 30px;
-	}
-
-	.small_cubes{
-		width: 64px;
-		height: 64px;
-		border: 1px solid #000;
-		display: inline-block;
-		vertical-align: top;
-		background-color: #fff;
-		cursor: pointer;
-	}
-
-	.second{
-		font-size: 0;
-	}
-	.second>div{
-		display: inline-block;
-		vertical-align: top;
-	}
-	.first,
-	.third{
-		margin-left: 198px;
-	}
-
-	.pick_color{
-        height: 100px!important;
-        width: 100%;
-        margin-top: 40px;
-        font-size: 0;
-	}
-	.pick_color>button{
-        height: 30px;
-        width: 60px;
-        border-radius:6px;
-        font-size: 20px;
-        line-height: 30px;
-        text-align: center;
-        font-weight: bold;
-        cursor: pointer;
-        margin:0 4px;
-	}
-	.picked_up_msg{
-		display: inline-block;
-		vertical-align: top;
-		height: 30px;
-		width: auto;
-        color: white;
-		margin-left: 30px;
-		line-height: 30px;
-		font-weight: bold;
-		font-size: 20px;
-	}
-
-	.picked_up_color{
-		display: inline-block;
-		vertical-align: top;
-		height: 30px;
-		width: 60px;
-		background-color: white;
-		margin-left: 6px;
-	}
-
-	.confirm{
-		width: 80px;
-		height: 36px;
-		border-radius: 8px;
-		font-size: 20px;
-		line-height: 36px;
-		text-align: center;
-	}
-
-
-
-</style>
+<link rel="stylesheet" href="style.css">
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="javascript.js"></script>
 <body>
 
     <div class="init_wrap">
-    	<div class="first">
-    		<div class="up_f">
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes middle_c">上</div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
+    	<div class="init_wrap_container">
+    		<div style="height: 60px; background-color: transparent;width: 100%;"></div>
+    		<div class="first">
+    			<div class="up_f">
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes middle_c">上</div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    			</div>
     		</div>
-    	</div>
-    	<div class="second">
-    		<div class="left_f">
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes middle_c">左</div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
+    		<div class="second">
+    			<div class="left_f">
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes middle_c">左</div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    			</div>
+    			<div class="front_f">
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes middle_c">前</div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    			</div>
+    			<div class="right_f">
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes middle_c">右</div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    			</div>
+    			<div class="back_f">
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes middle_c">后</div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    			</div>
     		</div>
-    		<div class="front_f">
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes middle_c">前</div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
+    		<div class="third">
+    			<div class="down_f">
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes middle_c">下</div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    				<div data-newcolor="white" class="small_cubes"></div>
+    			</div>
     		</div>
-    		<div class="right_f">
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes middle_c">右</div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    		</div>
-    		<div class="back_f">
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes middle_c">后</div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    		</div>
-    	</div>
-    	<div class="third">
-    		<div class="down_f">
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes middle_c">下</div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    			<div data-newcolor="white" class="small_cubes"></div>
-    		</div>
-    	</div>
 
-    	<div class="pick_color">
-    		<button data-color="red" style="background-color: red" >红</button>
-    		<button data-color="orange" style="background-color: orange" >橙</button>
-    		<button data-color="yellow" style="background-color: yellow" >黄</button>
-    		<button data-color="green" style="background-color: green" >绿</button>
-    		<button data-color="blue" style="background-color: blue ; color:white" >蓝</button>
-    		<button data-color="white" style="background-color: white" >白</button>
-    		<button data-color="black" style="background-color: black; color:white" >黑</button>
-    		<span class="picked_up_msg">已选中的颜色:</span>
-    		<span class="picked_up_color"></span>
+    		<div class="pick_color">
+    			<button data-color="red" style="background-color: red" >红</button>
+    			<button data-color="orange" style="background-color: orange" >橙</button>
+    			<button data-color="yellow" style="background-color: yellow" >黄</button>
+    			<button data-color="green" style="background-color: green" >绿</button>
+    			<button data-color="blue" style="background-color: blue ; color:white" >蓝</button>
+    			<button data-color="white" style="background-color: white" >白</button>
+    			<button data-color="black" style="background-color: black; color:white" >黑</button>
+    			<span class="picked_up_msg">已选中的颜色:</span>
+    			<span class="picked_up_color"></span>
+    		</div>
+             
+            <div class="button_wrap">
+            	<button class="confirm">确定</button>
+            	<button class="cancel">取消</button>
+            </div>
     	</div>
-
-    	<button class="confirm">确定</button>
     </div>
 
 
-	<div class="rotate_btns">
-		<button class="btn1">180-U</button>
-		<button class="btn2">180-L</button>
-		<button class="btn3">180-F</button>
-		<button class="btn4">180-R</button>
-		<button class="btn5">180-D</button>
-		<button class="btn6">180-B</button>
-		<button class="btnF">视角复位</button>
-		<button class="testRun">testRun</button>
-	</div>
-	<div class="rotate_btns_00">
-		<button class="btn01">-180-U</button>
-		<button class="btn02">-180-L</button>
-		<button class="btn03">-180-F</button>
-		<button class="btn04">-180-R</button>
-		<button class="btn05">-180-D</button>
-		<button class="btn06">-180-B</button>
-		<button class="btnZ">暂停</button>
-		<button class="testF5">test开关</button>
-	</div>
-	<div class="rotate_btns_01">
-		<button class="btn7">90-U</button>
-		<button class="btn8">90-L</button>
-		<button class="btn9">90-F</button>
-		<button class="btn10">90-R</button>
-		<button class="btn11">90-D</button>
-		<button class="btn12">90-B</button>
-		<button class="btn20">random</button>
-	</div>
-	<div class="rotate_btns_02">
-		<button class="btn13">-90-U</button>
-		<button class="btn14">-90-L</button>
-		<button class="btn15">-90-F</button>
-		<button class="btn16">-90-R</button>
-		<button class="btn17">-90-D</button>
-		<button class="btn18">-90-B</button>
-	</div>
-	<div class="stepByStep">
-		<button class="btn19">计算</button>
-		<button class="last_step">上一步</button>
-		<button class="next_step">下一步</button>
-		<button class="steps_auto">自动完成</button>
-	</div>
+    <div class="content_wrap">
+    	
 
-	<div class="big_box_range">
-			<div>
-                <span>X轴</span>
-				<input class="x_rotate" type="range" name="points" min="-180" max="180" step="15" value="-30" />
-				<span class="x_deg"></span>
-			</div>
-			<div>
-                <span>Y轴</span>
-				<input class="y_rotate" type="range" name="points" min="-180" max="180" step="15" value="-30" />
-				<span class="y_deg"></span>
-			</div>
-			<div>
-                <span>Z轴</span>
-				<input class="z_rotate" type="range" name="points" min="-180" max="180" step="15" value="0" />
-				<span class="z_deg"></span>
-			</div>
-			<div>
-                <span>速度</span>
-				<input class="speed" type="range" name="points" min="10" max="2000" step="50" value="10" />
-				<span class="speed_num"></span>
-			</div>
-	</div>
-	<div class="wrap" id="wrap">
-		<div class="big_box" id="big_box" style="transform: rotateX(-30deg) rotateY(-30deg) rotateZ(0deg);">
+		<div class="big_box_range">
+				<div>
+	                <span>X轴</span>
+					<input class="x_rotate" type="range" name="points" min="-180" max="180" step="15" value="-30" />
+					<span class="x_deg"></span>
+				</div>
+				<div>
+	                <span>Y轴</span>
+					<input class="y_rotate" type="range" name="points" min="-180" max="180" step="15" value="-30" />
+					<span class="y_deg"></span>
+				</div>
+				<div>
+	                <span>Z轴</span>
+					<input class="z_rotate" type="range" name="points" min="-180" max="180" step="15" value="0" />
+					<span class="z_deg"></span>
+				</div>
+				<div>
+	                <span>转速</span>
+					<input class="speed" type="range" name="points" min="50" max="2000" step="50" value="1000" />
+					<span class="speed_num"></span>
+				</div>
 		</div>
+
+		<div class="btns_wrap">
+			<div class="rotate_btns">
+				<button class="btn1">180-U</button>
+				<button class="btn2">180-L</button>
+				<button class="btn3">180-F</button>
+				<button class="btn4">180-R</button>
+				<button class="btn5">180-D</button>
+				<button class="btn6">180-B</button>
+				<button class="btnF">视角复位</button>
+				<!-- <button class="testRun">testRun</button> -->
+			</div>
+			<div class="rotate_btns_00">
+				<button class="btn01">-180-U</button>
+				<button class="btn02">-180-L</button>
+				<button class="btn03">-180-F</button>
+				<button class="btn04">-180-R</button>
+				<button class="btn05">-180-D</button>
+				<button class="btn06">-180-B</button>
+				<button class="btn20">random</button>
+				<!-- <button class="testF5">test开关</button> -->
+			</div>
+			<div class="rotate_btns_01">
+				<button class="btn7">90-U</button>
+				<button class="btn8">90-L</button>
+				<button class="btn9">90-F</button>
+				<button class="btn10">90-R</button>
+				<button class="btn11">90-D</button>
+				<button class="btn12">90-B</button>
+			</div>
+			<div class="rotate_btns_02">
+				<button class="btn13">-90-U</button>
+				<button class="btn14">-90-L</button>
+				<button class="btn15">-90-F</button>
+				<button class="btn16">-90-R</button>
+				<button class="btn17">-90-D</button>
+				<button class="btn18">-90-B</button>
+			</div>
+			<div class="stepByStep">
+				<!-- <button class="btn19">计算</button> -->
+				<button class="last_step">上一步</button>
+				<button class="next_step">下一步</button>
+				<button class="steps_auto">自动完成</button>
+				<button class="btnZ">暂停</button>
+
+			</div>
+		</div>
+
+    </div>
+
+	<div class="content_wrap">
+
+		<button class="btn_left"><</button>
+		<div class="wrap" id="wrap">
+			<div class="big_box" id="big_box" style="transform: rotateX(-30deg) rotateY(-30deg) rotateZ(0deg);">
+			</div>
+		</div>
+		<button class="btn_right">></button>
+
 	</div>
 
 	<div class="bianliang"></div>

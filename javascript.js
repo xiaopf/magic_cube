@@ -23,6 +23,7 @@ window.onload = function(){
 
     // 调整big_box的视角
     get('.x_rotate').oninput = function(){
+        console.log(get('.x_rotate').value);
         get('.x_deg').innerHTML = this.value + 'deg';
         get("#big_box").style.transform = '';
         get("#big_box").style.transform += 'rotateX('+get('.x_rotate').value+'deg)';
@@ -66,32 +67,32 @@ window.onload = function(){
     // 代表每一个块的空间位置,顺序是色块的序列号
     var cubePosition = [
         [0,   0,   0  ],//1
-        [0,   200, 0  ],//2
-        [0,   400, 0  ],//3
-        [200, 0,   0  ],//4
-        [200, 200, 0  ],//5
-        [200, 400, 0  ],//6
-        [400, 0,   0  ],//7
-        [400, 200, 0  ],//8
-        [400, 400, 0  ],//9
-        [0,   0,   -200],//10
-        [0,   200, -200],//11
-        [0,   400, -200],//12
-        [200, 0,   -200],//13
-        [200, 200, -200],//14???ccccccccccccccccccc
-        [200, 400, -200],//15
-        [400, 0,   -200],//16
-        [400, 200, -200],//17
-        [400, 400, -200],//18
-        [0,   0,   -400],//19
-        [0,   200, -400],//20
-        [0,   400, -400],//21
-        [200, 0,   -400],//22
-        [200, 200, -400],//23
-        [200, 400, -400],//24
-        [400, 0,   -400],//25
-        [400, 200, -400],//26
-        [400, 400, -400]//27
+        [0,   160, 0  ],//2
+        [0,   320, 0  ],//3
+        [160, 0,   0  ],//4
+        [160, 160, 0  ],//5
+        [160, 320, 0  ],//6
+        [320, 0,   0  ],//7
+        [320, 160, 0  ],//8
+        [320, 320, 0  ],//9
+        [0,   0,   -160],//10
+        [0,   160, -160],//11
+        [0,   320, -160],//12
+        [160, 0,   -160],//13
+        [160, 160, -160],//14???ccccccccccccccccccc
+        [160, 320, -160],//15
+        [320, 0,   -160],//16
+        [320, 160, -160],//17
+        [320, 320, -160],//18
+        [0,   0,   -320],//19
+        [0,   160, -320],//20
+        [0,   320, -320],//21
+        [160, 0,   -320],//22
+        [160, 160, -320],//23
+        [160, 320, -320],//24
+        [320, 0,   -320],//25
+        [320, 160, -320],//26
+        [320, 320, -320]//27
     ];
 
     //每个cube都有固定的顺序,在旋转的时候是不会变化的,所以是默认的,每个大面包含的cube也是不会变化的
@@ -606,6 +607,7 @@ window.onload = function(){
     let dirArr = ['d','u','l','f','r','b'];
     let NumTurn = [[0, 'f'], [2, 'r'], [8, 'b'], [6, 'l']];
     var autoStep = [];
+    var saveShiftStep = [];
     var tempCube = [];
     var tempCornerCube = [];
 
@@ -4774,8 +4776,66 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         ////////// 
         
         
+    }
 
-        
+    //过滤步骤 ['l', 90, 0]
+
+    function filterSteps(arr){
+
+        let arrLen = arr.length;
+
+        for(let i = 0; i < arrLen - 1; i ++ ){
+
+
+            if(arr[i][0] == arr[i + 1][0]){
+
+                if(arr[i][2] == arr[i + 1][2]){
+                    
+                    arr.splice(i,2,[arr[i][0],(arr[i][1] + arr[i + 1][1])%180,arr[i + 1][2]]);
+                    arrLen -- ;
+                    // i -- ;
+
+                }else{
+
+                    if(arr[i][2] === 0 && arr[i + 1][2] === 1){
+
+                        if(-arr[i][1] + arr[i + 1][1] > 0){
+
+                            arr.splice(i,2,[arr[i][0],-arr[i][1] + arr[i + 1][1],arr[i + 1][2]]);
+                            arrLen -- ;
+                            // i -- ;
+
+                        }else{
+
+                            arr.splice(i,2,[arr[i][0],arr[i][1] - arr[i + 1][1],arr[i][2]]);
+                            arrLen -- ;
+                            // i -- ;
+
+                        }
+
+                    }else if(arr[i][2] === 1 && arr[i + 1][2] === 0){
+
+                        if(arr[i][1] - arr[i + 1][1] > 0){
+
+                            arr.splice(i,2,[arr[i][0],arr[i][1] - arr[i + 1][1],arr[i][2]]);
+                            arrLen -- ;
+                            // i -- ;
+
+                        }else{
+
+                            arr.splice(i,2,[arr[i][0],-arr[i][1] + arr[i + 1][1],arr[i + 1][2]]);
+                            arrLen -- ;
+                            // i -- ;
+
+                        }
+
+                    }
+                }
+
+
+            }
+        }
+
     }
 
 
@@ -4831,30 +4891,49 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
                     rotateCubeFace.apply(null,autoStep[0]);
                     autoStep.shift();  
                 }
-            },1000);
+            },speed);
             stop = false;
         }
         
     };
     
-    function stepByStep(autoStep,t){
+    function stepByStep(autoStep,t,from){
         rotateCubeFace.apply(null,autoStep[0]);
-        autoStep.shift();
+        let tempStep = autoStep.shift();
+
+        if(!from){
+            saveShiftStep.push(tempStep);
+        }
+        
         clearInterval(timerStepByStep);
         timerStepByStep = setInterval(function(){
             if(autoStep.length === 0){
                 clearInterval(timerStepByStep);
             }else{
                 rotateCubeFace.apply(null,autoStep[0]);
-                autoStep.shift();
+                let tempStep = autoStep.shift();
+                if(!from){
+                    saveShiftStep.push(tempStep);
+                }
             }
         },t);
     };
 
-    function oneStepStep(autoStep,t){
+    function nextStepStep(autoStep,t){
         rotateCubeFace.apply(null,autoStep[0]);
-        autoStep.shift();
+        let tempStep = autoStep.shift();
+        saveShiftStep.push(tempStep);
     };
+
+    function lastStepStep(Step,t){
+        autoStep.unshift(Step[0]);
+        let tempShiftStep = [Step[0][0],Step[0][1],Number(!Step[0][2])]
+        rotateCubeFace.apply(null,tempShiftStep);
+        saveShiftStep.shift();
+    };
+
+
+
 
 
 
@@ -4892,14 +4971,14 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
             randomArrTemp.push(steps[randomNum]);
         }
 
-        for (let i = 0; i < 12; i++) {
-            get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
-        }
+        // for (let i = 0; i < 12; i++) {
+        //     get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
+        // }
 
 
         // var testArr = [
            
-        //    ["l",90,0],["f",180,0],["d",90,1],["f",180,0],["f",180,0],["l",90,0],["d",180,1],["b",90,0],["b",180,1],["l",90,0],["l",90,0],["d",90,1],
+        //    ["d",90,1],["b",180,1],["b",180,1],["f",180,0],["b",180,1],["u",180,0],["b",90,0],["b",90,0],["l",90,0],["r",90,1],["d",90,1],["d",90,1],
         // ]
 
         // for (let i = 0; i < 12; i++) {
@@ -4912,7 +4991,7 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
         
-        stepByStep(randomArr,speed)
+        stepByStep(randomArr,speed,true)
 
     }
 
@@ -5011,83 +5090,108 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
 
-    get('.testRun').onclick = function(){
-        let testNums = 0;
+    // get('.testRun').onclick = function(){
+    //     let testNums = 0;
         
-        random();
-        auto(true);
-        // console.log(test())
-        if ( test() != 15 ){
-            get('.bianliang').innerHTML += '<br>' 
-            for (let i = 0; i < 12; i++) {
-                get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
-            }
-        };
+    //     random();
+    //     auto(true);
+    //     // console.log(test())
+    //     if ( test() != 15 ){
+    //         get('.bianliang').innerHTML += '<br>' 
+    //         for (let i = 0; i < 12; i++) {
+    //             get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
+    //         }
+    //     };
 
-        let tt = autoStep.length * 20 + 1000;
+    //     let tt = autoStep.length * 20 + 1000;
 
-        setTimeout(function(){      
-            stepByStep(autoStep,20);
-        },400);
+    //     setTimeout(function(){      
+    //         stepByStep(autoStep,20,false);
+    //     },400);
 
      
 
-        let timer = setInterval(function(){
+    //     let timer = setInterval(function(){
             
-            random();
-            auto(true);
-            // console.log(test())
-            if ( test() != 15 ){
-                get('.bianliang').innerHTML += '<br>'
-                for (let i = 0; i < 12; i++) {
-                    get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
-                }
-            };
+    //         random();
+    //         auto(true);
+    //         // console.log(test())
+    //         if ( test() != 15 ){
+    //             get('.bianliang').innerHTML += '<br>'
+    //             for (let i = 0; i < 12; i++) {
+    //                 get('.bianliang').innerHTML += '["'+randomArrTemp[i][0]+'",'+randomArrTemp[i][1]+','+randomArrTemp[i][2]+'],'
+    //             }
+    //         };
 
-            tt = autoStep.length * 20 + 1000;
+    //         tt = autoStep.length * 20 + 1000;
 
-            setTimeout(function(){                
-                stepByStep(autoStep,20)
-            },400);
-
-
-
-            if(testNums > 50){
-                clearInterval(timer);
-            }
-
-            testNums ++;
-
-        },tt + 2000);
-    };
+    //         setTimeout(function(){                
+    //             stepByStep(autoStep,20,false)
+    //         },400);
 
 
 
+    //         if(testNums > 50){
+    //             clearInterval(timer);
+    //         }
+
+    //         testNums ++;
+
+    //     },tt + 2000);
+    // };
 
 
-    get('.btn19').onclick = function(){
 
-        auto(false);
 
-    };
+
+    // get('.btn19').onclick = function(){
+
+       
+
+    // };
+
+    var calculate = true;
 
     get('.steps_auto').onclick = function(){
-
-            stepByStep(autoStep,speed)
+        
+     
+        if(calculate && !allOk()){
+            auto(false);
+            // console.log(autoStep);
+            // filterSteps(autoStep);
+            // console.log(autoStep);
+            calculate = false;
+        }
+        if(autoStep.length > 0){
+            stepByStep(autoStep,speed,false)
+        }
+        
 
     };
 
+    $('.btn_left').click(function(){
+        $('.last_step').trigger('click')
+    })
+    $('.btn_right').click(function(){
+        $('.next_step').trigger('click')
+    })
 
     get('.last_step').onclick = function(){
-
-        if(!test){
-            stepByStep(autoStep,speed)
+        if(saveShiftStep.length > 0){
+            lastStepStep(saveShiftStep,speed)
         }
     };
 
     get('.next_step').onclick = function(){
+        
+        if(calculate && !allOk()){
+            auto(false);
+            // filterSteps(autoStep);
+            calculate = false;
+        }
+
         if(autoStep.length > 0){
-            oneStepStep(autoStep,speed)
+            nextStepStep(autoStep,speed)
         }
     };
 
@@ -5230,94 +5334,129 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
         $(this).attr('data-newColor',pick_up_color)
     })
 
+   $('.cancel').click(function() {
+       $('.init_wrap').hide();
+   });
+
+
+    $('.confirm').click(function() {
+      
+
+        for(let i = 0; i < 9; i ++){
+
+            bigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
+
+            fakeBigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
+
+        }
 
 
 
-$('.confirm').click(function() {
-  
+        $('.init_wrap').hide();
 
-    for(let i = 0; i < 9; i ++){
+        console.log(bigSixFace);
 
-        bigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
-        bigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
-        bigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
-        bigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
-        bigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
-        bigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
+                backgroundColor : bigSixFace["u"][i]
+            })
+            $("#box_"+defaultBigSixFace["l"][i]).find(".face_02").css({
+                backgroundColor : bigSixFace["l"][i]
+            })
+            $("#box_"+defaultBigSixFace["f"][i]).find(".face_03").css({
+                backgroundColor : bigSixFace["f"][i]
+            })
+            $("#box_"+defaultBigSixFace["r"][i]).find(".face_04").css({
+                backgroundColor : bigSixFace["r"][i]
+            })
+            $("#box_"+defaultBigSixFace["d"][i]).find(".face_05").css({
+                backgroundColor : bigSixFace["d"][i]
+            })
+            $("#box_"+defaultBigSixFace["b"][i]).find(".face_06").css({
+                backgroundColor : bigSixFace["b"][i]
+            })
+        }
 
-        fakeBigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
-        fakeBigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
-        fakeBigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
-        fakeBigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
-        fakeBigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
-        fakeBigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
+    });
 
 
 
 
+$('.wrap')[0].onmousedown=function (ev)
+{
+    var oEvent=ev||event;
+    pauseEvent(oEvent);
+    var disX=oEvent.clientX;
+    var disY=oEvent.clientY;
 
+
+
+    var posX = get(".x_rotate").value;
+    var posY = get(".y_rotate").value;
+     
+    document.onmousemove=function (ev)
+    {
+        var oEvent=ev||event;
+        pauseEvent(oEvent);
+
+        var l=oEvent.clientX-disX;//移动x坐标位置
+
+        var t=oEvent.clientY-disY;//移动y坐标位置
+
+
+
+        var last_cX = -t%1000 + Number(posX);
+
+        var last_cY = l%1000 + Number(posY);
+
+
+        get(".x_rotate").value = last_cX;
+        get(".y_rotate").value = last_cY;
+
+        $('.x_rotate').trigger('input');
+        $('.y_rotate').trigger('input');
+
+
+
+    };
+     
+    document.onmouseup=function (ev)
+    {
+        var oEvent=ev||event;
+        pauseEvent(oEvent);
+        document.onmousemove=null;
+        document.onmouseup=null;
+    };
+};
+
+
+
+ 
+//阻止事件冒泡
+//不仅仅要stopPropagation，还要preventDefault
+function pauseEvent(e){
+
+    if(e.stopPropagation) {
+        e.stopPropagation();
     }
-
-
-
-
-
-
-    // bigSixFace = {
-    //     'b':["red", "blue", "blue", "blue", "orange", "orange", "orange", "green", "green"],
-    //     'd':["white", "orange", "blue", "blue", "blue", "red", "red", "white", "red"],
-    //     'f':["yellow", "green", "yellow", "yellow", "red", "white", "blue", "green", "white"],
-    //     'l':["red", "red", "orange", "yellow", "yellow", "blue", "white", "orange", "white"],
-    //     'r':["orange", "yellow", "yellow", "orange", "white", "white", "orange", "red", "green"],
-    //     'u':["yellow", "red", "green", "yellow", "green", "green", "green", "white", "blue"]
-
-    // }
-    // fakeBigSixFace = {
-    //     'b':["red", "blue", "blue", "blue", "orange", "orange", "orange", "green", "green"],
-    //     'd':["white", "orange", "blue", "blue", "blue", "red", "red", "white", "red"],
-    //     'f':["yellow", "green", "yellow", "yellow", "red", "white", "blue", "green", "white"],
-    //     'l':["red", "red", "orange", "yellow", "yellow", "blue", "white", "orange", "white"],
-    //     'r':["orange", "yellow", "yellow", "orange", "white", "white", "orange", "red", "green"],
-    //     'u':["yellow", "red", "green", "yellow", "green", "green", "green", "white", "blue"]
-
-    // }
-
-
-    $('.init_wrap').hide();
-
-    console.log(bigSixFace);
-
-    for(let i = 0; i < 9; i++) {
-        $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
-            backgroundColor : bigSixFace["u"][i]
-        })
-        $("#box_"+defaultBigSixFace["l"][i]).find(".face_02").css({
-            backgroundColor : bigSixFace["l"][i]
-        })
-        $("#box_"+defaultBigSixFace["f"][i]).find(".face_03").css({
-            backgroundColor : bigSixFace["f"][i]
-        })
-        $("#box_"+defaultBigSixFace["r"][i]).find(".face_04").css({
-            backgroundColor : bigSixFace["r"][i]
-        })
-        $("#box_"+defaultBigSixFace["d"][i]).find(".face_05").css({
-            backgroundColor : bigSixFace["d"][i]
-        })
-        $("#box_"+defaultBigSixFace["b"][i]).find(".face_06").css({
-            backgroundColor : bigSixFace["b"][i]
-        })
+    if(e.preventDefault) {
+        e.preventDefault();
     }
+    e.cancelBubble=true;
+    e.returnValue=false;
+    return false;
 
-});
-
-
-
-
-
-
-
-
-
+}
 
 
 
