@@ -365,3 +365,48 @@
 	background-color: white;
 	margin-left: 6px;
 }
+
+
+.pre_color_wrap{
+	height: 80px!important;
+	width: 100%;
+}
+.pre_color_wrap>button{
+	height: 30px;
+	width: 60px;
+	border-radius: 8px;
+	margin:0 20px;
+}
+.pre_color_01{
+	background-image:-webkit-linear-gradient(45deg, orange, green);
+	background-image:linear-gradient(45deg,orange,green);
+}
+.pre_color_02{
+	background-image:-webkit-linear-gradient(45deg, orange, green);
+	background-image:linear-gradient(45deg,yellow,green);
+}
+.pre_color_03{
+	background-image:-webkit-linear-gradient(45deg, orange, green);
+	background-image:linear-gradient(45deg,orange,red);
+}
+.pre_color_04{
+	background-image:-webkit-linear-gradient(45deg, orange, green);
+	background-image:linear-gradient(45deg,blue,green);
+}
+
+.logo{
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	right: -163px;
+	top: -115px;
+	background: url(github.png) no-repeat center bottom;
+	background-size: 65px 60px;
+	transform: rotateZ(45deg);
+	background-color: #d8dadb;
+}
+.logo>a{
+	width: 100%;
+	height: 100%;
+	display: block;
+}

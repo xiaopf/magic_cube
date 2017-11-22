@@ -4898,11 +4898,13 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
     };
     
     function stepByStep(autoStep,t,from){
+
+
         rotateCubeFace.apply(null,autoStep[0]);
         let tempStep = autoStep.shift();
 
         if(!from){
-            saveShiftStep.push(tempStep);
+            saveShiftStep.unshift(tempStep);
         }
         
         clearInterval(timerStepByStep);
@@ -4913,19 +4915,21 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
                 rotateCubeFace.apply(null,autoStep[0]);
                 let tempStep = autoStep.shift();
                 if(!from){
-                    saveShiftStep.push(tempStep);
+                    saveShiftStep.unshift(tempStep);
                 }
             }
         },t);
     };
 
     function nextStepStep(autoStep,t){
+
         rotateCubeFace.apply(null,autoStep[0]);
         let tempStep = autoStep.shift();
         saveShiftStep.unshift(tempStep);
     };
 
     function lastStepStep(Step,t){
+
         autoStep.unshift(Step[0]);
         let tempShiftStep = [Step[0][0],Step[0][1],Number(!Step[0][2])]
         rotateCubeFace.apply(null,tempShiftStep);
@@ -5200,17 +5204,70 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
     
 
     get('.btn20').onclick = function(){
+        calculate = true;
         random();
         randomArr = []
     };
     
 
     get('.cube_reset').onclick = function(){
-        $('.confirm').trigger('click');
+        renderCube (true, []);
+        calculate = true;
+        autoStep = autoStep.splice(0,autoStep.length)
+        saveShiftStep = saveShiftStep.splice(0,saveShiftStep.length)
+        for(let i = 0; i < 9; i ++){
+
+            bigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
+            bigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
+
+            fakeBigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
+            fakeBigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
+
+        }
+
+
+
+        $('.init_wrap').hide();
+
+
+        for(let i = 0; i < 9; i++) {
+            $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
+                backgroundColor : bigSixFace["u"][i]
+            })
+            $("#box_"+defaultBigSixFace["l"][i]).find(".face_02").css({
+                backgroundColor : bigSixFace["l"][i]
+            })
+            $("#box_"+defaultBigSixFace["f"][i]).find(".face_03").css({
+                backgroundColor : bigSixFace["f"][i]
+            })
+            $("#box_"+defaultBigSixFace["r"][i]).find(".face_04").css({
+                backgroundColor : bigSixFace["r"][i]
+            })
+            $("#box_"+defaultBigSixFace["d"][i]).find(".face_05").css({
+                backgroundColor : bigSixFace["d"][i]
+            })
+            $("#box_"+defaultBigSixFace["b"][i]).find(".face_06").css({
+                backgroundColor : bigSixFace["b"][i]
+            })
+        }
+
         auto(false);
     };
 
     get('.show_init').onclick = function(){
+        renderCube (true, []);
+        calculate = true;
+        autoStep = autoStep.splice(0,autoStep.length)
+        saveShiftStep = saveShiftStep.splice(0,saveShiftStep.length)
+
         $('.init_wrap').show();
     };
 
@@ -5221,7 +5278,125 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
 
+$('.pre_color_01').click(function(){
 
+        let pre_color = {
+
+            'b': ["orange", "yellow", "green", "orange", "orange", "red", "red", "yellow", "red"],
+            'd': ["red", "red", "orange", "green", "green", "white", "yellow", "green", "white"],
+            'f': ["red", "white", "white", "yellow", "red", "yellow", "white", "blue", "yellow"],
+            'l': ["orange", "green", "yellow", "green", "white", "blue", "blue", "white", "green"],
+            'r': ["blue", "orange", "white", "red", "yellow", "blue", "blue", "red", "blue"],
+            'u':["yellow", "orange", "green", "orange", "blue", "white", "green", "blue", "orange"]
+        }
+
+        for(let i = 0; i < 9; i ++){
+         
+            $($('.up_f .small_cubes')[i]).attr('data-newColor',pre_color['u'][i]);
+            $($('.left_f .small_cubes')[i]).attr('data-newColor',pre_color['l'][i]);
+            $($('.front_f .small_cubes')[i]).attr('data-newColor',pre_color['f'][i]);
+            $($('.right_f .small_cubes')[i]).attr('data-newColor',pre_color['r'][i]);
+            $($('.back_f .small_cubes')[i]).attr('data-newColor', pre_color['b'][i]);
+            $($('.down_f .small_cubes')[i]).attr('data-newColor', pre_color['d'][i]);
+
+            $($('.up_f .small_cubes')[i]).css({backgroundColor:pre_color['u'][i]});
+            $($('.left_f .small_cubes')[i]).css({backgroundColor:pre_color['l'][i]});
+            $($('.front_f .small_cubes')[i]).css({backgroundColor:pre_color['f'][i]});
+            $($('.right_f .small_cubes')[i]).css({backgroundColor:pre_color['r'][i]});
+            $($('.back_f .small_cubes')[i]).css({backgroundColor: pre_color['b'][i]});
+            $($('.down_f .small_cubes')[i]).css({backgroundColor: pre_color['d'][i]});
+
+        }
+
+
+})
+$('.pre_color_02').click(function(){
+        let pre_color = {
+
+            'b':["red", "yellow", "orange", "red", "orange", "white", "white", "orange", "orange"],
+            'd':["green", "green", "green", "green", "green", "green", "green", "green", "blue"],
+            'f':["white", "red", "orange", "yellow", "red", "orange", "red", "red", "red"],
+            'l':["yellow", "blue", "orange", "blue", "white", "blue", "white", "white", "white"],
+            'r':["blue", "red", "blue", "white", "yellow", "yellow", "yellow", "yellow", "red"],
+            'u':["green", "orange", "yellow", "orange", "blue", "white", "blue", "blue", "yellow"]
+        }
+
+        for(let i = 0; i < 9; i ++){
+         
+            $($('.up_f .small_cubes')[i]).attr('data-newColor',pre_color['u'][i]);
+            $($('.left_f .small_cubes')[i]).attr('data-newColor',pre_color['l'][i]);
+            $($('.front_f .small_cubes')[i]).attr('data-newColor',pre_color['f'][i]);
+            $($('.right_f .small_cubes')[i]).attr('data-newColor',pre_color['r'][i]);
+            $($('.back_f .small_cubes')[i]).attr('data-newColor', pre_color['b'][i]);
+            $($('.down_f .small_cubes')[i]).attr('data-newColor', pre_color['d'][i]);
+
+            $($('.up_f .small_cubes')[i]).css({backgroundColor:pre_color['u'][i]});
+            $($('.left_f .small_cubes')[i]).css({backgroundColor:pre_color['l'][i]});
+            $($('.front_f .small_cubes')[i]).css({backgroundColor:pre_color['f'][i]});
+            $($('.right_f .small_cubes')[i]).css({backgroundColor:pre_color['r'][i]});
+            $($('.back_f .small_cubes')[i]).css({backgroundColor: pre_color['b'][i]});
+            $($('.down_f .small_cubes')[i]).css({backgroundColor: pre_color['d'][i]});
+
+        }
+})
+$('.pre_color_03').click(function(){
+        let pre_color = {
+
+            'b':["white", "red", "yellow", "orange", "blue", "orange", "yellow", "blue", "green"],
+            'd':["yellow", "white", "red", "orange", "yellow", "white", "red", "yellow", "red"],
+            'f':["orange", "yellow", "green", "orange", "green", "red", "green", "red", "white"],
+            'l':["orange", "green", "blue", "green", "orange", "blue", "white", "yellow", "orange"],
+            'r':["yellow", "white", "green", "yellow", "red", "white", "blue", "blue", "blue"],
+            'u':["blue", "blue", "orange", "red", "white", "green", "white", "green", "red"]
+        }
+
+        for(let i = 0; i < 9; i ++){
+         
+            $($('.up_f .small_cubes')[i]).attr('data-newColor',pre_color['u'][i]);
+            $($('.left_f .small_cubes')[i]).attr('data-newColor',pre_color['l'][i]);
+            $($('.front_f .small_cubes')[i]).attr('data-newColor',pre_color['f'][i]);
+            $($('.right_f .small_cubes')[i]).attr('data-newColor',pre_color['r'][i]);
+            $($('.back_f .small_cubes')[i]).attr('data-newColor', pre_color['b'][i]);
+            $($('.down_f .small_cubes')[i]).attr('data-newColor', pre_color['d'][i]);
+
+            $($('.up_f .small_cubes')[i]).css({backgroundColor:pre_color['u'][i]});
+            $($('.left_f .small_cubes')[i]).css({backgroundColor:pre_color['l'][i]});
+            $($('.front_f .small_cubes')[i]).css({backgroundColor:pre_color['f'][i]});
+            $($('.right_f .small_cubes')[i]).css({backgroundColor:pre_color['r'][i]});
+            $($('.back_f .small_cubes')[i]).css({backgroundColor: pre_color['b'][i]});
+            $($('.down_f .small_cubes')[i]).css({backgroundColor: pre_color['d'][i]});
+
+        }
+})
+$('.pre_color_04').click(function(){
+        let pre_color = {
+
+            'b':["orange", "green", "orange", "blue", "red", "green", "yellow", "yellow", "white"],
+            'd':["red", "yellow", "blue", "orange", "green", "yellow", "orange", "red", "green"],
+            'f':["red", "white", "red", "white", "orange", "blue", "blue", "orange", "white"],
+            'l':["blue", "white", "blue", "red", "yellow", "red", "green", "blue", "white"],
+            'r':["white", "orange", "green", "red", "white", "yellow", "orange", "green", "red"],
+            'u':["yellow", "orange", "yellow", "blue", "blue", "white", "yellow", "green", "green"]
+        }
+
+        for(let i = 0; i < 9; i ++){
+         
+            $($('.up_f .small_cubes')[i]).attr('data-newColor',pre_color['u'][i]);
+            $($('.left_f .small_cubes')[i]).attr('data-newColor',pre_color['l'][i]);
+            $($('.front_f .small_cubes')[i]).attr('data-newColor',pre_color['f'][i]);
+            $($('.right_f .small_cubes')[i]).attr('data-newColor',pre_color['r'][i]);
+            $($('.back_f .small_cubes')[i]).attr('data-newColor', pre_color['b'][i]);
+            $($('.down_f .small_cubes')[i]).attr('data-newColor', pre_color['d'][i]);
+
+            $($('.up_f .small_cubes')[i]).css({backgroundColor:pre_color['u'][i]});
+            $($('.left_f .small_cubes')[i]).css({backgroundColor:pre_color['l'][i]});
+            $($('.front_f .small_cubes')[i]).css({backgroundColor:pre_color['f'][i]});
+            $($('.right_f .small_cubes')[i]).css({backgroundColor:pre_color['r'][i]});
+            $($('.back_f .small_cubes')[i]).css({backgroundColor: pre_color['b'][i]});
+            $($('.down_f .small_cubes')[i]).css({backgroundColor: pre_color['d'][i]});
+
+        }
+})
 
 
 
@@ -5327,6 +5502,8 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 // 给魔方着色
 
+
+
     let pick_up_color = 'white'
 
     $('.pick_color button').click(function(){
@@ -5351,51 +5528,59 @@ function topFaceRotate (face, dir) {  //zheng 1 ni 0
 
 
     $('.confirm').click(function() {
+
+        if (true) {
+           var pick_color_over  = confirm("是否根据实体魔方进行着色？");
+        }
       
 
-        for(let i = 0; i < 9; i ++){
-
-            bigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
-            bigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
-            bigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
-            bigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
-            bigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
-            bigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
-
-            fakeBigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
-            fakeBigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
-            fakeBigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
-            fakeBigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
-            fakeBigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
-            fakeBigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
-
-        }
+        if(pick_color_over){
 
 
+            for(let i = 0; i < 9; i ++){
 
-        $('.init_wrap').hide();
+                bigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
+                bigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
+                bigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
+                bigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
+                bigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
+                bigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
 
-        console.log(bigSixFace);
+                fakeBigSixFace['u'][i] = $($('.up_f .small_cubes')[i]).attr('data-newColor');
+                fakeBigSixFace['l'][i] = $($('.left_f .small_cubes')[i]).attr('data-newColor');
+                fakeBigSixFace['f'][i] = $($('.front_f .small_cubes')[i]).attr('data-newColor');
+                fakeBigSixFace['r'][i] = $($('.right_f .small_cubes')[i]).attr('data-newColor');
+                fakeBigSixFace['b'][i] = $($('.back_f .small_cubes')[i]).attr('data-newColor');
+                fakeBigSixFace['d'][i] = $($('.down_f .small_cubes')[i]).attr('data-newColor');
 
-        for(let i = 0; i < 9; i++) {
-            $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
-                backgroundColor : bigSixFace["u"][i]
-            })
-            $("#box_"+defaultBigSixFace["l"][i]).find(".face_02").css({
-                backgroundColor : bigSixFace["l"][i]
-            })
-            $("#box_"+defaultBigSixFace["f"][i]).find(".face_03").css({
-                backgroundColor : bigSixFace["f"][i]
-            })
-            $("#box_"+defaultBigSixFace["r"][i]).find(".face_04").css({
-                backgroundColor : bigSixFace["r"][i]
-            })
-            $("#box_"+defaultBigSixFace["d"][i]).find(".face_05").css({
-                backgroundColor : bigSixFace["d"][i]
-            })
-            $("#box_"+defaultBigSixFace["b"][i]).find(".face_06").css({
-                backgroundColor : bigSixFace["b"][i]
-            })
+            }
+
+
+
+            $('.init_wrap').hide();
+
+            console.log(bigSixFace);
+
+            for(let i = 0; i < 9; i++) {
+                $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
+                    backgroundColor : bigSixFace["u"][i]
+                })
+                $("#box_"+defaultBigSixFace["l"][i]).find(".face_02").css({
+                    backgroundColor : bigSixFace["l"][i]
+                })
+                $("#box_"+defaultBigSixFace["f"][i]).find(".face_03").css({
+                    backgroundColor : bigSixFace["f"][i]
+                })
+                $("#box_"+defaultBigSixFace["r"][i]).find(".face_04").css({
+                    backgroundColor : bigSixFace["r"][i]
+                })
+                $("#box_"+defaultBigSixFace["d"][i]).find(".face_05").css({
+                    backgroundColor : bigSixFace["d"][i]
+                })
+                $("#box_"+defaultBigSixFace["b"][i]).find(".face_06").css({
+                    backgroundColor : bigSixFace["b"][i]
+                })
+            }
         }
 
     });
