@@ -123,8 +123,8 @@
 
 .wrap{
 	font-size: 0;
-    width: 480px;
-    height: 480px;
+    width: 484px;
+    height: 484px;
     margin: 40px 60px 0 90px;
     border: 1px solid black;
     perspective:800px;
@@ -133,16 +133,17 @@
     text-align: left;
     display: inline-block;
     vertical-align: top;
+    cursor: move;
 }
 
 .litteWrap{
 	display: inline-block;
 	vertical-align: top;
-    width: 480px;
-    height: 480px;
+    width: 484px;
+    height: 484px;
     position: absolute;
     -webkit-transform-style: preserve-3d;
-    transform-origin: 240px 240px -240px;
+    transform-origin: 242px 242px -242px;
     transition-property: all;
 }
 
@@ -150,11 +151,11 @@
 .big_box{
 	display: inline-block;
 	vertical-align: top;
-    width: 480px;
-    height: 480px;
+    width: 484px;
+    height: 484px;
     position: absolute;
     -webkit-transform-style: preserve-3d;
-    transform-origin: center center -300px;
+    transform-origin: center center -242px;
     transition: all 1s;
 }
 
@@ -169,12 +170,14 @@
     transition: all 1s;
 }
 .box>div{
-    width: 158px;
-    height: 158px;
-    border: 1px solid black;
+    width: 156px;
+    height: 156px;
+    border: 2px solid black;
     position: absolute;
 }
 .face_01{
+	backface-visibility: hidden;
+	border-radius: 12px;
 	font-size: 50px;
 	text-align: center;
 	line-height: 158px;
@@ -184,6 +187,8 @@
 	transform: rotateX(90deg);
 }
 .face_02{
+	backface-visibility: hidden;
+	border-radius: 12px;
 	font-size: 50px;
 	text-align: center;
 	line-height: 158px;
@@ -193,6 +198,8 @@
 	transform: rotateY(-90deg);
 }
 .face_03{
+	backface-visibility: hidden;
+	border-radius: 12px;
 	font-size: 50px;
 	text-align: center;
 	line-height: 158px;
@@ -200,6 +207,8 @@
 	top: 0px;
 }
 .face_04{
+	backface-visibility: hidden;
+	border-radius: 12px;
 	font-size: 50px;
 	text-align: center;
 	line-height: 158px;
@@ -209,6 +218,8 @@
 	transform: rotateY(90deg);
 }
 .face_05{
+	backface-visibility: hidden;
+	border-radius: 12px;
 	font-size: 50px;
 	text-align: center;
 	line-height: 158px;
@@ -218,6 +229,8 @@
 	transform: rotateX(-90deg);
 }
 .face_06{
+	backface-visibility: hidden;
+	border-radius: 12px;
 	font-size: 50px;
 	text-align: center;
 	line-height: 158px;
