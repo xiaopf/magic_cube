@@ -3,6 +3,7 @@
 	outline: none;
 }
 .content_wrap_02{
+	padding-top: 40px;
 	padding-bottom: 500px;
 }
 
@@ -127,7 +128,7 @@
     height: 484px;
     margin: 40px 60px 0 90px;
     border: 1px solid black;
-    perspective:800px;
+    perspective:1200px;
     position: relative;
     /*transform: scale(0.8);*/
     text-align: left;

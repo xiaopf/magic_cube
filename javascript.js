@@ -4635,21 +4635,23 @@ window.onload = function(){
     var stop = false;
     // 暂停继续按钮
     get('.btnZ').onclick = function(){
-        if(!stop){
-            get('.btnZ').innerHTML= '继续';
-            clearInterval(timerStepByStep);
-            stop = true;
-        }else{
-            get('.btnZ').innerHTML= '暂停';
-            timerStepByStep = setInterval(function(){
-                if(autoStep.length === 0){
-                    clearInterval(timerStepByStep);
-                }else{
-                    rotateCubeFace.apply(null,autoStep[0]);
-                    autoStep.shift();  
-                }
-            },speed);
-            stop = false;
+        if(autoStep.length != 0){
+            if(!stop){
+                get('.btnZ').innerHTML= '继续';
+                clearInterval(timerStepByStep);
+                stop = true;
+            }else{
+                get('.btnZ').innerHTML= '暂停';
+                timerStepByStep = setInterval(function(){
+                    if(autoStep.length === 0){
+                        clearInterval(timerStepByStep);
+                    }else{
+                        rotateCubeFace.apply(null,autoStep[0]);
+                        autoStep.shift();  
+                    }
+                },speed);
+                stop = false;
+            }
         }
         
     };
@@ -4846,9 +4848,12 @@ window.onload = function(){
     };
 
     get('.btn20').onclick = function(){
-        calculate = true;
-        random();
-        randomArr = []
+        if(autoStep.length === 0){
+           calculate = true;
+           random();
+           randomArr = [];
+           saveShiftStep = [];
+       }
     };
     
     get('.cube_reset').onclick = function(){
