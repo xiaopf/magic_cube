@@ -4539,9 +4539,19 @@ window.onload = function(){
 
             if(arr[i][0] == arr[i + 1][0]){
 
+                console.log(i);
+
                 if(arr[i][2] == arr[i + 1][2]){
-                    
-                    arr.splice(i,2,[arr[i][0],(arr[i][1] + arr[i + 1][1])%180,arr[i + 1][2]]);
+  
+                    let tempDeg = arr[i][1] + arr[i + 1][1];
+                    let tempDir = arr[i + 1][2];
+
+                    if(tempDeg > 180){
+                        tempDeg = Math.abs((arr[i][1] + arr[i + 1][1])%360-180);
+                        tempDir = Number(!tempDir);
+                    }
+
+                    arr.splice(i,2,[arr[i][0],tempDeg,tempDir]);
                     arrLen -- ;
                     // i -- ;
 
@@ -4750,7 +4760,6 @@ window.onload = function(){
                     $('.btn19').trigger('click');
 
                     setTimeout(function(){
-                        // console.log(allOk());
                         if ( !allOk() ){
                             console.log("danger!!!");
                         }else{
@@ -4799,9 +4808,9 @@ window.onload = function(){
         
         if(calculate && !allOk()){
             auto(false);
-            // console.log(autoStep);
-            // filterSteps(autoStep);
-            // console.log(autoStep);
+            console.log(autoStep.length);
+            filterSteps(autoStep);
+            console.log(autoStep.length);
             calculate = false;
         }
         if(autoStep.length > 0){
@@ -4825,7 +4834,9 @@ window.onload = function(){
     get('.next_step').onclick = function(){
         if(calculate && !allOk()){
             auto(false);
-            // filterSteps(autoStep);
+            console.log(autoStep.length);
+            filterSteps(autoStep);
+            console.log(autoStep.length);
             calculate = false;
         }
 
@@ -5213,7 +5224,6 @@ window.onload = function(){
 
             $('.init_wrap').hide();
 
-            console.log(bigSixFace);
 
             for(let i = 0; i < 9; i++) {
                 $("#box_"+defaultBigSixFace["u"][i]).find(".face_01").css({
